@@ -20,7 +20,8 @@
   <link rel="stylesheet" href="<?= base_url();?>assets/dist/css/adminlte.min.css">
   <!-- <script src="<?= base_url();?>assets/css/print.css"></script> -->
   <script src="<?= base_url();?>assets/plugins/jquery/jquery.min.js"></script>
-  <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+  <script src="<?= base_url();?>assets/js/angular.min.js"></script>
+  <script src="<?= base_url();?>assets/js/angular-sanitize.min.js"></script>
   <style>
     .print-header {
     display: none;
@@ -55,8 +56,8 @@
 </head>
 <body class="hold-transition sidebar-mini">
   <?php
-  $a = $this->session->userdata('jenis');
-  if(!$this->session->userdata('jenis') || $this->session->userdata('jenis')!='Admin'){
+  $a = $this->session->userdata('akses');
+  if(!$this->session->userdata('akses') || $this->session->userdata('akses')!='admin'){
     $this->session->set_flashdata('pesan', 'Anda tidak memiliki akses, error');
     $this->session->sess_destroy();
     redirect('authorization');
@@ -81,7 +82,7 @@
       <a href="<?= base_url();?>assets/index3.html" class="brand-link">
         <img src="<?= base_url();?>assets/dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
           class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">Laundry</span>
+        <span class="brand-text font-weight-light">Musrenbang</span>
       </a>
       <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
@@ -93,34 +94,84 @@
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
-              <a href="<?= base_url()?>admin/home" class="nav-link">
+              <a href="<?= base_url()?>admin/home" class="nav-link <?= $title['header']=='Home' ? 'active': '' ?>">
                 <i class="nav-icon fas fa-tasks"></i>
                 <p>
                   Home
                 </p>
               </a>
             </li>
+            <li class="nav-item has-treeview <?= $title['header']=='Pegawai' || $title['header']=='RW' ? 'menu-open': '' ?>">
+              <a href="#" class="nav-link <?= $title['header']=='Pegawai' || $title['header']=='RW' ? 'active': '' ?>">
+                <i class="nav-icon fas fa-edit"></i>
+                <p>
+                  Manajemen User
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="<?= base_url();?>admin/pegawai" class="nav-link <?= $title['header']=='Pegawai' ? 'active': '' ?>">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Pegawai</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="<?= base_url();?>admin/rw" class="nav-link <?= $title['header']=='RW' ? 'active': '' ?>">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>RW</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
             <li class="nav-item">
-              <a href="<?= base_url()?>admin/profile" class="nav-link">
+              <a href="<?= base_url()?>admin/periode" class="nav-link <?= $title['header']=='Periode Rencana Kerja' ? 'active': '' ?>">
                 <i class="nav-icon fas fa-tasks"></i>
                 <p>
-                  Profile
+                  Periode Rencana Kerja
                 </p>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="<?= base_url()?>admin/pegawai" class="nav-link">
-                <i class="nav-icon fas fa-tasks"></i>
+            <li class="nav-item has-treeview <?= $title['header']=='Bidang' || $title['header']=='Profile Kelurahan' || $title['header']=='Rencana Biaya' || $title['header']=='Bidang SKPD' ? 'menu-open': '' ?>">
+              <a href="#" class="nav-link <?= $title['header']=='Bidang' || $title['header']=='Profile Kelurahan' || $title['header']=='Rencana Biaya' || $title['header']=='Bidang SKPD' ? 'active': '' ?>">
+                <i class="nav-icon fas fa-edit"></i>
                 <p>
-                  Pegawai
+                  Master Data
+                  <i class="fas fa-angle-left right"></i>
                 </p>
               </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="<?= base_url();?>admin/profile" class="nav-link <?= $title['header']=='Profile Kelurahan' ? 'active': '' ?>">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Profile Kelurahan</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="<?= base_url();?>admin/bidang" class="nav-link <?= $title['header']=='Bidang' ? 'active': '' ?>">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Bidang</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="<?= base_url();?>admin/skpd" class="nav-link <?= $title['header']=='Bidang SKPD' ? 'active': '' ?>">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Bidang SKPD</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="<?= base_url();?>admin/rencanabiaya" class="nav-link <?= $title['header']=='Rencana Biaya' ? 'active': '' ?>">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Rencana Biaya</p>
+                  </a>
+                </li>
+              </ul>
             </li>
             <li class="nav-item">
               <a href="<?= base_url()?>admin/pelanggan" class="nav-link">
                 <i class="nav-icon fas fa-tasks"></i>
                 <p>
-                  Pelanggan
+                  Rencana Kerja
                 </p>
               </a>
             </li>

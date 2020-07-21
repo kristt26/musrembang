@@ -3,27 +3,33 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Pegawai extends CI_Controller {
+class Skpd extends CI_Controller {
     
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('admin/Pegawai_model', 'PegawaiModel');
+        $this->load->model('admin/Skpd_model', 'SkpdModel');
     }
 
     public function index()
     {
-        $title['title'] = ['header'=>'Pegawai', 'dash'=>'Pegawai'];
+        $title['title'] = ['header'=>'Bidang SKPD', 'dash'=>'SKPD'];
         $this->load->view('admin/template/header', $title);
-        $this->load->view('admin/pegawai');
+        $this->load->view('admin/skpd');
         $this->load->view('admin/template/footer');
+    }
+
+    public function getdata()
+    {
+        $result = $this->SkpdModel->select();
+        echo json_encode($result);
     }
 
     function simpan()
     {
         $data = json_decode($this->security->xss_clean($this->input->raw_input_stream), true);
-        if(!isset($data['idpegawai'])){
-            $result = $this->PegawaiModel->insert($data);
+        if(!isset($data['idbidangskpd'])){
+            $result = $this->SkpdModel->insert($data);
             if($result !== false)
                 echo json_encode($result);
             else{
@@ -31,7 +37,7 @@ class Pegawai extends CI_Controller {
                 echo json_encode(array('message'=>'Gagal Simpan'));
             }                
         }else{
-            $result = $this->PegawaiModel->update($data);
+            $result = $this->SkpdModel->update($data);
             if($result !== false)
                 echo json_encode($result);
             else{
@@ -40,16 +46,10 @@ class Pegawai extends CI_Controller {
             } 
         }
     }
-
-    public function getdata()
+    
+    function hapus($idbidangskpd)
     {
-        $result = $this->PegawaiModel->select();
-        echo json_encode($result);
-    }
-
-    function hapus($idpegawai)
-    {
-        if($this->PegawaiModel->delete($idpegawai))
+        if($this->SkpdModel->delete($idbidangskpd))
             echo json_encode(array('message'=>'Berhasil Hapus'));
         else{
             http_response_code(400);

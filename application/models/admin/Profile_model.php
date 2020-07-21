@@ -5,53 +5,41 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Profile_model extends CI_Model {
     function select()
     {
-        $result = $this->db->get('profile');
+        $result = $this->db->get('kelurahan');
         if($result->num_rows()>0)
             return $result->result()[0];
         else
             return $result->result();
     }    
+
+    public function updategambar($logo)
+    {
+        $result = $this->db->update('kelurahan', array('logo'=>$logo));
+        return $result;
+    }
     function insert($data)
     {
         $item = [
-            'nama_laundry'=>$data['nama_laundry'],
-            'alamat_laundry'=>$data['alamat_laundry'],
-            'no_tlp'=>$data['no_tlp']
+            'NamaKelurahan'=>$data['NamaKelurahan'],
+            'Alamat'=>$data['Alamat'],
+            'Kontak'=>$data['Kontak']
         ];
-        if($data['kd_profile']==''){
-            $result = $this->db->insert('profile', $item);
+        if(!isset($data['idKelurahan'])){
+            $result = $this->db->insert('kelurahan', $item);
             if($result){
-                $message=[
-                    'message'=>"Data berhasil di simpan, success",
-                    'status'=>$result
-                ];
-                return $message;
+                $item['idKelurahan'] = $this->db->insert_id();
+                return $item;
             }else{
-                $message=[
-                    'message'=>"Data gagal di simpan, error",
-                    'status'=>$result
-                ];
-                return $message;
+                return false;
             }
         }else{
-            $this->db->where('kd_profile', $data['kd_profile']);
-            $result = $this->db->update('profile', $item);
+            $this->db->where('idKelurahan', $data['idKelurahan']);
+            $result = $this->db->update('kelurahan', $item);
             if($result){
-                $message=[
-                    'message'=>"Data berhasil di ubah, success",
-                    'status'=>$result
-                ];
-                return $message;
+                return true;
             }else{
-                $message=[
-                    'message'=>"Data gagal di ubah, error",
-                    'status'=>$result
-                ];
-                return $message;
+                return false;
             }
         }
     }
-
 }
-
-/* End of file ModelName.php */

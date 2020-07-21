@@ -26,7 +26,7 @@ class Authorization extends CI_Controller
             redirect('authorization');
         } else {
             $this->session->set_userdata($result);
-            if($result['jenis']=="Admin")
+            if($result['akses']=="admin")
                 redirect('admin/home');
             else
                 redirect('member/home');

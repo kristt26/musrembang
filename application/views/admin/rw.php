@@ -1,34 +1,21 @@
-<div class="row" ng-app="app" ng-controller="pegawaiController">
+<div class="row" ng-app="app" ng-controller="rwController">
   <div class="col-md-3">
     <div class="card card-danger">
       <div class="card-header">
-        <h3 class="card-title">Input Pegawai</h3>
+        <h3 class="card-title">Input RW</h3>
       </div>
       <form ng-submit="simpan()">
         <div class="card-body">
           <div class="form-group row">
-            <label for="nama" class="col-sm-3 col-form-label">Nama</label>
+            <label for="norw" class="col-sm-3 col-form-label">No. RW</label>
             <div class="col-sm-9">
-              <input type="text" class="form-control" ng-model="model.nama" placeholder="Nama pegawai" required>
+              <input type="text" class="form-control" ng-model="model.norw" placeholder="Nama norw" required>
             </div>
           </div>
           <div class="form-group row">
-            <label for="kontak" class="col-sm-3 col-form-label">No Hp.</label>
+            <label for="pejabatrw" class="col-sm-3 col-form-label">Pejabat</label>
             <div class="col-sm-9">
-              <input type="text" class="form-control" ng-model="model.kontak" placeholder="No Hp." required>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="alamat" class="col-sm-3 col-form-label">Alamat</label>
-            <div class="col-sm-9">
-              <textarea class="form-control" ng-model="model.alamat" id="alamat" rows="3"></textarea>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="jabatan" class="col-sm-3 col-form-label">Jabatan</label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" ng-model="model.jabatan" id="jabatan" placeholder="Jabatan"
-                required>
+              <input type="text" class="form-control" ng-model="model.pejabatrw" placeholder="Pejabat RW" required>
             </div>
           </div>
           <div class="form-group row">
@@ -60,18 +47,17 @@
   <div class="col-md-9">
     <div class="card card-danger">
       <div class="card-header">
-        <h3 class="card-title">Data Pegawai</h3>
+        <h3 class="card-title">Data RW</h3>
       </div>
       <div class="card-body">
         <table class="table table-bordered">
           <thead>
             <tr>
               <th style="width: 10px">No</th>
-              <th>Nama</th>
-              <th>Kontak</th>
-              <th>Alamat</th>
-              <th>Jabatan</th>
+              <th>No. RW</th>
+              <th>Pejabar RW</th>
               <th>Email</th>
+              <th>Username</th>
               <th>Status</th>
               <th style="width: 15%">Action</th>
             </tr>
@@ -79,18 +65,17 @@
           <tbody>
             <tr ng-repeat="item in datas">
               <td>{{$index+1}}</td>
-              <td>{{item.nama}}</td>
-              <td>{{item.kontak}}</td>
-              <td>{{item.alamat}}</td>
-              <td>{{item.jabatan}}</td>
+              <td>{{item.norw}}</td>
+              <td>{{item.pejabatrw}}</td>
               <td>{{item.email}}</td>
+              <td>{{item.username}}</td>
               <td>{{item.status}}</td>
               <td>
                 <div class="tombol">
                   <bottom class="btn btn-default" ng-click="ubah(item)">
                     <ion-icon name="create-outline"></ion-icon>
                   </bottom>
-                  <bottom class="btn btn-danger" ng-click="delete(item)">
+                  <bottom class="btn btn-danger float-right" ng-click="delete(item)">
                     <ion-icon name="trash-outline"></ion-icon>
                   </bottom>
                 </div>
@@ -104,17 +89,18 @@
 </div>
 <script>
   angular.module('app', ['data.service'])
-  .controller('pegawaiController', function($scope, PegawaiService){
+  .controller('rwController', function($scope, RwService){
     $scope.datas = [];
     $scope.model = {};
     $scope.edit = true;
-    PegawaiService.get().then((x)=>{
+    RwService.get().then((x)=>{
       $scope.datas = x;
     })
     $scope.simpan = ()=>{
-      PegawaiService.post($scope.model).then((x)=>{
+      RwService.post($scope.model).then((x)=>{
         $scope.model = {};
-        swal("Information!", "Berhasil disimpan", "success");
+        $scope.edit = true;
+        swal("Information!", "Proses Berhasil", "success");
       })
     }
     $scope.ubah = (item)=>{
@@ -126,7 +112,7 @@
       $scope.edit = true;
     }
     $scope.delete = (item)=>{
-      PegawaiService.delete(item.idpegawai).then((x)=>{
+      RwService.delete(item.idrw).then((x)=>{
         swal("Information!", "Berhasil dihapus", "success");
       })
     }

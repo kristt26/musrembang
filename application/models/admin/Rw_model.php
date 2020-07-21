@@ -1,37 +1,39 @@
 <?php
 
-class Pegawai_model extends CI_Model {
+class Rw_model extends CI_Model {
     function select()
     {
         $result = $this->db->query("SELECT
-            `pegawai`.*,
+            `rw`.*,
             `user`.`username`,
             `user`.`status`
         FROM
-            `pegawai`
-            LEFT JOIN `user` ON `user`.`iduser` = `pegawai`.`iduser`");
+            `rw`
+            LEFT JOIN `user` ON `user`.`iduser` = `rw`.`iduser`");
         return $result->result();
     }
 
     function insert($data)
     {
         $item= [
-            'nama'=>$data['nama'],
-            'kontak'=>$data['kontak'],
-            'alamat'=>$data['alamat'],
-            'jabatan'=>$data['jabatan'],
+            'norw'=>$data['norw'],
+            'idKelurahan'=>1,
+            'pejabatrw'=>$data['pejabatrw'],
             'email'=>$data['email']
         ];
         $user= [
             'username'=>$data['username'],
             'password'=>md5($data['password']),
+            'akses'=>'user',
             'status'=>'Aktif'
         ];
         $this->db->trans_begin();
         $this->db->insert('user', $user);
         $item['iduser'] = $this->db->insert_id();
-        $this->db->insert('pegawai', $item);
-        $item['idpegawai'] = $this->db->insert_id();
+        $this->db->insert('rw', $item);
+        $item['idrw'] = $this->db->insert_id();
+        $item['username'] = $data['username'];
+        $item['status'] = 'Aktif';
         if($this->db->trans_status()==true){
             $this->db->trans_commit();
             return $item;
@@ -44,22 +46,20 @@ class Pegawai_model extends CI_Model {
     function update($data)
     {
         $item= [
-            'nama'=>$data['nama'],
-            'kontak'=>$data['kontak'],
-            'alamat'=>$data['alamat'],
-            'jabatan'=>$data['jabatan'],
+            'norw'=>$data['norw'],
+            'pejabatrw'=>$data['pejabatrw'],
             'email'=>$data['email']
         ];
-        $this->db->where('idpegawai', $data['idpegawai']);
-        if($this->db->update('pegawai', $item))
+        $this->db->where('idrw', $data['idrw']);
+        if($this->db->update('rw', $item))
             return true;
         else
             return false;
     }
-    function delete($idpegawai)
+    function delete($idrw)
     {
-        $this->db->where('idpegawai', $idpegawai);
-        if($this->db->delete('pegawai'))
+        $this->db->where('idrw', $idrw);
+        if($this->db->delete('rw'))
             return true;
         else
             return false;

@@ -3,27 +3,27 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Pegawai extends CI_Controller {
+class Periode extends CI_Controller {
     
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('admin/Pegawai_model', 'PegawaiModel');
+        $this->load->model('admin/Periode_model', 'PeriodeModel');
     }
 
     public function index()
     {
-        $title['title'] = ['header'=>'Pegawai', 'dash'=>'Pegawai'];
+        $title['title'] = ['header'=>'Periode Rencana Kerja', 'dash'=>'Periode'];
         $this->load->view('admin/template/header', $title);
-        $this->load->view('admin/pegawai');
+        $this->load->view('admin/periode');
         $this->load->view('admin/template/footer');
     }
 
     function simpan()
     {
         $data = json_decode($this->security->xss_clean($this->input->raw_input_stream), true);
-        if(!isset($data['idpegawai'])){
-            $result = $this->PegawaiModel->insert($data);
+        if(!isset($data['idPeriodeRenker'])){
+            $result = $this->PeriodeModel->insert($data);
             if($result !== false)
                 echo json_encode($result);
             else{
@@ -31,7 +31,7 @@ class Pegawai extends CI_Controller {
                 echo json_encode(array('message'=>'Gagal Simpan'));
             }                
         }else{
-            $result = $this->PegawaiModel->update($data);
+            $result = $this->PeriodeModel->update($data);
             if($result !== false)
                 echo json_encode($result);
             else{
@@ -43,13 +43,13 @@ class Pegawai extends CI_Controller {
 
     public function getdata()
     {
-        $result = $this->PegawaiModel->select();
+        $result = $this->PeriodeModel->select();
         echo json_encode($result);
     }
 
-    function hapus($idpegawai)
+    function hapus($idPeriodeRenker)
     {
-        if($this->PegawaiModel->delete($idpegawai))
+        if($this->PeriodeModel->delete($idPeriodeRenker))
             echo json_encode(array('message'=>'Berhasil Hapus'));
         else{
             http_response_code(400);
