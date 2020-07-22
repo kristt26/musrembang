@@ -1,18 +1,19 @@
 <div class="row" ng-app="app" ng-controller="profileController">
   <div class="col-md-2">
     <div class="card text-center">
-        <center>
-          <div ng-bind-html='img' style="width:50%">
+      <center>
+        <div ng-bind-html='img' style="width:50%">
 
-          </div>
-          <!-- <img class="card-img-top" src="<?= base_url()?>assets/img/{{model.logo}}" alt=""> -->
-        </center>
+        </div>
+        <!-- <img class="card-img-top" src="<?= base_url()?>assets/img/{{model.logo}}" alt=""> -->
+      </center>
 
       <div class="card-body">
         <div class="form-group">
-          <input type="file" class="form-control-file" name="" id="" placeholder="" file-model="files" aria-describedby="fileHelpId">
+          <input type="file" class="form-control-file" name="" id="" placeholder="" file-model="files"
+            aria-describedby="fileHelpId">
           <small id="fileHelpId" class="form-text text-muted">Upload Logo Kelurahan</small>
-          <button class="btn btn-primary"  ng-click="uploadFile()">Upload</button>
+          <button class="btn btn-primary" ng-click="uploadFile()">Upload</button>
         </div>
       </div>
     </div>
@@ -34,7 +35,7 @@
           <div class="form-group row">
             <label for="Kontak" class="col-sm-2 col-form-label">No Telp</label>
             <div class="col-sm-10">
-              <input type="number" ng-model="model.Kontak" class="form-control" id="Kontak">
+              <input type="text" ng-model="model.Kontak" class="form-control" id="Kontak">
             </div>
           </div>
           <div class="form-group row">
@@ -54,29 +55,38 @@
 </div>
 <script>
   angular.module('app', ['ngSanitize', 'directives', 'data.service'])
+    .directive('fileModel', function ($parse) {
+      return {
+        restrict: 'A',
+        link: function (scope, element, attrs) {
+          var model = $parse(attrs.fileModel);
+          var modelSetter = model.assign;
+
+          element.bind('change', function () {
+            scope.$apply(function () {
+              modelSetter(scope, element[0].files[0]);
+            });
+          });
+        }
+      };
+    })
     .controller('profileController', function ($scope, $http, ProfileService) {
       $scope.model = {};
       $scope.img;
-      ProfileService.get().then(data=>{
-        if(data.length!==0)
+      ProfileService.get().then(data => {
+        if (data.length !== 0)
           $scope.model = data;
-          $scope.img =  '<img class="card-img-top" src="<?= base_url()?>assets/img/' + data.logo + '">';
+        $scope.img = '<img class="card-img-top" src="<?= base_url()?>assets/img/' + data.logo + '">';
       })
-      $scope.simpan = ()=>{
-        ProfileService.post($scope.model.idbidangskpd).then((x)=>{
+      $scope.simpan = () => {
+        ProfileService.post($scope.model).then((x) => {
           swal("Information!", "Berhasil disimpan", "success");
         })
       }
       $scope.uploadFile = function () {
-        
-        var fd = new FormData();
-        // console.log($scope.files);
-        angular.forEach($scope.files, function (file) {
-          fd.append('file', file);
-        });
-        ProfileService.upload(fd).then(x=>{
+        ProfileService.upload($scope.files).then(x => {
           var a = '<img class="card-img-top" src="<?= base_url()?>assets/img/${x}">';
-          $scope.img =  '<img class="card-img-top" src="<?= base_url()?>assets/img/' + x.logo + '">';
+          $scope.img = '<img class="card-img-top" src="<?= base_url()?>assets/img/' + x.logo + '">';
           swal("Information!", "Logo Berhasil ditambahkan", "success");
         })
       }

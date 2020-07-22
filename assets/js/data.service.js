@@ -62,13 +62,15 @@ function ProfileService($http, $q, helperServices) {
 	};
 	service.upload = function (param) {
 		var def = $q.defer();
+		var fd = new FormData();
+        fd.append('file', param[0]);
 		$http({
 			method: 'POST',
 			url: url + 'upload',
 			headers: {
 				'Content-Type': undefined
 			},
-			data: param
+			data: fd
 		}).then(
 			(response) => {
 				service.Items.logo=response.data;
