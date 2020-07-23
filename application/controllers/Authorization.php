@@ -29,7 +29,7 @@ class Authorization extends CI_Controller
             if($result['akses']=="admin")
                 redirect('admin/home');
             else
-                redirect('member/home');
+                redirect('user/home');
         }
     }
     function logout()

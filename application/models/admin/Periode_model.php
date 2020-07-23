@@ -11,7 +11,8 @@ class Periode_model extends CI_Model {
     {
         $item= [
             'Tahun'=>$data['Tahun'],
-            'Status'=>$data['Status']
+            'mulai'=>$data['mulai'],
+            'berakhir'=>$data['berakhir']
         ];
         $this->db->update('perioderenker', array('Status'=>'Tidak Aktif'));
         $result = $this->db->insert('perioderenker', $item);
@@ -26,7 +27,8 @@ class Periode_model extends CI_Model {
     {
         $item= [
             'Tahun'=>$data['Tahun'],
-            'Status'=>$data['Status']
+            'mulai'=>$data['mulai'],
+            'berakhir'=>$data['berakhir']
         ];
         $this->db->where('idPeriodeRenker', $data['idPeriodeRenker']);
         if($this->db->update('perioderenker', $item))

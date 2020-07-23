@@ -6,20 +6,17 @@
       </div>
       <form ng-submit="simpan()">
         <div class="card-body">
-          <div class="form-group row">
-            <label for="Tahun" class="col-sm-3 col-form-label">Tahun</label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" ng-model="model.Tahun" id="Tahun" placeholder="Tahun Periode" required>
-            </div>
+          <div class="form-group">
+            <label for="Tahun" class="col-form-label">Tahun</label>
+            <input type="text" class="form-control" ng-model="model.Tahun" id="Tahun" placeholder="Tahun Periode" required>
           </div>
-          <div class="form-group row">
-            <label for="Status" class="col-sm-3 col-form-label">Status</label>
-            <div class="col-sm-9">
-                <select class="form-control" id="Status" ng-model="model.Status">
-                    <option value="Aktif">Aktif</option>
-                    <option value="Tidak Aktif">Tidak Aktif</option>
-                </select>
-            </div>
+          <div class="form-group">
+            <label for="mulai" class="col-form-label">Tanggal Mulai</label>
+            <input type="date" class="form-control" ng-model="model.mulai" id="mulai" required>
+          </div>
+          <div class="form-group">
+            <label for="berakhir" class="col-form-label">Tanggal Selesai</label>
+            <input type="date" class="form-control" ng-model="model.berakhir" id="berakhir" required>
           </div>
         </div>
         <div class="card-footer justify-content-between">
@@ -40,7 +37,8 @@
             <tr>
               <th style="width: 10px">No</th>
               <th>Tahun</th>
-              <th>Status</th>
+              <th>Tanggal Mulai</th>
+              <th>Tanggal Berakhir</th>
               <th style="width: 15%">Action</th>
             </tr>
           </thead>
@@ -48,11 +46,13 @@
             <tr ng-repeat="item in datas">
               <td>{{$index+1}}</td>
               <td>{{item.Tahun}}</td>
-              <td>{{item.Status}}</td>
+              <td>{{item.mulai | date:'EEEE, d MMMM y'}}</td>
+              <td>{{item.berakhir | date:'EEEE, d MMMM y'}}</td>
               <td>
-                <div class="tombol">
-                  <bottom class="btn btn-default" ng-click="ubah(item)"><ion-icon name="create-outline"></ion-icon></bottom>
-                  <bottom class="btn btn-danger" ng-click="delete(item)"><ion-icon name="trash-outline"></ion-icon></bottom>
+                <div class="d-flex justify-content-center">
+                  <bottom class="btn btn-info btn-sm" ng-click="ubah(item)" style="margin: 0px 1px 0px 1px" data-toggle="tooltip" data-placement="top" title="Detail"><i class="fa fa-info-circle"></i></bottom>
+                  <bottom class="btn btn-warning btn-sm" ng-click="ubah(item)" style="margin: 0px 1px 0px 1px" data-toggle="tooltip" data-placement="top" title="Detail"><i class="fa fa-edit"></i></bottom>
+                  <a href="<?= base_url();?>admin/anggaranbiaya/index/{{item.idPeriodeRenker}}" class="btn btn-success btn-sm" style="margin: 0px 1px 0px 1px" data-toggle="tooltip" data-placement="top" title="Tambah Anggaran"><i class="fa fa-plus-circle"></i></a>
                 </div>
               </td>
             </tr>
@@ -63,12 +63,23 @@
   </div>
 </div>
 <script>
+  
+  $(document).ready(function () {
+      $('bottom').tooltip();
+    })
   angular.module('app', ['data.service'])
   .controller('periodeController', function($scope, periodeService){
     $scope.datas = [];
     $scope.model = {};
     periodeService.get().then((x)=>{
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
       $scope.datas = x;
+      angular.forEach($scope.datas, x=>{
+        x.mulai = new Date(x.mulai);
+        x.berakhir = new Date(x.berakhir);
+        console.log(x.mulai.toLocaleDateString(undefined, options));
+        console.log(x.mulai.toTimeString());
+      })
     })
     $scope.simpan = ()=>{
       periodeService.post($scope.model).then((x)=>{

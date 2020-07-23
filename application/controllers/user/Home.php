@@ -13,10 +13,10 @@ class Home extends CI_Controller
     public function index()
     {
         $title['title'] = ['header' => 'Home', 'dash' => 'Home'];
-        $this->load->view('member/template/header', $title);
-        $this->load->view('member/home');
-        $this->load->view('member/template/footer');
-        // $this->load->view('member/template/top');
+        $this->load->view('user/template/header', $title);
+        $this->load->view('user/home');
+        $this->load->view('user/template/footer');
+        // $this->load->view('user/template/top');
     }
 
 }

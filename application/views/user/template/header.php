@@ -8,13 +8,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="<?=base_url();?>assets/plugins/fontawesome-free/css/all.min.css">
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <script src="https://kit.fontawesome.com/00f691f57e.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="<?=base_url();?>assets/dist/css/adminlte.min.css">
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
   <link rel="stylesheet" href="<?=base_url();?>assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <link rel="stylesheet" href="<?= base_url();?>assets/plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="<?=base_url();?>assets/dist/css/adminlte.min.css">
   <script src="<?=base_url();?>assets/plugins/jquery/jquery.min.js"></script>
   <link rel="stylesheet" href="<?=base_url();?>assets/css/style.css">
+  <script src="<?= base_url();?>assets/js/angular.min.js"></script>
+  <script src="<?= base_url();?>assets/js/angular-sanitize.min.js"></script>
   <style>
     .center {
       margin: 0;
@@ -70,7 +72,7 @@ if (!$this->session->userdata('jenis') && $this->session->userdata('akses') != '
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
-              <a href="<?=base_url()?>member/home" class="nav-link <?=$title['header'] == 'Home' ? 'active' : ''?>">
+              <a href="<?=base_url()?>user/home" class="nav-link <?=$title['header'] == 'Home' ? 'active' : ''?>">
                 <i class="nav-icon fas fa-th"></i>
                 <p>
                   Home
@@ -78,7 +80,7 @@ if (!$this->session->userdata('jenis') && $this->session->userdata('akses') != '
               </a>
             </li>
             <li class="nav-item">
-              <a href="<?=base_url()?>member/renja" class="nav-link">
+              <a href="<?=base_url()?>user/renja" class="nav-link">
                 <i class="nav-icon fas fa-th"></i>
                 <p>
                   Rencana Kerja
@@ -86,7 +88,7 @@ if (!$this->session->userdata('jenis') && $this->session->userdata('akses') != '
               </a>
             </li>
             <li class="nav-item">
-              <a href="<?=base_url()?>member/transaksi" class="nav-link">
+              <a href="<?=base_url()?>user/transaksi" class="nav-link">
                 <i class="nav-icon fas fa-th"></i>
                 <p>
                   Transaksi
@@ -106,7 +108,7 @@ if (!$this->session->userdata('jenis') && $this->session->userdata('akses') != '
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="<?= base_url();?>user/home">Home</a></li>
                 <li class="breadcrumb-item active"><?=$title['dash'];?></li>
               </ol>
             </div>

@@ -25,10 +25,14 @@
   <!-- bs-custom-file-input -->
   <script src="<?=base_url();?>assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
   <script src="<?=base_url();?>assets/node_modules/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="<?= base_url();?>assets/plugins/select2/js/select2.full.min.js"></script>
   <!-- AdminLTE App -->
   <script src="<?=base_url();?>assets/dist/js/adminlte.min.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="<?=base_url();?>assets/dist/js/demo.js"></script>
+  <script type="text/javascript" src="<?php echo base_url();?>assets/js/helper.services.js"></script>
+  <script type="text/javascript" src="<?php echo base_url();?>assets/js/directives.js"></script>
+  <script type="text/javascript" src="<?php echo base_url();?>assets/js/userdata.service.js"></script>
   <script type="text/javascript">
     $(document).ready(function () {
       bsCustomFileInput.init();
@@ -48,6 +52,15 @@
           }
       })
     })
+
+    $('.select2').select2({
+      placeholder: "Pilih item"
+    });
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    });
   </script>
 </body>
 

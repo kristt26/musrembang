@@ -17,6 +17,21 @@ class Kegiatan_model extends CI_Model {
         }
         return $bidang;
     }
+    
+    public function selectkegiatan()
+    {
+        $result = $this->db->query("SELECT
+            `kegiatan`.*,
+            `bidang`.`KodeBidang`,
+            `bidang`.`NamaBidang`
+        FROM
+            `kegiatan`
+            LEFT JOIN `bidang` ON `bidang`.`idbidang` = `kegiatan`.`idbidang`
+        ORDER BY
+            `bidang`.`NamaBidang`, kegiatan.NamaKegiatan");
+        return $result->result();
+    }
+
     function insert($data)
     {
         $item = [

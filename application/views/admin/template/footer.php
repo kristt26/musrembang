@@ -37,12 +37,15 @@
   <script src="<?= base_url();?>assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>
   <script src="<?= base_url();?>assets/plugins/daterangepicker/daterangepicker.js"></script>
+  <script type="text/javascript" src="<?php echo base_url();?>assets/js/angular-locale_id-id.js"></script>
   <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.PrintArea.js"></script>
   <script type="text/javascript" src="<?php echo base_url();?>assets/js/helper.services.js"></script>
   <script type="text/javascript" src="<?php echo base_url();?>assets/js/directives.js"></script>
   <script type="text/javascript" src="<?php echo base_url();?>assets/js/data.service.js"></script>
   <script type="text/javascript">
   
+    
+    
     $(document).ready(function () {
       bsCustomFileInput.init();
     });

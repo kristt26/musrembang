@@ -5,6 +5,7 @@ angular
 	.factory('RencanaBiayaService', RencanaBiayaService)
 	.factory('PegawaiService', PegawaiService)
 	.factory('RwService', RwService)
+	.factory('AnggaranBiayaService', AnggaranBiayaService)
 	.factory('periodeService', periodeService);
 
 function ProfileService($http, $q, helperServices) {
@@ -440,6 +441,103 @@ function RwService($http, $q, helperServices) {
 
 function periodeService($http, $q, helperServices) {
 	var url = helperServices.url + '/musrembang/admin/periode/';
+	var service = { Items: [] };
+
+	service.get = function () {
+		var def = $q.defer();
+		if (service.instance) {
+			def.resolve(service.Items);
+		} else {
+			$http({
+				method: 'Get',
+				url: url + 'getdata',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+			}).then(
+				(response) => {
+					service.instance = true;
+					service.Items = response.data;
+					def.resolve(service.Items);
+				},
+				(err) => {
+					message.error(err.data);
+					def.reject(err);
+				}
+			);
+		}
+		return def.promise;
+	};
+
+	service.post = function (param) {
+		var def = $q.defer();
+		$http({
+			method: 'Post',
+			url: url + 'simpan',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			data: param
+		}).then(
+			(response) => {
+				if(param.idPeriodeRenker){
+					var data = service.Items.find((x) => x.idPeriodeRenker == param.idPeriodeRenker);
+					if (data) {
+						if(data.Status != 'Aktif')
+						{
+							angular.forEach(service.Items, item=>{
+								if(item.idPeriodeRenker!=param.idPeriodeRenker)
+								item.Status='Tidak Aktif';
+							})
+						}
+						data.Tahun = param.Tahun;
+						data.Status = param.Status;
+					}
+				}else{
+					angular.forEach(service.Items, item=>{
+						item.Status='Tidak Aktif';
+					})
+					service.Items.push(response.data);
+				}
+				def.resolve(response.data);
+			},
+			(err) => {
+				swal("Information!", err.data, "error");
+				def.reject(err);
+			}
+		);
+		return def.promise;
+	};
+
+	service.delete = function (id) {
+		var def = $q.defer();
+		$http({
+			method: 'Delete',
+			url: url + 'hapus/' + id,
+			headers: {
+				'Content-Type': 'application/json'
+			},
+		}).then(
+			(response) => {
+				var data = service.Items.find((x) => x.idPeriodeRenker == id);
+				if (data) {
+					var index = service.Items.indexOf(data);
+					service.Items.splice(index, 1);
+					def.resolve(true);
+				}
+			},
+			(err) => {
+				swal("Information!", err.data, "error");
+				def.reject(err);
+			}
+		);
+		return def.promise;
+	};
+	return service;
+}
+
+function AnggaranBiayaService($http, $q, helperServices) {
+	var url = helperServices.url + '/musrembang/admin/anggaranbiaya/';
 	var service = { Items: [] };
 
 	service.get = function () {

@@ -8,15 +8,15 @@ class Renja extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('member/Renja_model', 'RenjaModel');
+        $this->load->model('user/Renja_model', 'RenjaModel');
     }
 
     public function index()
     {
         $title['title'] = ['header' => 'Rencana Kerja', 'dash' => 'Rencana Kerja'];
-        $this->load->view('member/template/header', $title);
-        $this->load->view('member/renja');
-        $this->load->view('member/template/footer');
+        $this->load->view('user/template/header', $title);
+        $this->load->view('user/renja');
+        $this->load->view('user/template/footer');
     }
 
     public function simpan()
@@ -47,12 +47,12 @@ class Renja extends CI_Controller
         echo json_encode($result);
     }
 
-    public function addrenja()
+    public function created()
     {
         $title['title'] = ['header' => 'Rencana Kerja', 'dash' => 'Rencana Kerja'];
-        $this->load->view('member/template/header', $title);
-        $this->load->view('member/addrenja');
-        $this->load->view('member/template/footer');
+        $this->load->view('user/template/header', $title);
+        $this->load->view('user/createdrenja');
+        $this->load->view('user/template/footer');
     }
 
     public function hapus($idRencanaKerja)

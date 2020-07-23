@@ -24,6 +24,12 @@ class Kegiatan extends CI_Controller {
         echo json_encode($result);
     }
 
+    public function getkegiatan()
+    {
+        $result = $this->KegiatanModel->selectkegiatan();
+        echo json_encode($result);
+    }
+
     public function simpan()
     {
         $data = json_decode($this->security->xss_clean($this->input->raw_input_stream), true);
