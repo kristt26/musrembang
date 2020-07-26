@@ -27,7 +27,7 @@ function RenjaService($http, $q, helperServices) {
 					def.resolve(service.Items);
 				},
 				(err) => {
-					message.error(err.data);
+					swal("Information!", err.data, "error");
 					def.reject(err);
 				}
 			);
@@ -35,14 +35,14 @@ function RenjaService($http, $q, helperServices) {
 		return def.promise;
     };
     
-    service.getKegaitan = function () {
+    service.getKegiatan = function () {
 		var def = $q.defer();
 		if (service.instance) {
 			def.resolve(service.Items);
 		} else {
 			$http({
 				method: 'Get',
-				url: helperServices.url + '/musrembang/admin/kegiatan/getkegiatan',
+				url: url + 'getdatacreated',
 				headers: {
 					'Content-Type': 'application/json'
 				}
@@ -67,7 +67,7 @@ function RenjaService($http, $q, helperServices) {
 			method: 'POST',
 			url: url + 'simpan',
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': undefined
 			},
 			data: param
 		}).then(

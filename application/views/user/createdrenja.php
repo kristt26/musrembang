@@ -9,11 +9,11 @@
         </bottom>
       </div>
       <div class="card-body">
-        <form>
+        <form ng-submit="simpan()">
           <div class="form-group row">
             <label for="kegiatan" class="col-sm-2 col-form-label col-form-label-sm">Kegiatan<sup style="color: red;">*</sup></label>
             <div class="col-sm-10">
-              <select class="form-control form-control-sm select2" ng-options="item as (item.NamaBidang + ' | ' + item.NamaKegiatan) for item in kegiatans" style="width: 100%;" ng-model="kegiatan" ng-change="model.idKegiatan=kegiatan.idKegiatan">
+              <select class="form-control form-control-sm select2" ng-options="item as (item.NamaBidang + ' | ' + item.NamaKegiatan) for item in datas.kegiatan" style="width: 100%;" ng-model="kegiatan" ng-change="model.idKegiatan=kegiatan.idKegiatan; model.NamaKegiatan = kegiatan.NamaKegiatan; model.KodeKegiatan = kegiatan.KodeKegiatan; model.idbidang = kegiatan.idbidang; model.NamaBidang = kegiatan.NamaBidang; model.KodeBidang= kegiatan.KodeBidang;">
                 <option></option>
               </select>
             </div>
@@ -21,7 +21,7 @@
           <div class="form-group row">
             <label for="lingkungan" class="col-sm-2 col-form-label col-form-label-sm">Lingkungan<sup style="color: red;">*</sup></label>
             <div class="col-sm-10">
-              <select class="form-control form-control-sm select2" ng-options="item as item.nort for item in lingkungans" style="width: 100%;" ng-model="lingkungan" ng-change="model.idKegiatan=kegiatan.idKegiatan">
+              <select class="form-control form-control-sm select2" ng-options="item as item.nort for item in datas.lingkungan" style="width: 100%;" ng-model="lingkungan" ng-change="model.nort = lingkungan.nort; model.idrt = lingkungan.idrt;">
                 <option></option>
               </select>
             </div>
@@ -31,7 +31,7 @@
             <div class="col-sm-10 clearfix">
               <div class="d-flex justify-content-between">
                 <div class="d-flex justify-content-between" style="width: 85%;">
-                  <select class="form-control form-control-sm select2" ng-options="item as item.nort for item in jalans" style="width: 100%;" ng-model="jalan" ng-change="model.idjalan=jalan.idjalan">
+                  <select class="form-control form-control-sm select2" ng-options="item as item.jalan for item in lingkungan.jalan" style="width: 100%;" ng-model="jalan" ng-change="model.idjalan=jalan.idjalan; model.jalan = jalan.jalan">
                   <option></option>
                   </select>
                 </div>
@@ -76,7 +76,7 @@
             <div class="col-sm-10">
               <div class="form-group inputDnD">
                 <!-- <label class="sr-only" for="inputFile">File Upload</label> -->
-                <input type="file" class="form-control-file form-control-sm text-secondary font-weight-bold" id="inputFile" accept="image/*" data-title="Drag and drop a file">
+                <input type="file" class="form-control-file form-control-sm text-secondary font-weight-bold" id="inputFile" file-model = "myFile" accept="image/*" data-title="Drag and drop a file">
               </div>
             </div>
           </div>
@@ -92,7 +92,7 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text">Rp.</span>
                   </div>
-                  <input type="text" class="form-control text-right" id="rencanabiaya">
+                  <input type="text" class="form-control text-right" id="rencanabiaya" ng-model="model.nominal">
                   <div class="input-group-append">
                     <span class="input-group-text">,00</span>
                   </div>
@@ -102,13 +102,13 @@
           <div class="form-group row">
             <label for="sumberanggaran" class="col-sm-2 col-form-label col-form-label-sm">Sumber Anggaran<sup style="color: red;">*</sup></label>
             <div class="col-sm-10">
-              <select class="form-control form-control-sm select2" ng-options="item for item in datas.sumberanggaran" style="width:100%;" ng-model="sumberanggaran" id="sumberanggaran"></select>
+              <select class="form-control form-control-sm select2" ng-options="item as item.NamaRencanaBiaya for item in datas.sumberanggaran" style="width:100%;" ng-model="sumberanggaran" id="sumberanggaran" ng-change="model.nominal1 = sumberanggaran.nominal1; model.idRencanaBiaya = sumberanggaran.idRencanaBiaya; model.NamaRencanaBiaya = sumberanggaran.NamaRencanaBiaya; model.iddetailrencanabiaya = sumberanggaran.iddetailrencanabiaya;"></select>
             </div>
           </div>
           <div class="form-group row">
             <label for="bidangskpd" class="col-sm-2 col-form-label col-form-label-sm">Bidang SKPD<sup style="color: red;">*</sup></label>
             <div class="col-sm-10">
-              <select class="form-control form-control-sm select2" ng-options="item for item in datas.bidangskpd" style="width:100%;" ng-model="bidangskpd" id="bidangskpd"></select>
+              <select class="form-control form-control-sm select2" ng-options="item as item.NamaBidangSkpd for item in datas.bidangskpd" style="width:100%;" ng-model="bidangskpd" id="bidangskpd" ng-change="model.idbidangskpd = bidangskpd.idbidangskpd; model.NamaBidangSkpd = bidangskpd.NamaBidangSkpd;"></select>
             </div>
           </div>
           <hr>
@@ -123,31 +123,41 @@
   </div>
 </div>
 <script>
-  function readUrl(input) {
-
-if (input.files && input.files[0]) {
-  var reader = new FileReader();
-  reader.onload = function (e) {
-    var imgData = e.target.result;
-    var imgName = input.files[0].name;
-    input.setAttribute("data-title", imgName);
-    console.log(e.target.result);
-  };
-  reader.readAsDataURL(input.files[0]);
-}
-}
   angular.module('app', ['userdata.service', 'helper.service'])
+    .directive('fileModel', function ($parse) {
+            return {
+               restrict: 'A',
+               link: function(scope, element, attrs) {
+                  var model = $parse(attrs.fileModel);
+                  var modelSetter = model.assign;
+                  
+                  element.bind('change', function() {
+                     scope.$apply(function() {
+                        modelSetter(scope, element[0].files[0]);
+                     });
+                  });
+               }
+            };
+         })
     .controller('createdRenjaController', function ($scope, RenjaService, $window, helperServices) {
       $scope.datas = [];
       $scope.service = helperServices;
       $scope.kegiatans = [];
       $scope.model = {};
-      RenjaService.getKegaitan().then((x) => {
-        $scope.kegiatans = x;
+      $scope.jalans = [];
+      RenjaService.getKegiatan().then((x) => {
+        $scope.datas = x;
       })
       $scope.simpan = () => {
-        RenjaService.post($scope.model).then((x) => {
-          $scope.model = {};
+        $scope.model.idPeriodeRenker = '<?= $periode->idPeriodeRenker;?>';
+        var file = $scope.myFile;
+        var fd = new FormData();
+        fd.append('file', file);
+        for (var prop in $scope.model) {
+          fd.append(prop, $scope.model[prop]);
+        }
+        RenjaService.post(fd).then((x) => {
+          // $scope.model = {};
           swal("Information!", "Berhasil disimpan", "success");
         })
       }

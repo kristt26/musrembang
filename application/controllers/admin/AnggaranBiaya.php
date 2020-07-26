@@ -41,9 +41,9 @@ class AnggaranBiaya extends CI_Controller {
         }
     }
 
-    public function getdata()
+    public function getdata($idPeriodeRenker= null)
     {
-        $result = $this->AnggaranBiayaModel->select();
+        $result = $this->AnggaranBiayaModel->select($idPeriodeRenker);
         echo json_encode($result);
     }
 

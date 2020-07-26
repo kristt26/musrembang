@@ -19,7 +19,6 @@
                   <th>Lokasi</th>
                   <th>Target</th>
                   <th>Volume</th>
-                  <th>Satuan</th>
                   <th>File</th>
                   <th style="width: 190px">Action</th>
                 </tr>
@@ -32,8 +31,7 @@
                   <td>RW. {{item.norw}}</td>
                   <td>{{item.lokasi}}</td>
                   <td>{{item.target}}</td>
-                  <td>{{item.volume}}</td>
-                  <td>{{item.satuan}}</td>
+                  <td>{{item.volume}} {{item.satuan}}</td>
                   <td>{{item.file}}</td>
                   <td>
                     <div class="noborder-radius text-center">
@@ -56,6 +54,7 @@
 </div>
 <script>
   angular.module('app', ['userdata.service'])
+    
     .controller('rencanaBiayaController', function ($scope, RenjaService) {
       $scope.datas = [];
       $scope.model = {};

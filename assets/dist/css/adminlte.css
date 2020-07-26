@@ -1724,6 +1724,7 @@ pre code {
 .table-sm th,
 .table-sm td {
   padding: 0.3rem;
+  font-size: 0.875rem !important;
 }
 
 .table-bordered {

@@ -7,7 +7,7 @@
       <div class="float-right d-none d-sm-block">
         <b>Version</b> 3.0.5
       </div>
-      <strong><a href="http://adminlte.io">Sistem Informasi Laundry</a></strong> 
+      <strong><a href="http://adminlte.io">MUSRENBANG KELURAHAN HAMADI</a></strong> 
     </footer>
 
     <!-- Control Sidebar -->
@@ -42,6 +42,7 @@
   <script type="text/javascript" src="<?php echo base_url();?>assets/js/helper.services.js"></script>
   <script type="text/javascript" src="<?php echo base_url();?>assets/js/directives.js"></script>
   <script type="text/javascript" src="<?php echo base_url();?>assets/js/data.service.js"></script>
+  <script type="text/javascript" src="<?php echo base_url();?>assets/js/input-mask/angular-input-masks-standalone.min.js"></script>
   <script type="text/javascript">
   
     
@@ -65,7 +66,7 @@
       })
     })
     $('.select2').select2({
-      placeholder: "Pilih kode pemesanan"
+      placeholder: "Pilih item"
     });
 
     //Initialize Select2 Elements
