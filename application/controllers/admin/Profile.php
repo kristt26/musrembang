@@ -9,11 +9,15 @@ class Profile extends CI_Controller
     {
         parent::__construct();
         $this->load->model('admin/Profile_model', 'ProfileModel');
+        $this->load->model('admin/Periode_model', 'PeriodeModel');
+        $this->load->model('admin/Profile_Model', 'ProfileModel');
     }
 
     public function index()
     {
-        $title['title'] = ['header' => 'Profile Kelurahan', 'dash' => 'Profile'];
+        $profile = $this->ProfileModel->select();
+        $periode = $this->PeriodeModel->selectarsip();
+        $title['title'] = ['header' => 'Profile Kelurahan', 'dash' => 'Profile', 'tahun'=>$periode, 'profile'=>$profile];
         $this->load->view('admin/template/header', $title);
         $this->load->view('admin/profile');
         $this->load->view('admin/template/footer', $title);

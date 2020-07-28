@@ -13,7 +13,7 @@
           <div class="form-group row">
             <label for="kegiatan" class="col-sm-2 col-form-label col-form-label-sm">Kegiatan<sup style="color: red;">*</sup></label>
             <div class="col-sm-10">
-              <select class="form-control form-control-sm select2" ng-options="item as (item.NamaBidang + ' | ' + item.NamaKegiatan) for item in datas.kegiatan" style="width: 100%;" ng-model="kegiatan" ng-change="model.idKegiatan=kegiatan.idKegiatan; model.NamaKegiatan = kegiatan.NamaKegiatan; model.KodeKegiatan = kegiatan.KodeKegiatan; model.idbidang = kegiatan.idbidang; model.NamaBidang = kegiatan.NamaBidang; model.KodeBidang= kegiatan.KodeBidang;">
+              <select ng-disabled="model.status != 'Draf'" class="form-control form-control-sm select2" ng-options="item as (item.NamaBidang + ' | ' + item.NamaKegiatan) for item in datas.kegiatan" style="width: 100%;" ng-model="kegiatan" ng-change="model.idKegiatan=kegiatan.idKegiatan; model.NamaKegiatan = kegiatan.NamaKegiatan; model.KodeKegiatan = kegiatan.KodeKegiatan; model.idbidang = kegiatan.idbidang; model.NamaBidang = kegiatan.NamaBidang; model.KodeBidang= kegiatan.KodeBidang;">
                 <option></option>
               </select>
             </div>
@@ -21,7 +21,7 @@
           <div class="form-group row">
             <label for="lingkungan" class="col-sm-2 col-form-label col-form-label-sm">Lingkungan<sup style="color: red;">*</sup></label>
             <div class="col-sm-10">
-              <select class="form-control form-control-sm select2" ng-options="item as item.nort for item in datas.lingkungan" style="width: 100%;" ng-model="lingkungan" ng-change="model.nort = lingkungan.nort; model.idrt = lingkungan.idrt;">
+              <select ng-disabled="model.status != 'Draf'" class="form-control form-control-sm select2" ng-options="item as item.nort for item in datas.lingkungan" style="width: 100%;" ng-model="lingkungan" ng-change="model.nort = lingkungan.nort; model.idrt = lingkungan.idrt;">
                 <option></option>
               </select>
             </div>
@@ -31,7 +31,7 @@
             <div class="col-sm-10 clearfix">
               <div class="d-flex justify-content-between">
                 <div class="d-flex justify-content-between" style="width: 85%;">
-                  <select class="form-control form-control-sm select2" ng-options="item as item.jalan for item in lingkungan.jalan" style="width: 100%;" ng-model="jalan" ng-change="model.idjalan=jalan.idjalan; model.jalan = jalan.jalan">
+                  <select ng-disabled="model.status != 'Draf'" class="form-control form-control-sm select2" ng-options="item as item.jalan for item in lingkungan.jalan" style="width: 100%;" ng-model="jalan" ng-change="model.idjalan=jalan.idjalan; model.jalan = jalan.jalan">
                   <option></option>
                   </select>
                 </div>
@@ -46,14 +46,14 @@
                 <div class="col-sm-5 row d-flex justify-content-between">
                   <label for="volume" class="col-sm-4 col-form-label col-form-label-sm">Volume<sup style="color: red;">*</sup></label>
                   <div class="col-sm-7 text-right">
-                    <input type="number" class="form-control form-control-sm" ng-model="model.volume">
+                    <input ng-disabled="model.status != 'Draf'" type="number" class="form-control form-control-sm" ng-model="model.volume">
                   </div>
                 </div>
                 <div class="col-sm-2 row"></div>
                 <div class="col-sm-5 row d-flex justify-content-between">
                   <label for="satuan" class="col-sm-4 col-form-label col-form-label-sm">Satuan<sup style="color: red;">*</sup></label>
                   <div class="col-sm-7  text-right">
-                    <input type="text" class="form-control form-control-sm" ng-model="model.satuan">
+                    <input ng-disabled="model.status != 'Draf'" type="text" class="form-control form-control-sm" ng-model="model.satuan">
                   </div>
                 </div>
               </div>
@@ -62,13 +62,13 @@
           <div class="form-group row">
             <label for="permasalahan" class="col-sm-2 col-form-label col-form-label-sm">Permasalahan<sup style="color: red;">*</sup></label>
             <div class="col-sm-10">
-              <textarea class="form-control form-control-sm" ng-model="model.permasalahan" id="permasalahan" rows="4"></textarea>
+              <textarea ng-disabled="model.status != 'Draf'" class="form-control form-control-sm" ng-model="model.permasalahan" id="permasalahan" rows="4"></textarea>
             </div>
           </div>
           <div class="form-group row">
             <label for="skalaprioritas" class="col-sm-2 col-form-label col-form-label-sm">Skala Prioritas<sup style="color: red;">*</sup></label>
             <div class="col-sm-10">
-              <select class="form-control form-control-sm select2" ng-options="item for item in service.priotitas" ng-model="model.prioritas" id="skalaprioritas"></select>
+              <select ng-disabled="model.status != 'Draf'" class="form-control form-control-sm select2" ng-options="item for item in service.priotitas" ng-model="model.prioritas" id="skalaprioritas"></select>
             </div>
           </div>
           <div class="form-group row">
@@ -76,7 +76,7 @@
             <div class="col-sm-10">
               <div class="form-group inputDnD">
                 <!-- <label class="sr-only" for="inputFile">File Upload</label> -->
-                <input type="file" class="form-control-file form-control-sm text-secondary font-weight-bold" id="inputFile" file-model = "myFile" accept="image/*" data-title="Drag and drop a file">
+                <input ng-disabled="model.status != 'Draf'" type="file" class="form-control-file form-control-sm text-secondary font-weight-bold" id="inputFile" file-model = "myFile" accept="image/*, application/pdf" data-title="{{fileTitle}}" onchange="angular.element(this).scope().ChangeFile(this)">
               </div>
             </div>
           </div>
@@ -92,7 +92,7 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text">Rp.</span>
                   </div>
-                  <input type="text" class="form-control text-right" id="rencanabiaya" ng-model="model.nominal">
+                  <input ng-disabled="model.status != 'Draf'" type="text" class="form-control text-right" id="rencanabiaya" ng-model="model.nominal" ui-number-mask="0">
                   <div class="input-group-append">
                     <span class="input-group-text">,00</span>
                   </div>
@@ -102,28 +102,53 @@
           <div class="form-group row">
             <label for="sumberanggaran" class="col-sm-2 col-form-label col-form-label-sm">Sumber Anggaran<sup style="color: red;">*</sup></label>
             <div class="col-sm-10">
-              <select class="form-control form-control-sm select2" ng-options="item as item.NamaRencanaBiaya for item in datas.sumberanggaran" style="width:100%;" ng-model="sumberanggaran" id="sumberanggaran" ng-change="model.nominal1 = sumberanggaran.nominal1; model.idRencanaBiaya = sumberanggaran.idRencanaBiaya; model.NamaRencanaBiaya = sumberanggaran.NamaRencanaBiaya; model.iddetailrencanabiaya = sumberanggaran.iddetailrencanabiaya;"></select>
+              <select ng-disabled="model.status != 'Draf'" class="form-control form-control-sm select2" ng-options="item as item.NamaRencanaBiaya for item in datas.sumberanggaran" style="width:100%;" ng-model="sumberanggaran" id="sumberanggaran" ng-change="model.nominal1 = sumberanggaran.nominal1; model.idRencanaBiaya = sumberanggaran.idRencanaBiaya; model.NamaRencanaBiaya = sumberanggaran.NamaRencanaBiaya; model.iddetailrencanabiaya = sumberanggaran.iddetailrencanabiaya;"></select>
             </div>
           </div>
           <div class="form-group row">
             <label for="bidangskpd" class="col-sm-2 col-form-label col-form-label-sm">Bidang SKPD<sup style="color: red;">*</sup></label>
             <div class="col-sm-10">
-              <select class="form-control form-control-sm select2" ng-options="item as item.NamaBidangSkpd for item in datas.bidangskpd" style="width:100%;" ng-model="bidangskpd" id="bidangskpd" ng-change="model.idbidangskpd = bidangskpd.idbidangskpd; model.NamaBidangSkpd = bidangskpd.NamaBidangSkpd;"></select>
+              <select ng-disabled="model.status != 'Draf'" class="form-control form-control-sm select2" ng-options="item as item.NamaBidangSkpd for item in datas.bidangskpd" style="width:100%;" ng-model="bidangskpd" id="bidangskpd" ng-change="model.idbidangskpd = bidangskpd.idbidangskpd; model.NamaBidangSkpd = bidangskpd.NamaBidangSkpd;"></select>
             </div>
           </div>
           <hr>
           <div class="form-group row">
             <div class="col-sm-10">
-              <button type="submit" class="btn btn-info btn-sm"><i class="fa fa-save"></i> Simpan</button>
+              <button ng-show="model.status == 'Draf'" type="submit" class="btn btn-info btn-sm"><i class="fa fa-save"></i> Simpan</button>
+              <button ng-show="model.status != 'Draf'" type="submit" class="btn btn-info btn-sm" disabled><i class="fa fa-save"></i> Simpan</button>
             </div>
           </div>
         </form>
+        <!-- <div class="col-md-12"> -->
+          <button ng-show="model.status == 'Draf'" type="button" class="btn btn-block bg-gradient-primary" ng-click="showvalidasi()">Validasi</button>
+          <button ng-show="model.status != 'Draf'" type="button" class="btn btn-block bg-gradient-primary" disabled>Validasi</button>
+        <!-- </div> -->
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="waning-validasi">
+    <div class="modal-dialog">
+      <div class="modal-content bg-primary">
+        <div class="list-group">
+          <div class="list-group-item bg-blue" style="font-size:24px; color: red;">
+            Peringatan !!!
+          </div>
+          <div class="list-group-item text-center">
+            <p style="color:black;  font-size:18px">Data yang telah di validasi tidak dapat dilakukan perubahan</p>
+            <p style="color:black; font-size:20px">Yakin akan melakukan validasi?</p>
+          </div>
+          <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+              <button type="button" class="btn btn-outline-light" ng-click="validasi()">Validasi</button>
+          </div>
+          
+        </div>
       </div>
     </div>
   </div>
 </div>
 <script>
-  angular.module('app', ['userdata.service', 'helper.service'])
+  angular.module('app', ['userdata.service', 'helper.service', 'ui.utils.masks'])
     .directive('fileModel', function ($parse) {
             return {
                restrict: 'A',
@@ -145,11 +170,25 @@
       $scope.kegiatans = [];
       $scope.model = {};
       $scope.jalans = [];
+      $scope.fileTitle = "Drag and drop a file";
+      $scope.ChangeFile = (x)=>{
+        $scope.fileTitle = x.files[0].name;
+      }
       RenjaService.getKegiatan().then((x) => {
         $scope.datas = x;
+        if(x.data){
+          $scope.model = x.data;
+          $scope.datas.data.volume = parseInt($scope.datas.data.volume);
+          $scope.kegiatan = $scope.datas.kegiatan.find(x=>x.idKegiatan==$scope.datas.data.idKegiatan);
+          $scope.lingkungan = $scope.datas.lingkungan.find(x=>x.idrt==$scope.datas.data.idrt);
+          $scope.sumberanggaran = $scope.datas.sumberanggaran.find(x=>x.iddetailrencanabiaya==$scope.datas.data.iddetailrencanabiaya);
+          $scope.bidangskpd = $scope.datas.bidangskpd.find(x=>x.idbidangskpd==$scope.datas.data.idbidangskpd);
+          $scope.jalan = $scope.lingkungan.jalan.find(x=>x.idjalan==$scope.datas.data.idjalan);
+        }
       })
       $scope.simpan = () => {
-        $scope.model.idPeriodeRenker = '<?= $periode->idPeriodeRenker;?>';
+        if(!$scope.model.idPeriodeRenker)
+          $scope.model.idPeriodeRenker = '<?= $periode->idPeriodeRenker;?>';
         var file = $scope.myFile;
         var fd = new FormData();
         fd.append('file', file);
@@ -160,6 +199,25 @@
           // $scope.model = {};
           swal("Information!", "Berhasil disimpan", "success");
         })
+      }
+      $scope.validasi= ()=>{
+        RenjaService.validasi($scope.model).then(x=>{
+          $window.history.back();
+        })
+      }
+      $scope.showvalidasi = ()=>{
+        if(isEmpty($scope.model))
+          swal("Information!", "Tidak ada data yang divalidasi", "error");
+        else{
+          $('#waning-validasi').modal('show');
+        }
+      }
+      function isEmpty(obj) {
+          for(var key in obj) {
+              if(obj.hasOwnProperty(key))
+                  return false;
+          }
+          return true;
       }
       $scope.ubah = (item) => {
         $scope.model = angular.copy(item);

@@ -33,7 +33,19 @@
   <script type="text/javascript" src="<?php echo base_url();?>assets/js/helper.services.js"></script>
   <script type="text/javascript" src="<?php echo base_url();?>assets/js/directives.js"></script>
   <script type="text/javascript" src="<?php echo base_url();?>assets/js/userdata.service.js"></script>
+  <script type="text/javascript" src="<?php echo base_url();?>assets/js/angular-locale_id-id.js"></script>
+  <script type="text/javascript" src="<?php echo base_url();?>assets/js/input-mask/angular-input-masks-standalone.min.js"></script>
   <script type="text/javascript">
+    $(document).ready(function(){
+      $('[data-toggle=tooltip]').hover(function(){
+          // on mouseenter
+          $(this).tooltip('show');
+      }, function(){
+          // on mouseleave
+          $(this).tooltip('hide');
+      });
+    });
+    
     $(document).ready(function () {
       bsCustomFileInput.init();
     });
