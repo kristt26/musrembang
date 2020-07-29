@@ -25,7 +25,7 @@ class Renja extends CI_Controller
     public function simpan()
     {
         $data = $_POST;
-        $a = $this->upload();
+        $a = $this->upload($data['idRencanaKerja']);
         if (count($a) > 0) {
             $data['file'] = $a['file'];
         }
@@ -57,10 +57,9 @@ class Renja extends CI_Controller
 
     public function created()
     {
-        $periode['periode'] = $this->RenjaModel->selectperiode();
         $title['title'] = ['header' => 'Rencana Kerja', 'dash' => 'Rencana Kerja'];
         $this->load->view('user/template/header', $title);
-        $this->load->view('user/createdrenja', $periode);
+        $this->load->view('user/createdrenja');
         $this->load->view('user/template/footer');
     }
 
@@ -92,16 +91,33 @@ class Renja extends CI_Controller
         }
     }
 
-    public function upload()
+    public function upload($idRencanaKerja)
     {
         $cek = $this->RenjaModel->select();
-        $path_to_file = './assets/berkas/' . $cek[0]->file;
+        $nilai;
+        foreach ($cek as $key => $value) {
+            if($value->idRencanaKerja==$idRencanaKerja)
+                $nilai = $value;
+        }
+        $path_to_file = './assets/berkas/' . $nilai->file;
         $config['upload_path'] = './assets/berkas';
         $config['allowed_types'] = 'gif|jpg|png|jpeg|pdf';
         $config['max_size'] = 4096;
         $config['encrypt_name'] = true;
-        if ($cek[0]->file !== null && isset($_FILES['file'])) {
-            if (unlink($path_to_file)) {
+        if(isset($_FILES['file'])){
+            if ($nilai->file !== null) {
+                if (unlink($path_to_file)) {
+                    $this->load->library('upload', $config);
+                    if ($this->upload->do_upload("file")) {
+                        $data = array('upload_data' => $this->upload->data());
+                        $image = $data['upload_data']['file_name'];
+                        // $result = $this->ProfileModel->updategambar($image);
+                        return array('file' => $image);
+                    }
+                } else {
+                    return [];
+                }
+            } else {
                 $this->load->library('upload', $config);
                 if ($this->upload->do_upload("file")) {
                     $data = array('upload_data' => $this->upload->data());
@@ -109,17 +125,9 @@ class Renja extends CI_Controller
                     // $result = $this->ProfileModel->updategambar($image);
                     return array('file' => $image);
                 }
-            } else {
-                return [];
             }
-        } else {
-            $this->load->library('upload', $config);
-            if ($this->upload->do_upload("file")) {
-                $data = array('upload_data' => $this->upload->data());
-                $image = $data['upload_data']['file_name'];
-                // $result = $this->ProfileModel->updategambar($image);
-                return array('file' => $image);
-            }
+        }else{
+            return array('file' => $nilai->file);
         }
     }
 }

@@ -13,10 +13,11 @@
   <link rel="stylesheet" href="<?=base_url();?>assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <link rel="stylesheet" href="<?= base_url();?>assets/plugins/select2/css/select2.min.css">
   <link rel="stylesheet" href="<?=base_url();?>assets/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="<?= base_url();?>assets/plugins/angular-datatables/dist/css/angular-datatables.min.css">
   <script src="<?=base_url();?>assets/plugins/jquery/jquery.min.js"></script>
   <link rel="stylesheet" href="<?=base_url();?>assets/css/style.css">
-  <script src="<?= base_url();?>assets/js/angular.min.js"></script>
-  <script src="<?= base_url();?>assets/js/angular-sanitize.min.js"></script>
+  <script src="<?= base_url();?>assets/js/plugins/angular.min.js"></script>
+  <script src="<?= base_url();?>assets/js/plugins/angular-sanitize.min.js"></script>
   <style>
     .center {
       margin: 0;

@@ -14,7 +14,8 @@ class Home extends CI_Controller {
     {
         $profile = $this->ProfileModel->select();
         $periode = $this->PeriodeModel->selectarsip();
-        $title['title'] = ['header'=>'Home', 'dash'=>'Home', 'tahun'=>$periode, 'profile'=>$profile];
+        $periodeaktif = $this->PeriodeModel->selectperiodeaktif();
+        $title['title'] = ['header'=>'Home', 'dash'=>'Home', 'tahun'=>$periode[0], 'profile'=>$profile, 'periode'=>$periodeaktif[0]];
         $this->load->view('admin/template/header', $title);
         $this->load->view('admin/home');
         $this->load->view('admin/template/footer');

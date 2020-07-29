@@ -1,4 +1,4 @@
-<div class="row" ng-app="app" ng-controller="rencanaKerjaController">
+<div class="row" ng-app="appuser" ng-controller="rencanaKerjaController">
   <div class="col-md-12">
     <div class="card card-default">
       <div class="card-header">
@@ -35,9 +35,11 @@
                   <td><a href="<?= base_url();?>assets/berkas/{{item.file}}" target="_blank">file</a></td>
                   <td>
                     <div class="noborder-radius text-center">
-                      <a ng-show="item.status == 'Draf'" class="btn btn-primary" ng-click="validasi(item)" title="Validasi" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-check"></i></a>
-                      <a href="<?= base_url();?>user/renja/created/{{item.idRencanaKerja}}" class="btn btn-warning" ng-click="ubah(item)" title="Ubah" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-edit"></i></a>
-                      <bottom class="btn btn-danger" ng-click="delete(item)" title="Hapus Pengajuan" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-trash-alt"></i></bottom>
+                      <a ng-show="item.status == 'Draf'" class="btn btn-primary" ng-click="showvalidasi(item)" title="Validasi" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-check"></i></a>
+                      <a ng-show="item.status == 'Draf'" href="<?= base_url();?>user/renja/created/{{item.idRencanaKerja}}" class="btn btn-warning" ng-click="ubah(item)" title="Ubah" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-edit"></i></a>
+                      <bottom ng-show="item.status != 'Draf'" class="btn btn-warning disabled" title="Ubah" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-edit"></i></bottom>
+                      <bottom ng-show="item.status == 'Draf'" class="btn btn-danger" ng-click="delete(item)" title="Hapus Pengajuan" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-trash-alt"></i></bottom>
+                      <bottom ng-show="item.status != 'Draf'" class="btn btn-danger disabled" title="Hapus Pengajuan" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-trash-alt"></i></bottom>
                     </div>
                   </td>
                 </tr>
@@ -48,45 +50,24 @@
       </div>
     </div>
   </div>
+  <div class="modal fade" id="waning-validasi">
+    <div class="modal-dialog">
+      <div class="modal-content bg-primary">
+        <div class="list-group">
+          <div class="list-group-item bg-blue" style="font-size:24px; color: red;">
+            Peringatan !!!
+          </div>
+          <div class="list-group-item text-center">
+            <p style="color:black;  font-size:18px">Data yang telah di validasi tidak dapat dilakukan perubahan</p>
+            <p style="color:black; font-size:20px">Yakin akan melakukan validasi?</p>
+          </div>
+          <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+              <button type="button" class="btn btn-outline-light" ng-click="validasi()">Validasi</button>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<script>
-  angular.module('app', ['userdata.service'])
-  .directive('tooltip', function(){
-        return {
-            restrict: 'A',
-            link: function(scope, element, attrs){
-                element.hover(function(){
-                    // on mouseenter
-                    element.tooltip('show');
-                }, function(){
-                    // on mouseleave
-                    element.tooltip('hide');
-                });
-            }
-        };
-    })
-    .controller('rencanaKerjaController', function ($scope, RenjaService) {
-      $scope.datas = [];
-      $scope.model = {};
-      RenjaService.get().then((x) => {
-        $scope.datas = x;
-      })
-      $scope.simpan = () => {
-        RenjaService.post($scope.model).then((x) => {
-          $scope.model = {};
-          swal("Information!", "Berhasil disimpan", "success");
-        })
-      }
-      $scope.ubah = (item) => {
-        $scope.model = angular.copy(item);
-      }
-      $scope.clear = () => {
-        $scope.model = {};
-      }
-      $scope.delete = (item) => {
-        RenjaService.delete(item.idRencanaBiaya).then((x) => {
-          swal("Information!", "Berhasil dihapus", "success");
-        })
-      }
-    })
-</script>

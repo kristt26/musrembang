@@ -33,9 +33,9 @@ function RenjaService($http, $q, helperServices) {
 			);
 		}
 		return def.promise;
-    };
-    
-    service.getKegiatan = function () {
+	};
+
+	service.getKegiatan = function () {
 		var def = $q.defer();
 		id = helperServices.absUrl.split('/');
 		id = id[id.length - 1];
@@ -62,34 +62,35 @@ function RenjaService($http, $q, helperServices) {
 		}
 		return def.promise;
 	};
-	
-	service.validasi = function ($param) {
+
+	service.validasi = function (param) {
 		var def = $q.defer();
-		if (service.instance) {
-			def.resolve(service.Items);
-		} else {
-			$http({
-				method: 'Get',
-				url: url + 'validasi',
-				data: $param,
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			}).then(
-				(response) => {
-					service.instance = true;
-					service.Items = response.data;
-					def.resolve(service.Items);
-				},
-				(err) => {
-					swal("Information!", err.data, "error");
-					def.reject(err);
-				}
-			);
-		}
+		$http({
+			method: 'POST',
+			url: url + 'validasi',
+			data: param,
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}).then(
+			(response) => {
+				if(!service.Items.data){
+					var data = service.Items.find(x => x.idRencanaKerja == param.idRencanaKerja);
+					if (data) {
+						data.status = 'Usulan'
+					}
+				}else
+					service.Items.data.status = 'Usulan'
+				def.resolve(service.Items);
+			},
+			(err) => {
+				swal("Information!", err.data, "error");
+				def.reject(err);
+			}
+		);
 		return def.promise;
-    };
-    
+	};
+
 	service.post = function (param) {
 		var def = $q.defer();
 		$http({
@@ -115,7 +116,7 @@ function RenjaService($http, $q, helperServices) {
 	service.upload = function (param) {
 		var def = $q.defer();
 		var fd = new FormData();
-        fd.append('file', param[0]);
+		fd.append('file', param[0]);
 		$http({
 			method: 'POST',
 			url: url + 'upload',
@@ -125,7 +126,7 @@ function RenjaService($http, $q, helperServices) {
 			data: fd
 		}).then(
 			(response) => {
-				service.Items.logo=response.data;
+				service.Items.logo = response.data;
 				def.resolve(response.data);
 			},
 			(err) => {
@@ -180,15 +181,15 @@ function SkpdService($http, $q, helperServices) {
 			data: param
 		}).then(
 			(response) => {
-				if(param.idRencanaBiaya){
+				if (param.idRencanaBiaya) {
 					var data = service.Items.find((x) => x.idbidangskpd == param.idbidangskpd);
 					if (data) {
 						data.NamaBidang = param.NamaBidang;
 					}
-				}else{
+				} else {
 					service.Items.push(response.data);
 				}
-				
+
 				def.resolve(response.data);
 			},
 			(err) => {

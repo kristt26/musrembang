@@ -9,11 +9,16 @@ class Rw extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('admin/Rw_model', 'RwModel');
+        $this->load->model('admin/Periode_model', 'PeriodeModel');
+        $this->load->model('admin/Profile_Model', 'ProfileModel');
     }
 
     public function index()
     {
-        $title['title'] = ['header'=>'RW', 'dash'=>'RW'];
+        $profile = $this->ProfileModel->select();
+        $periode = $this->PeriodeModel->selectarsip();
+        $periodeaktif = $this->PeriodeModel->selectperiodeaktif();
+        $title['title'] = ['header'=>'RW', 'dash'=>'RW', 'tahun'=>$periode, 'profile'=>$profile, 'periode'=>$periodeaktif[0]];
         $this->load->view('admin/template/header', $title);
         $this->load->view('admin/rw');
         $this->load->view('admin/template/footer');

@@ -1409,7 +1409,7 @@ var _index5 = require('../locale/en-US/index.js');
 
 var _index6 = _interopRequireDefault(_index5);
 
-var _index7 = require('./_lib/formatters/index.js');
+var _index7 = require('./_lib/formatters/index.js.js');
 
 var _index8 = _interopRequireDefault(_index7);
 
@@ -2295,23 +2295,23 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = require('./_lib/formatDistance/index.js');
+var _index = require('./_lib/formatDistance/index.js.js');
 
 var _index2 = _interopRequireDefault(_index);
 
-var _index3 = require('./_lib/formatLong/index.js');
+var _index3 = require('./_lib/formatLong/index.js.js');
 
 var _index4 = _interopRequireDefault(_index3);
 
-var _index5 = require('./_lib/formatRelative/index.js');
+var _index5 = require('./_lib/formatRelative/index.js.js');
 
 var _index6 = _interopRequireDefault(_index5);
 
-var _index7 = require('./_lib/localize/index.js');
+var _index7 = require('./_lib/localize/index.js.js');
 
 var _index8 = _interopRequireDefault(_index7);
 
-var _index9 = require('./_lib/match/index.js');
+var _index9 = require('./_lib/match/index.js.js');
 
 var _index10 = _interopRequireDefault(_index9);
 
@@ -3013,11 +3013,11 @@ var _index5 = require('../locale/en-US/index.js');
 
 var _index6 = _interopRequireDefault(_index5);
 
-var _index7 = require('./_lib/parsers/index.js');
+var _index7 = require('./_lib/parsers/index.js.js');
 
 var _index8 = _interopRequireDefault(_index7);
 
-var _index9 = require('./_lib/units/index.js');
+var _index9 = require('./_lib/units/index.js.js');
 
 var _index10 = _interopRequireDefault(_index9);
 

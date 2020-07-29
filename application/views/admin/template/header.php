@@ -15,13 +15,14 @@
   <link rel="stylesheet" href="<?= base_url();?>assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <link rel="stylesheet" href="<?= base_url();?>assets/plugins/select2/css/select2.min.css">
   <link rel="stylesheet" href="<?= base_url();?>assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="<?= base_url();?>assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-  <!-- <link rel="stylesheet" href="<?= base_url();?>assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css"> -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.0/css/responsive.dataTables.min.css">
+  <!-- <link rel="stylesheet" href="<?= base_url();?>assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css"> -->
   <link rel="stylesheet" href="<?= base_url();?>assets/dist/css/adminlte.min.css">
-  <!-- <script src="<?= base_url();?>assets/css/print.css"></script> -->
+  <link rel="stylesheet" href="<?= base_url();?>assets/plugins/angular-datatables/dist/css/angular-datatables.min.css">
   <script src="<?= base_url();?>assets/plugins/jquery/jquery.min.js"></script>
-  <script src="<?= base_url();?>assets/js/angular.min.js"></script>
-  <script src="<?= base_url();?>assets/js/angular-sanitize.min.js"></script>
+  <script src="<?= base_url();?>assets/js/plugins/angular.min.js"></script>
+  <script src="<?= base_url();?>assets/js/plugins/angular-sanitize.min.js"></script>
+  
   <style>
     .print-header {
     display: none;
@@ -209,7 +210,8 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1><?= $title['header'];?></h1>
+              <h3>MUSRENBANG TAHUN <?= $title['periode']->Tahun;?></h3>
+              <p>Berlangsung dari tanggal <?= date('d M Y', strtotime($title['periode']->mulai));?> sampai <?= date('d M Y',strtotime($title['periode']->berakhir));?></p>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">

@@ -9,11 +9,16 @@ class AnggaranBiaya extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('admin/AnggaranBiaya_model', 'AnggaranBiayaModel');
+        $this->load->model('admin/Periode_model', 'PeriodeModel');
+        $this->load->model('admin/Profile_Model', 'ProfileModel');
     }
 
     public function index($idPeriodeRenker= null)
     {
-        $title['title'] = ['header'=>'Musrenbang | Anggaran Biaya', 'dash'=>'Periode'];
+        $profile = $this->ProfileModel->select();
+        $periode = $this->PeriodeModel->selectarsip();
+        $periodeaktif = $this->PeriodeModel->selectperiodeaktif();
+        $title['title'] = ['header'=>'Musrenbang | Anggaran Biaya', 'dash'=>'Periode', 'tahun'=>$periode, 'profile'=>$profile, 'periode'=>$periodeaktif[0]];
         $this->load->view('admin/template/header', $title);
         $this->load->view('admin/anggaranbiaya');
         $this->load->view('admin/template/footer');

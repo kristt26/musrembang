@@ -111,7 +111,7 @@ class Renja_model extends CI_Model
             `bidang`.`NamaBidang`, kegiatan.NamaKegiatan");
         $data['kegiatan'] = $result->result();
 
-        $result = $this->db->get_where('rt', array('idrw' => $idrw));
+        $result = $this->db->get_where('rt', array('idrw' => $data['data']->idrw));
         $RT = $result->result();
         foreach ($RT as $value) {
             $result = $this->db->get_where('jalan', array('idrt' => $value->idrt));
@@ -168,6 +168,7 @@ class Renja_model extends CI_Model
         WHERE `perioderenker`.`mulai` <= '$tanggal' AND `perioderenker`.`berakhir` >= '$tanggal'");
         $data['sumberanggaran'] = $result->result();
         $data['bidangskpd'] = $this->SkpdModel->select();
+        $data['periode'] = $this->selectperiode();
         return $data;
     }
 

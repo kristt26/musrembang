@@ -10,3 +10,34 @@ angular.module('directives', [])
        }
     };
 })
+.directive('tooltip', function(){
+   return {
+       restrict: 'A',
+       link: function(scope, element, attrs){
+           element.hover(function(){
+               // on mouseenter
+               element.tooltip('show');
+           }, function(){
+               // on mouseleave
+               element.tooltip('hide');
+           });
+       }
+   };
+})
+.directive('format', function ($filter) {
+    return {
+      require: '?ngModel',
+      link: function (scope, elem, attrs, ctrl) {
+        if (!ctrl) return;
+
+        ctrl.$formatters.unshift(function (a) {
+          return $filter(attrs.format)(ctrl.$modelValue, attrs.format == 'currency' ? ' ' : null)
+        });
+
+        elem.bind('blur', function (event) {
+          var plainNumber = elem.val().replace(/[^\d|\-+|\.+]/g, '');
+          elem.val($filter(attrs.format)(plainNumber));
+        });
+      }
+    };
+  });

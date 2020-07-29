@@ -9,11 +9,16 @@ class Rt extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('admin/Rt_model', 'RtModel');
+        $this->load->model('admin/Periode_model', 'PeriodeModel');
+        $this->load->model('admin/Profile_Model', 'ProfileModel');
     }
 
     public function index($idrw=null)
     {
-        $title['title'] = ['header'=>'Musrenbang | RT', 'dash'=>'RT'];
+        $profile = $this->ProfileModel->select();
+        $periode = $this->PeriodeModel->selectarsip();
+        $periodeaktif = $this->PeriodeModel->selectperiodeaktif();
+        $title['title'] = ['header'=>'Musrenbang | RT', 'dash'=>'RT', 'tahun'=>$periode, 'profile'=>$profile, 'periode'=>$periodeaktif[0]];
         $this->load->view('admin/template/header', $title);
         $this->load->view('admin/rt');
         $this->load->view('admin/template/footer');

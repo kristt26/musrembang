@@ -14,6 +14,13 @@ class Periode_model extends CI_Model {
         return $result->result();
     }
 
+    public function selectperiodeaktif()
+    {
+        $tanggal = date("Y-m-d");
+        $result = $this->db->query("SELECT * FROM perioderenker WHERE `perioderenker`.`mulai` <= '$tanggal' AND `perioderenker`.`berakhir` >= '$tanggal'");
+        return $result->result();
+    }
+
     function insert($data)
     {
         $item= [

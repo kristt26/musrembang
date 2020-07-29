@@ -102,33 +102,3 @@
     </div>
   </div>
 </div>
-<script>
-  angular.module('app', ['data.service'])
-  .controller('pegawaiController', function($scope, PegawaiService){
-    $scope.datas = [];
-    $scope.model = {};
-    $scope.edit = true;
-    PegawaiService.get().then((x)=>{
-      $scope.datas = x;
-    })
-    $scope.simpan = ()=>{
-      PegawaiService.post($scope.model).then((x)=>{
-        $scope.model = {};
-        swal("Information!", "Berhasil disimpan", "success");
-      })
-    }
-    $scope.ubah = (item)=>{
-      $scope.model = angular.copy(item);
-      $scope.edit = false;
-    }
-    $scope.clear = () =>{
-      $scope.model = {};
-      $scope.edit = true;
-    }
-    $scope.delete = (item)=>{
-      PegawaiService.delete(item.idpegawai).then((x)=>{
-        swal("Information!", "Berhasil dihapus", "success");
-      })
-    }
-  })
-</script>
