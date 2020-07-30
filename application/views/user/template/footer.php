@@ -19,21 +19,40 @@
   <!-- ./wrapper -->
 
   <!-- jQuery -->
-
+  <script type="text/javascript" src="<?php echo base_url();?>assets/js/appuser.js"></script>
+  <script type="text/javascript" src="<?php echo base_url();?>assets/js/controller/usercontroller.js"></script>
+  <script type="text/javascript" src="<?php echo base_url();?>assets/js/directives.js"></script>
+  <script type="text/javascript" src="<?php echo base_url();?>assets/plugins/angular-datatables/dist/angular-datatables.min.js"></script>
   <!-- Bootstrap 4 -->
   <script src="<?=base_url();?>assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="<?= base_url();?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
   <!-- bs-custom-file-input -->
+  <script src="<?= base_url();?>assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
   <script src="<?=base_url();?>assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
   <script src="<?=base_url();?>assets/node_modules/sweetalert/dist/sweetalert.min.js"></script>
   <script src="<?= base_url();?>assets/plugins/select2/js/select2.full.min.js"></script>
   <!-- AdminLTE App -->
   <script src="<?=base_url();?>assets/dist/js/adminlte.min.js"></script>
+  <script src="<?= base_url();?>assets/plugins/daterangepicker/daterangepicker.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="<?=base_url();?>assets/dist/js/demo.js"></script>
-  <script type="text/javascript" src="<?php echo base_url();?>assets/js/helper.services.js"></script>
+  <script type="text/javascript" src="<?php echo base_url();?>assets/js/services/helper.services.js"></script>
   <script type="text/javascript" src="<?php echo base_url();?>assets/js/directives.js"></script>
-  <script type="text/javascript" src="<?php echo base_url();?>assets/js/userdata.service.js"></script>
+  <script type="text/javascript" src="<?php echo base_url();?>assets/js/services/userdata.service.js"></script>
+  <script type="text/javascript" src="<?php echo base_url();?>assets/js/plugins/angular-locale_id-id.js"></script>
+  <script type="text/javascript" src="<?php echo base_url();?>assets/js/plugins/input-mask/angular-input-masks-standalone.min.js"></script>
+  <script type="text/javascript" src="<?php echo base_url();?>assets/bower_components/jquery-loading-overlay/dist/loadingoverlay.min.js"></script>
   <script type="text/javascript">
+    $(document).ready(function(){
+      $('[data-toggle=tooltip]').hover(function(){
+          // on mouseenter
+          $(this).tooltip('show');
+      }, function(){
+          // on mouseleave
+          $(this).tooltip('hide');
+      });
+    });
+    
     $(document).ready(function () {
       bsCustomFileInput.init();
     });

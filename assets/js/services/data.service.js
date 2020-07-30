@@ -5,8 +5,12 @@ angular
 	.factory('RencanaBiayaService', RencanaBiayaService)
 	.factory('PegawaiService', PegawaiService)
 	.factory('RwService', RwService)
+	.factory('RtService', RtService)
 	.factory('AnggaranBiayaService', AnggaranBiayaService)
-	.factory('periodeService', periodeService);
+	.factory('RencanaKerjaService', RencanaKerjaService)
+	.factory('periodeService', periodeService)
+	.factory('HomeService', HomeService)
+	.factory('DetailRencanaKerjaService', DetailRencanaKerjaService);
 
 function ProfileService($http, $q, helperServices) {
 	var url = helperServices.url + '/musrembang/admin/profile/';
@@ -64,7 +68,7 @@ function ProfileService($http, $q, helperServices) {
 	service.upload = function (param) {
 		var def = $q.defer();
 		var fd = new FormData();
-        fd.append('file', param[0]);
+		fd.append('file', param[0]);
 		$http({
 			method: 'POST',
 			url: url + 'upload',
@@ -74,7 +78,7 @@ function ProfileService($http, $q, helperServices) {
 			data: fd
 		}).then(
 			(response) => {
-				service.Items.logo=response.data;
+				service.Items.logo = response.data;
 				def.resolve(response.data);
 			},
 			(err) => {
@@ -129,15 +133,15 @@ function SkpdService($http, $q, helperServices) {
 			data: param
 		}).then(
 			(response) => {
-				if(param.idRencanaBiaya){
+				if (param.idRencanaBiaya) {
 					var data = service.Items.find((x) => x.idbidangskpd == param.idbidangskpd);
 					if (data) {
 						data.NamaBidang = param.NamaBidang;
 					}
-				}else{
+				} else {
 					service.Items.push(response.data);
 				}
-				
+
 				def.resolve(response.data);
 			},
 			(err) => {
@@ -216,12 +220,12 @@ function RencanaBiayaService($http, $q, helperServices) {
 			data: param
 		}).then(
 			(response) => {
-				if(param.idRencanaBiaya){
+				if (param.idRencanaBiaya) {
 					var data = service.Items.find((x) => x.idRencanaBiaya == param.idRencanaBiaya);
 					if (data) {
 						data.NamaRencanaBiaya = param.NamaRencanaBiaya;
 					}
-				}else{
+				} else {
 					service.Items.push(response.data);
 				}
 				def.resolve(response.data);
@@ -302,7 +306,7 @@ function PegawaiService($http, $q, helperServices) {
 			data: param
 		}).then(
 			(response) => {
-				if(param.idpegawai){
+				if (param.idpegawai) {
 					var data = service.Items.find((x) => x.idpegawai == param.idpegawai);
 					if (data) {
 						data.nama = param.nama;
@@ -311,7 +315,7 @@ function PegawaiService($http, $q, helperServices) {
 						data.jabatan = param.jabatan;
 						data.email = param.email;
 					}
-				}else{
+				} else {
 					service.Items.push(response.data);
 				}
 				def.resolve(response.data);
@@ -392,15 +396,136 @@ function RwService($http, $q, helperServices) {
 			data: param
 		}).then(
 			(response) => {
-				if(param.idrw){
+				if (param.idrw) {
 					var data = service.Items.find((x) => x.idrw == param.idrw);
 					if (data) {
 						data.nowr = param.nowr;
 						data.pejabatrw = param.pejabatrw;
 						data.email = param.email;
 					}
-				}else{
+				} else {
 					service.Items.push(response.data);
+				}
+				def.resolve(response.data);
+			},
+			(err) => {
+				swal("Information!", err.data, "error");
+				def.reject(err);
+			}
+		);
+		return def.promise;
+	};
+
+	service.delete = function (id) {
+		var def = $q.defer();
+		$http({
+			method: 'Delete',
+			url: url + 'hapus/' + id,
+			headers: {
+				'Content-Type': 'application/json'
+			},
+		}).then(
+			(response) => {
+				var data = service.Items.find((x) => x.idrw == id);
+				if (data) {
+					var index = service.Items.indexOf(data);
+					service.Items.splice(index, 1);
+					def.resolve(true);
+				}
+			},
+			(err) => {
+				swal("Information!", err.data, "error");
+				def.reject(err);
+			}
+		);
+		return def.promise;
+	};
+	return service;
+}
+
+function RtService($http, $q, helperServices) {
+	var url = helperServices.url + '/musrembang/admin/rt/';
+	var service = { Items: [] };
+
+	service.get = function () {
+		var def = $q.defer();
+		id = helperServices.absUrl.split('/');
+		id = id[id.length - 1];
+		if (service.instance) {
+			def.resolve(service.Items);
+		} else {
+			$http({
+				method: 'Get',
+				url: url + 'getdata/' + id,
+				headers: {
+					'Content-Type': 'application/json'
+				},
+			}).then(
+				(response) => {
+					service.instance = true;
+					service.Items = response.data;
+					def.resolve(service.Items);
+				},
+				(err) => {
+					swal("Information!", err.data, "error");
+					def.reject(err);
+				}
+			);
+		}
+		return def.promise;
+	};
+
+	service.post = function (param) {
+		var def = $q.defer();
+		$http({
+			method: 'Post',
+			url: url + 'simpan',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			data: param
+		}).then(
+			(response) => {
+				if (param.idrt) {
+					var data = service.Items.rt.find((x) => x.idrt == param.idrt);
+					if (data) {
+						data.nort = param.nort;
+						data.pejabatrt = param.pejabatrt;
+						data.email = param.email;
+					}
+				} else {
+					service.Items.rt.push(response.data);
+				}
+				def.resolve(response.data);
+			},
+			(err) => {
+				swal("Information!", err.data, "error");
+				def.reject(err);
+			}
+		);
+		return def.promise;
+	};
+
+	service.postjalan = function (param) {
+		var def = $q.defer();
+		$http({
+			method: 'Post',
+			url: url + 'simpanjalan',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			data: param
+		}).then(
+			(response) => {
+				if (param.idjalan) {
+					var data = service.Items.rt.find((x) => x.idrt == param.idrt);
+					var jalan = data.jalan.find(x => x.idjalan == param.idjalan);
+					if (jalan) {
+						jalan.jalan = param.jalan;
+					}
+				} else {
+					var data = service.Items.rt.find((x) => x.idrt == param.idrt);
+					data.jalan.push(response.data)
 				}
 				def.resolve(response.data);
 			},
@@ -480,22 +605,21 @@ function periodeService($http, $q, helperServices) {
 			data: param
 		}).then(
 			(response) => {
-				if(param.idPeriodeRenker){
+				if (param.idPeriodeRenker) {
 					var data = service.Items.find((x) => x.idPeriodeRenker == param.idPeriodeRenker);
 					if (data) {
-						if(data.Status != 'Aktif')
-						{
-							angular.forEach(service.Items, item=>{
-								if(item.idPeriodeRenker!=param.idPeriodeRenker)
-								item.Status='Tidak Aktif';
+						if (data.Status != 'Aktif') {
+							angular.forEach(service.Items, item => {
+								if (item.idPeriodeRenker != param.idPeriodeRenker)
+									item.Status = 'Tidak Aktif';
 							})
 						}
 						data.Tahun = param.Tahun;
 						data.Status = param.Status;
 					}
-				}else{
-					angular.forEach(service.Items, item=>{
-						item.Status='Tidak Aktif';
+				} else {
+					angular.forEach(service.Items, item => {
+						item.Status = 'Tidak Aktif';
 					})
 					service.Items.push(response.data);
 				}
@@ -542,12 +666,14 @@ function AnggaranBiayaService($http, $q, helperServices) {
 
 	service.get = function () {
 		var def = $q.defer();
+		id = helperServices.absUrl.split('/');
+		id = id[id.length - 1];
 		if (service.instance) {
 			def.resolve(service.Items);
 		} else {
 			$http({
 				method: 'Get',
-				url: url + 'getdata',
+				url: url + 'getdata/' + id,
 				headers: {
 					'Content-Type': 'application/json'
 				},
@@ -577,24 +703,11 @@ function AnggaranBiayaService($http, $q, helperServices) {
 			data: param
 		}).then(
 			(response) => {
-				if(param.idPeriodeRenker){
-					var data = service.Items.find((x) => x.idPeriodeRenker == param.idPeriodeRenker);
-					if (data) {
-						if(data.Status != 'Aktif')
-						{
-							angular.forEach(service.Items, item=>{
-								if(item.idPeriodeRenker!=param.idPeriodeRenker)
-								item.Status='Tidak Aktif';
-							})
-						}
-						data.Tahun = param.Tahun;
-						data.Status = param.Status;
-					}
-				}else{
-					angular.forEach(service.Items, item=>{
-						item.Status='Tidak Aktif';
-					})
-					service.Items.push(response.data);
+				if (param.iddetailrencanabiaya) {
+					var data = service.Items.detailrencanabiaya.find((x) => x.iddetailrencanabiaya == param.iddetailrencanabiaya);
+					data.nominal = param.nominal;
+				} else {
+					service.Items.detailrencanabiaya.push(response.data);
 				}
 				def.resolve(response.data);
 			},
@@ -628,6 +741,408 @@ function AnggaranBiayaService($http, $q, helperServices) {
 				def.reject(err);
 			}
 		);
+		return def.promise;
+	};
+	return service;
+}
+
+function RencanaKerjaService($http, $q, helperServices) {
+	var url = helperServices.url + '/musrembang/admin/rencanakerja/';
+	var service = {
+		Items: []
+	};
+
+	service.get = function () {
+		var def = $q.defer();
+		if (service.instance) {
+			def.resolve(service.Items);
+		} else {
+			$http({
+				method: 'Get',
+				url: url + 'getdata',
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			}).then(
+				(response) => {
+					service.instance = true;
+					service.Items = response.data;
+					def.resolve(service.Items);
+				},
+				(err) => {
+					swal("Information!", err.data, "error");
+					def.reject(err);
+				}
+			);
+		}
+		return def.promise;
+	};
+
+	service.getKegiatan = function () {
+		var def = $q.defer();
+		id = helperServices.absUrl.split('/');
+		id = id[id.length - 1];
+		if (service.instance) {
+			def.resolve(service.Items);
+		} else {
+			$http({
+				method: 'GET',
+				url: url + 'getdatacreated/' + id,
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			}).then(
+				(response) => {
+					service.instance = true;
+					service.Items = response.data;
+					def.resolve(service.Items);
+				},
+				(err) => {
+					swal("Information!", err.data, "error");
+					def.reject(err);
+				}
+			);
+		}
+		return def.promise;
+	};
+
+	service.validasi = function (param) {
+		var def = $q.defer();
+		$http({
+			method: 'POST',
+			url: url + 'validasi',
+			data: param,
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}).then(
+			(response) => {
+				var data = service.Items.find(x => x.idRencanaKerja == param.idRencanaKerja);
+				if (data) {
+					data.status = param.setstatus;
+				}
+				def.resolve(response.data);
+			},
+			(err) => {
+				swal("Information!", err.data, "error");
+				def.reject(err);
+			}
+		);
+		return def.promise;
+	};
+
+	service.post = function (param) {
+		var def = $q.defer();
+		$http({
+			method: 'POST',
+			url: url + 'simpan',
+			headers: {
+				'Content-Type': undefined
+			},
+			data: param
+		}).then(
+			(response) => {
+				service.Items = response.data;
+				def.resolve(response.data);
+			},
+			(err) => {
+				swal("Information!", err.data, "success");
+				def.reject(err);
+			}
+		);
+
+		return def.promise;
+	};
+	service.upload = function (param) {
+		var def = $q.defer();
+		var fd = new FormData();
+		fd.append('file', param[0]);
+		$http({
+			method: 'POST',
+			url: url + 'upload',
+			headers: {
+				'Content-Type': undefined
+			},
+			data: fd
+		}).then(
+			(response) => {
+				service.Items.logo = response.data;
+				def.resolve(response.data);
+			},
+			(err) => {
+				swal("Information!", err.data, "success");
+				def.reject(err);
+			}
+		);
+
+		return def.promise;
+	};
+	return service;
+}
+
+function DetailRencanaKerjaService($http, $q, helperServices) {
+	var url = helperServices.url + '/musrembang/admin/rencanakerja/';
+	var service = {
+		Items: []
+	};
+
+	service.get = function (id) {
+		var def = $q.defer();
+		id = helperServices.absUrl.split('/');
+		id = id[id.length - 1];
+		if (service.instance) {
+			def.resolve(service.Items);
+		} else {
+			$http({
+				method: 'Get',
+				url: url + 'getdatadetail/' + id,
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			}).then(
+				(response) => {
+					service.instance = true;
+					service.Items = response.data;
+					def.resolve(service.Items);
+				},
+				(err) => {
+					swal("Information!", err.data, "error");
+					def.reject(err);
+				}
+			);
+		}
+		return def.promise;
+	};
+
+	service.getKegiatan = function () {
+		var def = $q.defer();
+		id = helperServices.absUrl.split('/');
+		id = id[id.length - 1];
+		if (service.instance) {
+			def.resolve(service.Items);
+		} else {
+			$http({
+				method: 'Get',
+				url: url + 'getdatacreated/' + id,
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			}).then(
+				(response) => {
+					service.instance = true;
+					service.Items = response.data;
+					def.resolve(service.Items);
+				},
+				(err) => {
+					swal("Information!", err.data, "error");
+					def.reject(err);
+				}
+			);
+		}
+		return def.promise;
+	};
+
+	service.validasi = function (param) {
+		var def = $q.defer();
+		$http({
+			method: 'POST',
+			url: url + 'validasi',
+			data: param,
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}).then(
+			(response) => {
+				service.instance = true;
+				service.Items = response.data;
+				def.resolve(service.Items);
+			},
+			(err) => {
+				swal("Information!", err.data, "error");
+				def.reject(err);
+			}
+		);
+		return def.promise;
+	};
+
+	service.post = function (param) {
+		var def = $q.defer();
+		$http({
+			method: 'POST',
+			url: url + 'simpan',
+			headers: {
+				'Content-Type': undefined
+			},
+			data: param
+		}).then(
+			(response) => {
+				service.Items = response.data;
+				def.resolve(response.data);
+			},
+			(err) => {
+				swal("Information!", err.data, "success");
+				def.reject(err);
+			}
+		);
+
+		return def.promise;
+	};
+	service.upload = function (param) {
+		var def = $q.defer();
+		var fd = new FormData();
+		fd.append('file', param[0]);
+		$http({
+			method: 'POST',
+			url: url + 'upload',
+			headers: {
+				'Content-Type': undefined
+			},
+			data: fd
+		}).then(
+			(response) => {
+				service.Items.logo = response.data;
+				def.resolve(response.data);
+			},
+			(err) => {
+				swal("Information!", err.data, "success");
+				def.reject(err);
+			}
+		);
+
+		return def.promise;
+	};
+	return service;
+}
+
+function HomeService($http, $q, helperServices) {
+	var url = helperServices.url + '/musrembang/admin/home/';
+	var service = {
+		Items: []
+	};
+
+	service.get = function (id) {
+		var def = $q.defer();
+		id = helperServices.absUrl.split('/');
+		id = id[id.length - 1];
+		if (service.instance) {
+			def.resolve(service.Items);
+		} else {
+			$http({
+				method: 'Get',
+				url: url + 'getdatadetail/' + id,
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			}).then(
+				(response) => {
+					service.instance = true;
+					service.Items = response.data;
+					def.resolve(service.Items);
+				},
+				(err) => {
+					swal("Information!", err.data, "error");
+					def.reject(err);
+				}
+			);
+		}
+		return def.promise;
+	};
+
+	service.getKegiatan = function () {
+		var def = $q.defer();
+		id = helperServices.absUrl.split('/');
+		id = id[id.length - 1];
+		if (service.instance) {
+			def.resolve(service.Items);
+		} else {
+			$http({
+				method: 'Get',
+				url: url + 'getdatacreated/' + id,
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			}).then(
+				(response) => {
+					service.instance = true;
+					service.Items = response.data;
+					def.resolve(service.Items);
+				},
+				(err) => {
+					swal("Information!", err.data, "error");
+					def.reject(err);
+				}
+			);
+		}
+		return def.promise;
+	};
+
+	service.validasi = function (param) {
+		var def = $q.defer();
+		$http({
+			method: 'POST',
+			url: url + 'validasi',
+			data: param,
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}).then(
+			(response) => {
+				service.instance = true;
+				service.Items = response.data;
+				def.resolve(service.Items);
+			},
+			(err) => {
+				swal("Information!", err.data, "error");
+				def.reject(err);
+			}
+		);
+		return def.promise;
+	};
+
+	service.post = function (param) {
+		var def = $q.defer();
+		$http({
+			method: 'POST',
+			url: url + 'simpan',
+			headers: {
+				'Content-Type': undefined
+			},
+			data: param
+		}).then(
+			(response) => {
+				service.Items = response.data;
+				def.resolve(response.data);
+			},
+			(err) => {
+				swal("Information!", err.data, "success");
+				def.reject(err);
+			}
+		);
+
+		return def.promise;
+	};
+	service.upload = function (param) {
+		var def = $q.defer();
+		var fd = new FormData();
+		fd.append('file', param[0]);
+		$http({
+			method: 'POST',
+			url: url + 'upload',
+			headers: {
+				'Content-Type': undefined
+			},
+			data: fd
+		}).then(
+			(response) => {
+				service.Items.logo = response.data;
+				def.resolve(response.data);
+			},
+			(err) => {
+				swal("Information!", err.data, "success");
+				def.reject(err);
+			}
+		);
+
 		return def.promise;
 	};
 	return service;

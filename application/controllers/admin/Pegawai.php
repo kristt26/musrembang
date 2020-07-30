@@ -9,11 +9,16 @@ class Pegawai extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('admin/Pegawai_model', 'PegawaiModel');
+        $this->load->model('admin/Periode_model', 'PeriodeModel');
+        $this->load->model('admin/Profile_Model', 'ProfileModel');
     }
 
     public function index()
     {
-        $title['title'] = ['header'=>'Pegawai', 'dash'=>'Pegawai'];
+        $profile = $this->ProfileModel->select();
+        $periode = $this->PeriodeModel->selectarsip();
+        $periodeaktif = $this->PeriodeModel->selectperiodeaktif();
+        $title['title'] = ['header'=>'Pegawai', 'dash'=>'Pegawai', 'tahun'=>$periode, 'profile'=>$profile, 'periode'=>$periodeaktif[0]];
         $this->load->view('admin/template/header', $title);
         $this->load->view('admin/pegawai');
         $this->load->view('admin/template/footer');

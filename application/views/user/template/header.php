@@ -13,10 +13,11 @@
   <link rel="stylesheet" href="<?=base_url();?>assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <link rel="stylesheet" href="<?= base_url();?>assets/plugins/select2/css/select2.min.css">
   <link rel="stylesheet" href="<?=base_url();?>assets/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="<?= base_url();?>assets/plugins/angular-datatables/dist/css/angular-datatables.min.css">
   <script src="<?=base_url();?>assets/plugins/jquery/jquery.min.js"></script>
   <link rel="stylesheet" href="<?=base_url();?>assets/css/style.css">
-  <script src="<?= base_url();?>assets/js/angular.min.js"></script>
-  <script src="<?= base_url();?>assets/js/angular-sanitize.min.js"></script>
+  <script src="<?= base_url();?>assets/js/plugins/angular.min.js"></script>
+  <script src="<?= base_url();?>assets/js/plugins/angular-sanitize.min.js"></script>
   <style>
     .center {
       margin: 0;
@@ -80,7 +81,7 @@ if (!$this->session->userdata('jenis') && $this->session->userdata('akses') != '
               </a>
             </li>
             <li class="nav-item">
-              <a href="<?=base_url()?>user/renja" class="nav-link">
+              <a href="<?=base_url()?>user/renja" class="nav-link <?= $title['header']=='Rencana Kerja' ? 'active': '' ?>">
                 <i class="nav-icon fas fa-th"></i>
                 <p>
                   Rencana Kerja
@@ -94,6 +95,25 @@ if (!$this->session->userdata('jenis') && $this->session->userdata('akses') != '
                   Transaksi
                 </p>
               </a>
+            </li>
+            <li class="nav-item has-treeview <?= $title['header']=='Pegawai' || $title['header']=='RW' ? 'menu-open': '' ?>">
+              <a href="#" class="nav-link <?= $title['header']=='Pegawai' || $title['header']=='RW' ? 'active': '' ?>">
+                <i class="nav-icon fas fa-edit"></i>
+                <p>
+                  Arsip
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <?php foreach($title['tahun'] as $value):?>
+                <li class="nav-item">
+                  <a href="<?= base_url();?>user/arsip/<?= $value->Tahun;?>" class="nav-link <?= $title['header']=='Pegawai' ? 'active': '' ?>">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Tahun <?= $value->Tahun?></p>
+                  </a>
+                </li>
+                <?php endforeach;?>
+              </ul>
             </li>
           </ul>
         </nav>

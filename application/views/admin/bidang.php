@@ -49,7 +49,7 @@
               <td>{{item.KodeBidang}}</td>
               <td>{{item.NamaBidang}}</td>
               <td>
-                <div class="tombol">
+                <div class="d-flex justify-content-center">
                   <bottom class="btn btn-default" title="Edit Bidang" ng-click="ubah(item)">
                     <ion-icon name="create-outline"></ion-icon>
                   </bottom>

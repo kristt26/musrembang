@@ -15,13 +15,14 @@
   <link rel="stylesheet" href="<?= base_url();?>assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <link rel="stylesheet" href="<?= base_url();?>assets/plugins/select2/css/select2.min.css">
   <link rel="stylesheet" href="<?= base_url();?>assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="<?= base_url();?>assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-  <!-- <link rel="stylesheet" href="<?= base_url();?>assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css"> -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.0/css/responsive.dataTables.min.css">
+  <!-- <link rel="stylesheet" href="<?= base_url();?>assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css"> -->
   <link rel="stylesheet" href="<?= base_url();?>assets/dist/css/adminlte.min.css">
-  <!-- <script src="<?= base_url();?>assets/css/print.css"></script> -->
+  <link rel="stylesheet" href="<?= base_url();?>assets/plugins/angular-datatables/dist/css/angular-datatables.min.css">
   <script src="<?= base_url();?>assets/plugins/jquery/jquery.min.js"></script>
-  <script src="<?= base_url();?>assets/js/angular.min.js"></script>
-  <script src="<?= base_url();?>assets/js/angular-sanitize.min.js"></script>
+  <script src="<?= base_url();?>assets/js/plugins/angular.min.js"></script>
+  <script src="<?= base_url();?>assets/js/plugins/angular-sanitize.min.js"></script>
+  
   <style>
     .print-header {
     display: none;
@@ -80,14 +81,15 @@
     </nav>
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <a href="<?= base_url();?>assets/index3.html" class="brand-link">
-        <img src="<?= base_url();?>assets/dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
-          class="brand-image img-circle elevation-3" style="opacity: .8">
+        <img src="<?= base_url();?>assets/img/<?= $title['profile']->logo;?>" alt="AdminLTE Logo"
+          class="brand-image elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">Musrenbang</span>
       </a>
       <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           <div class="info">
-            <a href="#" class="d-block"><?= $this->session->userdata('nama_pegawai');?></a>
+            <a href="#" class="d-block"><?= $title['profile']->NamaKelurahan;?></a>
+            <a href=""><i class="fa fa-circle text-success"></i><?= $this->session->userdata('nama');?></a>
           </div>
         </div>
 
@@ -168,7 +170,7 @@
               </ul>
             </li>
             <li class="nav-item">
-              <a href="<?= base_url()?>admin/pelanggan" class="nav-link">
+              <a href="<?= base_url()?>admin/rencanakerja" class="nav-link">
                 <i class="nav-icon fas fa-tasks"></i>
                 <p>
                   Rencana Kerja
@@ -208,7 +210,8 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1><?= $title['header'];?></h1>
+              <h3>MUSRENBANG TAHUN <?= $title['periode']->Tahun;?></h3>
+              <p>Berlangsung dari tanggal <?= date('d M Y', strtotime($title['periode']->mulai));?> sampai <?= date('d M Y',strtotime($title['periode']->berakhir));?></p>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">

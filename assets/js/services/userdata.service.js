@@ -27,22 +27,24 @@ function RenjaService($http, $q, helperServices) {
 					def.resolve(service.Items);
 				},
 				(err) => {
-					message.error(err.data);
+					swal("Information!", err.data, "error");
 					def.reject(err);
 				}
 			);
 		}
 		return def.promise;
-    };
-    
-    service.getKegaitan = function () {
+	};
+
+	service.getKegiatan = function () {
 		var def = $q.defer();
+		id = helperServices.absUrl.split('/');
+		id = id[id.length - 1];
 		if (service.instance) {
 			def.resolve(service.Items);
 		} else {
 			$http({
 				method: 'Get',
-				url: helperServices.url + '/musrembang/admin/kegiatan/getkegiatan',
+				url: url + 'getdatacreated/' + id,
 				headers: {
 					'Content-Type': 'application/json'
 				}
@@ -53,21 +55,49 @@ function RenjaService($http, $q, helperServices) {
 					def.resolve(service.Items);
 				},
 				(err) => {
-					message.error(err.data);
+					swal("Information!", err.data, "error");
 					def.reject(err);
 				}
 			);
 		}
 		return def.promise;
-    };
-    
+	};
+
+	service.validasi = function (param) {
+		var def = $q.defer();
+		$http({
+			method: 'POST',
+			url: url + 'validasi',
+			data: param,
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}).then(
+			(response) => {
+				if(!service.Items.data){
+					var data = service.Items.find(x => x.idRencanaKerja == param.idRencanaKerja);
+					if (data) {
+						data.status = 'Usulan'
+					}
+				}else
+					service.Items.data.status = 'Usulan'
+				def.resolve(service.Items);
+			},
+			(err) => {
+				swal("Information!", err.data, "error");
+				def.reject(err);
+			}
+		);
+		return def.promise;
+	};
+
 	service.post = function (param) {
 		var def = $q.defer();
 		$http({
 			method: 'POST',
 			url: url + 'simpan',
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': undefined
 			},
 			data: param
 		}).then(
@@ -86,7 +116,7 @@ function RenjaService($http, $q, helperServices) {
 	service.upload = function (param) {
 		var def = $q.defer();
 		var fd = new FormData();
-        fd.append('file', param[0]);
+		fd.append('file', param[0]);
 		$http({
 			method: 'POST',
 			url: url + 'upload',
@@ -96,7 +126,7 @@ function RenjaService($http, $q, helperServices) {
 			data: fd
 		}).then(
 			(response) => {
-				service.Items.logo=response.data;
+				service.Items.logo = response.data;
 				def.resolve(response.data);
 			},
 			(err) => {
@@ -151,15 +181,15 @@ function SkpdService($http, $q, helperServices) {
 			data: param
 		}).then(
 			(response) => {
-				if(param.idRencanaBiaya){
+				if (param.idRencanaBiaya) {
 					var data = service.Items.find((x) => x.idbidangskpd == param.idbidangskpd);
 					if (data) {
 						data.NamaBidang = param.NamaBidang;
 					}
-				}else{
+				} else {
 					service.Items.push(response.data);
 				}
-				
+
 				def.resolve(response.data);
 			},
 			(err) => {

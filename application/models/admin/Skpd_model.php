@@ -10,7 +10,7 @@ class Skpd_model extends CI_Model {
     function insert($data)
     {
         $item= [
-            'NamaBidang'=>$data['NamaBidang']
+            'NamaBidangSkpd'=>$data['NamaBidangSkpd']
         ];
         
         $result = $this->db->insert('bidangskpd', $item);
@@ -24,7 +24,7 @@ class Skpd_model extends CI_Model {
     function update($data)
     {
         $item= [
-            'NamaBidang'=>$data['NamaBidang']
+            'NamaBidangSkpd'=>$data['NamaBidangSkpd']
         ];
         $this->db->where('idbidangskpd', $data['idbidangskpd']);
         if($this->db->update('bidangskpd', $item))

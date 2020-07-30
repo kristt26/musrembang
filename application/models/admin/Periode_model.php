@@ -7,6 +7,20 @@ class Periode_model extends CI_Model {
         return $result->result();
     }
 
+    public function selectarsip()
+    {
+        $tanggal = date("Y-m-d");
+        $result = $this->db->query("SELECT * FROM perioderenker WHERE mulai <='$tanggal'");
+        return $result->result();
+    }
+
+    public function selectperiodeaktif()
+    {
+        $tanggal = date("Y-m-d");
+        $result = $this->db->query("SELECT * FROM perioderenker WHERE `perioderenker`.`mulai` <= '$tanggal' AND `perioderenker`.`berakhir` >= '$tanggal'");
+        return $result->result();
+    }
+
     function insert($data)
     {
         $item= [
@@ -14,7 +28,7 @@ class Periode_model extends CI_Model {
             'mulai'=>$data['mulai'],
             'berakhir'=>$data['berakhir']
         ];
-        $this->db->update('perioderenker', array('Status'=>'Tidak Aktif'));
+        // $this->db->update('perioderenker', array('Status'=>'Tidak Aktif'));
         $result = $this->db->insert('perioderenker', $item);
         $item['idPeriodeRenker'] = $this->db->insert_id();
         if($result)

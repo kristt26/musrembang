@@ -7,9 +7,9 @@
       <form ng-submit="simpan()">
         <div class="card-body">
           <div class="form-group row">
-            <label for="NamaBidang" class="col-sm-3 col-form-label">Nama SKPD</label>
+            <label for="NamaBidangSkpd" class="col-sm-3 col-form-label">Nama SKPD</label>
             <div class="col-sm-9">
-              <input type="text" class="form-control" ng-model="model.NamaBidang" placeholder="Nama Bidang SKPD" required>
+              <input type="text" class="form-control" ng-model="model.NamaBidangSkpd" placeholder="Nama Bidang SKPD" required>
             </div>
           </div>
         </div>
@@ -37,7 +37,7 @@
           <tbody>
             <tr ng-repeat="item in datas">
               <td>{{$index+1}}</td>
-              <td>{{item.NamaBidang}}</td>
+              <td>{{item.NamaBidangSkpd}}</td>
               <td>
                 <div class="tombol">
                   <bottom class="btn btn-default" ng-click="ubah(item)"><ion-icon name="create-outline"></ion-icon></bottom>

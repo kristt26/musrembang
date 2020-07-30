@@ -6,7 +6,17 @@ class AnggaranBiaya_model extends CI_Model {
         $data=array('detailrencanabiaya'=>array(), 'rencanabiaya'=>array(), 'periode'=> "");
         $result = $this->db->get_where('perioderenker', array('idPeriodeRenker'=>$idPeriodeRenker));
         $data['periode']= $result->result()[0];
-        $result = $this->db->get('detailrencanabiaya');
+        $result = $this->db->query("SELECT
+            `detailrencanabiaya`.*,
+            `perioderenker`.`Tahun`,
+            `rencanabiaya`.`NamaRencanaBiaya`
+        FROM
+            `detailrencanabiaya`
+            LEFT JOIN `perioderenker` ON `detailrencanabiaya`.`idPeriodeRenker` =
+            `perioderenker`.`idPeriodeRenker`
+            LEFT JOIN `rencanabiaya` ON `rencanabiaya`.`idRencanaBiaya` =
+            `detailrencanabiaya`.`idRencanaBiaya`
+        WHERE `detailrencanabiaya`.`idPeriodeRenker` = '$idPeriodeRenker'");
         $data['detailrencanabiaya']= $result->result();
         $result = $this->db->get('rencanabiaya');
         $data['rencanabiaya']= $result->result();
@@ -21,9 +31,9 @@ class AnggaranBiaya_model extends CI_Model {
             'nominal'=>$data['nominal']
         ];
         $result = $this->db->insert('detailrencanabiaya', $item);
-        $item['iddetailrencanabiaya'] = $this->db->insert_id();
+        $data['iddetailrencanabiaya'] = $this->db->insert_id();
         if($result)
-            return $item;
+            return $data;
         else
             return false;
     }
