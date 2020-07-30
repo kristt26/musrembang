@@ -17,7 +17,8 @@ class Profile extends CI_Controller
     {
         $profile = $this->ProfileModel->select();
         $periode = $this->PeriodeModel->selectarsip();
-        $title['title'] = ['header' => 'Profile Kelurahan', 'dash' => 'Profile', 'tahun'=>$periode, 'profile'=>$profile];
+        $periodeaktif = $this->PeriodeModel->selectperiodeaktif();
+        $title['title'] = ['header' => 'Profile Kelurahan', 'dash' => 'Profile', 'profile' => $profile, 'periode' => $periodeaktif[0]];
         $this->load->view('admin/template/header', $title);
         $this->load->view('admin/profile');
         $this->load->view('admin/template/footer', $title);

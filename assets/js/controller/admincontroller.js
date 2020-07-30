@@ -1,4 +1,4 @@
-angular.module('ctrl', [])
+angular.module('ctrl', ['ngSanitize'])
   .controller('rencanaKerjaController', rencanaKerjaController)
   .controller('detailRencanaKerjaController', detailRencanaKerjaController)
   .controller('homeController', homeController)
@@ -6,7 +6,9 @@ angular.module('ctrl', [])
   .controller('rwController', rwController)
   .controller('periodeController', periodeController)
   .controller('rtController', rtController)
-  .controller('anggaranBiayaController', anggaranBiayaController);
+  .controller('anggaranBiayaController', anggaranBiayaController)
+  .controller('rencanaBiayaController', rencanaBiayaController)
+  .controller('profileController', profileController);
 
 
 function rencanaKerjaController($scope, RencanaKerjaService) {
@@ -322,7 +324,7 @@ function rtController($scope, RtService, $window) {
     $scope.datas = x;
   })
   $scope.simpan = () => {
-    $scope.model.idrw = angular.copy($scope.datas.rw.norw);
+    $scope.model.idrw = angular.copy($scope.datas.rw.idrw);
     RtService.post($scope.model).then((x) => {
       $scope.model = {};
       $scope.edit = true;
@@ -439,6 +441,54 @@ function anggaranBiayaController($scope, $http, AnggaranBiayaService, helperServ
       swal("Information!", "proses gagal", "error").then((value) => {
 
       });
+    })
+  }
+}
+
+function rencanaBiayaController($scope, RencanaBiayaService) {
+  $.LoadingOverlay("hide");
+  $scope.datas = [];
+  $scope.model = {};
+  RencanaBiayaService.get().then((x) => {
+    $scope.datas = x;
+  })
+  $scope.simpan = () => {
+    RencanaBiayaService.post($scope.model).then((x) => {
+      $scope.model = {};
+      swal("Information!", "Berhasil disimpan", "success");
+    })
+  }
+  $scope.ubah = (item) => {
+    $scope.model = angular.copy(item);
+  }
+  $scope.clear = () => {
+    $scope.model = {};
+  }
+  $scope.delete = (item) => {
+    RencanaBiayaService.delete(item.idRencanaBiaya).then((x) => {
+      swal("Information!", "Berhasil dihapus", "success");
+    })
+  }
+}
+
+function profileController($scope, $http, ProfileService, helperServices) {
+  $.LoadingOverlay("hide");
+  $scope.model = {};
+  $scope.img;
+  ProfileService.get().then(data => {
+    if (data.length !== 0)
+      $scope.model = data;
+    $scope.img = '<img class="card-img-top" src="' + helperServices.url + "/musrembang/assets/img/" + data.logo + '">';
+  })
+  $scope.simpan = () => {
+    ProfileService.post($scope.model).then((x) => {
+      swal("Information!", "Berhasil disimpan", "success");
+    })
+  }
+  $scope.uploadFile = function () {
+    ProfileService.upload($scope.files).then(x => {
+      $scope.img = '<img class="card-img-top" src="' + helperServices.url + "/musrembang/assets/img/" + x.logo + '">';
+      swal("Information!", "Logo Berhasil ditambahkan", "success");
     })
   }
 }

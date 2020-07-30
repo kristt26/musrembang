@@ -1,8 +1,9 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Bidang extends CI_Controller {
-    
+class Bidang extends CI_Controller
+{
+
     public function __construct()
     {
         parent::__construct();
@@ -11,7 +12,7 @@ class Bidang extends CI_Controller {
 
     public function index()
     {
-        $title['title'] = ['header'=>'Bidang', 'dash'=>'Bidang'];
+        $title['title'] = ['header' => 'Bidang', 'dash' => 'Bidang'];
         $this->load->view('admin/template/header', $title);
         $this->load->view('admin/bidang');
         $this->load->view('admin/template/footer');
@@ -23,30 +24,36 @@ class Bidang extends CI_Controller {
         echo json_encode($result);
     }
 
-    function simpan()
+    public function simpan()
     {
-        $data = json_decode($this->security->xss_clean($this->input->raw_input_stream), true);           
-        if(!isset($data['kd_pegawai'])){
+        $data = json_decode($this->security->xss_clean($this->input->raw_input_stream), true);
+        if (!isset($data['kd_pegawai'])) {
             $result = $this->BidangModel->insert($data);
-            if($result !== false)
+            if ($result !== false) {
                 echo json_encode($result);
-            else
+            } else {
                 var_dump(http_response_code(400));
-        }else{
+            }
+
+        } else {
             $result = $this->BidangModel->update($data);
-            if($result !== false)
+            if ($result !== false) {
                 echo json_encode($result);
-            else
+            } else {
                 var_dump(http_response_code(400));
+            }
+
         }
     }
-    
-    function hapus($idbidang)
+
+    public function hapus($idbidang)
     {
-        if($this->BidangModel->delete($idbidang))
+        if ($this->BidangModel->delete($idbidang)) {
             var_dump(http_response_code(200));
-        else
+        } else {
             var_dump(http_response_code(400));
+        }
+
     }
 }
 

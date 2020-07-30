@@ -1,84 +1,95 @@
 <?php
 
-class Rt_model extends CI_Model {
-    function select($idrw)
+class Rt_model extends CI_Model
+{
+    public function select($idrw)
     {
-        $data=array('rw'=>'', 'rt'=>'');
-        $result = $this->db->get_where('rw', array('idrw'=>$idrw));
+        $data = array('rw' => '', 'rt' => '');
+        $result = $this->db->get_where('rw', array('idrw' => $idrw));
         $data['rw'] = $result->result()[0];
         $result = $this->db->get('rt');
         $rt = $result->result();
         foreach ($rt as $value) {
-            $result = $this->db->get_where('jalan', array('idrt'=>$value->idrt));
+            $result = $this->db->get_where('jalan', array('idrt' => $value->idrt));
             $value->jalan = $result->result();
         }
         $data['rt'] = $rt;
         return $data;
     }
 
-    function insert($data)
+    public function insert($data)
     {
-        $item= [
-            'nort'=>$data['nort'],
-            'pejabatrt'=>$data['pejabatrt'],
-            'email'=>$data['email'],
-            'idrw'=>$data['idrw']
+        $item = [
+            'nort' => $data['nort'],
+            'pejabatrt' => $data['pejabatrt'],
+            'email' => $data['email'],
+            'idrw' => $data['idrw'],
         ];
         $result = $this->db->insert('rt', $item);
         $item['idrt'] = $this->db->insert_id();
         $item['jalan'] = [];
-        if($result)
+        if ($result) {
             return $item;
-        else
+        } else {
             return false;
+        }
+
     }
 
-    function insertjalan($data)
+    public function insertjalan($data)
     {
-        $item= [
-            'jalan'=>$data['jalan'],
-            'idrt'=>$data['idrt']
+        $item = [
+            'jalan' => $data['jalan'],
+            'idrt' => $data['idrt'],
         ];
         $result = $this->db->insert('jalan', $item);
         $item['idjalan'] = $this->db->insert_id();
-        if($result)
+        if ($result) {
             return $item;
-        else
+        } else {
             return false;
+        }
+
     }
 
-    function updatejalan($data)
+    public function updatejalan($data)
     {
-        $item= [
-            'jalan'=>$data['jalan'],
+        $item = [
+            'jalan' => $data['jalan'],
         ];
         $this->db->where('idjalan', $data['idjalan']);
-        if($this->db->update('jalan', $item))
+        if ($this->db->update('jalan', $item)) {
             return $data;
-        else
+        } else {
             return false;
+        }
+
     }
 
-    function update($data)
+    public function update($data)
     {
-        $item= [
-            'nort'=>$data['nort'],
-            'pejabatrt'=>$data['pejabatrt'],
-            'email'=>$data['email'],
-            'idrw'=>$data['idrw']
+        $item = [
+            'nort' => $data['nort'],
+            'pejabatrt' => $data['pejabatrt'],
+            'email' => $data['email'],
+            'idrw' => $data['idrw'],
         ];
         $this->db->where('idrt', $data['idrt']);
-        if($this->db->update('rt', $item))
+        if ($this->db->update('rt', $item)) {
             return $data;
-        else
+        } else {
             return false;
+        }
+
     }
-    function delete($idrt)
+    public function delete($idrt)
     {
         $this->db->where('idrt', $idrt);
-        if($this->db->delete('rt'))
+        if ($this->db->delete('rt')) {
             return true;
-        else
+        } else {
             return false;
-    }    
+        }
+
+    }
 }

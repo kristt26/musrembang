@@ -51,30 +51,3 @@
     </div>
   </div>
 </div>
-<script>
-  angular.module('app', ['data.service'])
-  .controller('rencanaBiayaController', function($scope, RencanaBiayaService){
-    $scope.datas = [];
-    $scope.model = {};
-    RencanaBiayaService.get().then((x)=>{
-      $scope.datas = x;
-    })
-    $scope.simpan = ()=>{
-      RencanaBiayaService.post($scope.model).then((x)=>{
-        $scope.model = {};
-        swal("Information!", "Berhasil disimpan", "success");
-      })
-    }
-    $scope.ubah = (item)=>{
-      $scope.model = angular.copy(item);
-    }
-    $scope.clear = () =>{
-      $scope.model = {};
-    }
-    $scope.delete = (item)=>{
-      RencanaBiayaService.delete(item.idRencanaBiaya).then((x)=>{
-        swal("Information!", "Berhasil dihapus", "success");
-      })
-    }
-  })
-</script>
