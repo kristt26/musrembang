@@ -51,30 +51,3 @@
     </div>
   </div>
 </div>
-<script>
-  angular.module('app', ['data.service'])
-  .controller('skpdController', function($scope, SkpdService){
-    $scope.datas = [];
-    $scope.model = {};
-    SkpdService.get().then((x)=>{
-      $scope.datas = x;
-    })
-    $scope.simpan = ()=>{
-      SkpdService.post($scope.model).then((x)=>{
-        $scope.model = {};
-        swal("Information!", "Berhasil disimpan", "success");
-      })
-    }
-    $scope.ubah = (item)=>{
-      $scope.model = item
-    }
-    $scope.clear = () =>{
-      $scope.model = {};
-    }
-    $scope.delete = (item)=>{
-      SkpdService.delete(item.idbidangskpd).then((x)=>{
-        swal("Information!", "Berhasil dihapus", "success");
-      })
-    }
-  })
-</script>

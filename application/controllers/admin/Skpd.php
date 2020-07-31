@@ -9,11 +9,16 @@ class Skpd extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('admin/Skpd_model', 'SkpdModel');
+        $this->load->model('admin/Periode_model', 'PeriodeModel');
+        $this->load->model('admin/Profile_Model', 'ProfileModel');
     }
 
     public function index()
     {
-        $title['title'] = ['header'=>'Bidang SKPD', 'dash'=>'SKPD'];
+        $profile = $this->ProfileModel->select();
+        $periode = $this->PeriodeModel->selectarsip();
+        $periodeaktif = $this->PeriodeModel->selectperiodeaktif();
+        $title['title'] = ['header'=>'Bidang SKPD', 'dash'=>'SKPD', 'tahun' => $periode[0], 'profile' => $profile, 'periode' => $periodeaktif[0]];
         $this->load->view('admin/template/header', $title);
         $this->load->view('admin/skpd');
         $this->load->view('admin/template/footer');

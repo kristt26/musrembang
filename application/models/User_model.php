@@ -9,7 +9,7 @@ class User_model extends CI_Model {
         $result = $this->db->get_where('user', $item);
         if($result->num_rows()>0){
             $user = $result->result()[0];
-            if($user->akses=="admin"){
+            if($user->akses=="admin" || $user->akses=="pimpinan"){
                 $datauser = $this->db->get_where('pegawai', array('iduser'=>$user->iduser))->result_array()[0];
                 $datauser['akses'] = $user->akses;
                 return $datauser;

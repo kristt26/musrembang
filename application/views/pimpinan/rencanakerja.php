@@ -5,19 +5,15 @@
         <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
           <li class="nav-item">
             <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill" data-target="#custom-tabs-one-home" href=""
-              role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">DIAJUKAN</a>
+              role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">DIVALIDASI</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill" data-target="#custom-tabs-one-profile" href=""
-              role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">DIVALIDASI</a>
+              role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">DISETUJUI</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill" data-target="#custom-tabs-one-tolak" href=""
               role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">DITOLAK</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill" data-target="#custom-tabs-one-laporan" href=""
-              role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">CETAK LAPORAN</a>
           </li>
         </ul>
       </div>
@@ -38,7 +34,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="item in Usulan">
+                <tr ng-repeat="item in Final">
                   <td>{{$index+1}}</td>
                   <td>{{item.NamaBidang}}</td>
                   <td>{{item.NamaKegiatan}}</td>
@@ -48,7 +44,7 @@
                   <td>
                     <div class="noborder-radius text-center">
                       <a ng-show="item.status == 'Usulan'" class="btn btn-primary btn-sm" ng-click="validasi(item)" title="Validasi" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-check"></i></a>
-                      <a href="<?= base_url();?>admin/rencanakerja/detail/{{item.idRencanaKerja}}" class="btn btn-success btn-sm" ng-click="ubah(item)" title="Ubah" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-info-circle"></i></a>
+                      <a href="<?= base_url();?>pimpinan/rencanakerja/detail/{{item.idRencanaKerja}}" class="btn btn-success btn-sm" ng-click="ubah(item)" title="Ubah" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-info-circle"></i></a>
                       <bottom class="btn btn-warning btn-sm" ng-click="kembalikan(item)" title="Kembalikan pengajuan" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-arrow-left"></i></bottom>
                       <a href="<?= base_url();?>assets/berkas/{{item.file}}" target="_blank" class="btn btn-info btn-sm" ng-click="ubah(item)" title="Ubah" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-book"></i></a>
                       <bottom class="btn btn-danger btn-sm" ng-click="tolak(item)" title="Kembalikan pengajuan" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-minus-circle"></i></bottom>
@@ -73,7 +69,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="item in Final">
+                <tr ng-repeat="item in Disetujui">
                   <td>{{$index+1}}</td>
                   <td>{{item.NamaBidang}}</td>
                   <td>{{item.NamaKegiatan}}</td>
@@ -83,7 +79,7 @@
                   <td>
                     <div class="noborder-radius text-center">
                       <a ng-show="item.status == 'Usulan'" class="btn btn-primary btn-sm" ng-click="validasi(item)" title="Validasi" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-check"></i></a>
-                      <a href="<?= base_url();?>admin/rencanakerja/detail/{{item.idRencanaKerja}}" class="btn btn-primary btn-sm" title="Ubah" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-info-circle"></i></a>
+                      <a href="<?= base_url();?>pimpinan/rencanakerja/detail/{{item.idRencanaKerja}}" class="btn btn-primary btn-sm" title="Ubah" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-info-circle"></i></a>
                       <a href="<?= base_url();?>assets/berkas/{{item.file}}" target="_blank" class="btn btn-info btn-sm" ng-click="ubah(item)" title="Download" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-book"></i></a>
                     </div>
                   </td>
@@ -107,39 +103,6 @@
               </thead>
               <tbody>
                 <tr ng-repeat="item in Tolak">
-                  <td>{{$index+1}}</td>
-                  <td>{{item.NamaBidang}}</td>
-                  <td>{{item.NamaKegiatan}}</td>
-                  <td>RW. {{item.norw}}</td>
-                  <td>{{item.permasalahan}}</td>
-                  <td>{{item.prioritas}}</td>
-                  <td>
-                    <div class="noborder-radius text-center">
-                      <a ng-show="item.status == 'Usulan'" class="btn btn-primary btn-sm" ng-click="validasi(item)" title="Validasi" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-check"></i></a>
-                      <a href="<?= base_url();?>admin/rencanakerja/detail/{{item.idRencanaKerja}}" class="btn btn-primary btn-sm" title="Ubah" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-info-circle"></i></a>
-                      <a href="<?= base_url();?>assets/berkas/{{item.file}}" target="_blank" class="btn btn-info btn-sm" ng-click="ubah(item)" title="Download" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-book"></i></a>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="tab-pane fade" id="custom-tabs-one-laporan" role="tabpanel"
-            aria-labelledby="custom-tabs-one-profile-tab" style="width:100wh; overflow-x: auto;">
-            <table datatable="ng" class="table table-sm table-bordered">
-              <thead>
-                <tr>
-                  <th style="width: 5%">No</th>
-                  <th>Bidang</th>
-                  <th>Kegiatan</th>
-                  <th>RW</th>
-                  <th>Permasalahan</th>
-                  <th>Prioritas</th>
-                  <th style="width: 190px">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr ng-repeat="item in Laporan">
                   <td>{{$index+1}}</td>
                   <td>{{item.NamaBidang}}</td>
                   <td>{{item.NamaKegiatan}}</td>

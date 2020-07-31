@@ -58,7 +58,7 @@
 <body class="hold-transition sidebar-mini">
   <?php
   $a = $this->session->userdata('akses');
-  if(!$this->session->userdata('akses') || $this->session->userdata('akses')!='admin'){
+  if(!$this->session->userdata('akses') || $this->session->userdata('akses')!='pimpinan'){
     $this->session->set_flashdata('pesan', 'Anda tidak memiliki akses, error');
     $this->session->sess_destroy();
     redirect('authorization');
@@ -83,7 +83,7 @@
       <a href="<?= base_url();?>assets/index3.html" class="brand-link">
         <img src="<?= base_url();?>assets/img/<?= $title['profile']->logo;?>" alt="AdminLTE Logo"
           class="brand-image elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">MUSRENBANG</span>
+        <span class="brand-text font-weight-light">Musrenbang</span>
       </a>
       <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
@@ -96,92 +96,18 @@
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
-              <a href="<?= base_url()?>admin/home" class="nav-link <?= $title['header']=='Home' ? 'active': '' ?>">
+              <a href="<?= base_url()?>pimpinan/home" class="nav-link <?= $title['header']=='Home' ? 'active': '' ?>">
                 <i class="nav-icon fas fa-tasks"></i>
                 <p>
                   Home
                 </p>
               </a>
             </li>
-            <li class="nav-item has-treeview <?= $title['header']=='Pegawai' || $title['header']=='RW' ? 'menu-open': '' ?>">
-              <a href="#" class="nav-link <?= $title['header']=='Pegawai' || $title['header']=='RW' ? 'active': '' ?>">
-                <i class="nav-icon fas fa-edit"></i>
-                <p>
-                  Manajemen User
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="<?= base_url();?>admin/pegawai" class="nav-link <?= $title['header']=='Pegawai' ? 'active': '' ?>">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Pegawai</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="<?= base_url();?>admin/rw" class="nav-link <?= $title['header']=='RW' ? 'active': '' ?>">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>RW</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
             <li class="nav-item">
-              <a href="<?= base_url()?>admin/periode" class="nav-link <?= $title['header']=='Periode Rencana Kerja' ? 'active': '' ?>">
-                <i class="nav-icon fas fa-tasks"></i>
-                <p>
-                  Periode Rencana Kerja
-                </p>
-              </a>
-            </li>
-            <li class="nav-item has-treeview <?= $title['header']=='Bidang' || $title['header']=='Profile Kelurahan' || $title['header']=='Rencana Biaya' || $title['header']=='Bidang SKPD' ? 'menu-open': '' ?>">
-              <a href="#" class="nav-link <?= $title['header']=='Bidang' || $title['header']=='Profile Kelurahan' || $title['header']=='Rencana Biaya' || $title['header']=='Bidang SKPD' ? 'active': '' ?>">
-                <i class="nav-icon fas fa-edit"></i>
-                <p>
-                  Master Data
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="<?= base_url();?>admin/profile" class="nav-link <?= $title['header']=='Profile Kelurahan' ? 'active': '' ?>">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Profile Kelurahan</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="<?= base_url();?>admin/bidang" class="nav-link <?= $title['header']=='Bidang' ? 'active': '' ?>">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Bidang</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="<?= base_url();?>admin/skpd" class="nav-link <?= $title['header']=='Bidang SKPD' ? 'active': '' ?>">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Bidang SKPD</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="<?= base_url();?>admin/rencanabiaya" class="nav-link <?= $title['header']=='Rencana Biaya' ? 'active': '' ?>">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Rencana Biaya</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a href="<?= base_url()?>admin/rencanakerja" class="nav-link <?= $title['header']=='Rencana Kerja' ? 'active': '' ?>">
+              <a href="<?= base_url()?>pimpinan/rencanakerja" class="nav-link <?= $title['header']=='Rencana Kerja' ? 'active': '' ?>">
                 <i class="nav-icon fas fa-tasks"></i>
                 <p>
                   Rencana Kerja
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="<?= base_url()?>admin/laporan" class="nav-link">
-                <i class="nav-icon fas fa-tasks"></i>
-                <p>
-                  Hasil Musrenbang
                 </p>
               </a>
             </li>

@@ -28,8 +28,10 @@ class Authorization extends CI_Controller
             $this->session->set_userdata($result);
             if($result['akses']=="admin")
                 redirect('admin/home');
-            else
+            else if($result['akses']=="user")
                 redirect('user/home');
+            else
+                redirect('pimpinan/home');
         }
     }
     function logout()

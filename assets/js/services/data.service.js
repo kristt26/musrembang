@@ -10,7 +10,9 @@ angular
 	.factory('RencanaKerjaService', RencanaKerjaService)
 	.factory('periodeService', periodeService)
 	.factory('HomeService', HomeService)
-	.factory('DetailRencanaKerjaService', DetailRencanaKerjaService);
+	.factory('DetailRencanaKerjaService', DetailRencanaKerjaService)
+	.factory('BidangService', BidangService)
+	.factory('KegiatanService', KegiatanService);
 
 function ProfileService($http, $q, helperServices) {
 	var url = helperServices.url + '/musrembang/admin/profile/';
@@ -1135,6 +1137,140 @@ function HomeService($http, $q, helperServices) {
 		}).then(
 			(response) => {
 				service.Items.logo = response.data;
+				def.resolve(response.data);
+			},
+			(err) => {
+				swal("Information!", err.data, "success");
+				def.reject(err);
+			}
+		);
+
+		return def.promise;
+	};
+	return service;
+}
+
+function BidangService($http, $q, helperServices) {
+	var url = helperServices.url + '/musrembang/admin/bidang/';
+	var service = {
+		Items: []
+	};
+
+	service.get = function (id) {
+		var def = $q.defer();
+		id = helperServices.absUrl.split('/');
+		id = id[id.length - 1];
+		if (service.instance) {
+			def.resolve(service.Items);
+		} else {
+			$http({
+				method: 'Get',
+				url: url + 'getdata',
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			}).then(
+				(response) => {
+					service.instance = true;
+					service.Items = response.data;
+					def.resolve(service.Items);
+				},
+				(err) => {
+					swal("Information!", err.data, "error");
+					def.reject(err);
+				}
+			);
+		}
+		return def.promise;
+	};
+
+	service.post = function (param) {
+		var def = $q.defer();
+		$http({
+			method: 'POST',
+			url: url + 'simpan',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			data: param
+		}).then(
+			(response) => {
+				if(param.idbidang){
+					var data = service.Items.find((x)=>x.idbidang==param.idbidang);
+					if(data){
+						data.KodeBidang = param.KodeBidang;
+						data.NamaBidang = param. NamaBidang;
+					}
+				}else{
+					service.Items = response.data;
+				}
+				def.resolve(response.data);
+			},
+			(err) => {
+				swal("Information!", err.data, "success");
+				def.reject(err);
+			}
+		);
+
+		return def.promise;
+	};
+	return service;
+}
+
+function KegiatanService($http, $q, helperServices) {
+	var url = helperServices.url + '/musrembang/admin/kegiatan/';
+	var service = {
+		Items: []
+	};
+
+	service.get = function (id) {
+		var def = $q.defer();
+		id = helperServices.absUrl.split('/');
+		id = id[id.length - 1];
+		if (service.instance) {
+			def.resolve(service.Items);
+		} else {
+			$http({
+				method: 'Get',
+				url: url + 'getdata',
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			}).then(
+				(response) => {
+					service.instance = true;
+					service.Items = response.data;
+					def.resolve(service.Items);
+				},
+				(err) => {
+					swal("Information!", err.data, "error");
+					def.reject(err);
+				}
+			);
+		}
+		return def.promise;
+	};
+
+	service.post = function (param) {
+		var def = $q.defer();
+		$http({
+			method: 'POST',
+			url: url + 'simpan',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			data: param
+		}).then(
+			(response) => {
+				if(param.idbidang){
+					var data = service.Items.find((x)=>x.idbidang==param.idbidang);
+					if(data){
+						data.KodeBidang = param.KodeBidang;
+						data.NamaBidang = param. NamaBidang;
+					}
+				}else{
+					service.Items = response.data;
+				}
 				def.resolve(response.data);
 			},
 			(err) => {

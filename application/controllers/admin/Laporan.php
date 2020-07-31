@@ -9,16 +9,19 @@ class laporan extends CI_Controller
     {
         parent::__construct();
         $this->load->model('admin/Transaksi_model', 'TransaksiModel');
+        $this->load->model('admin/Periode_model', 'PeriodeModel');
+        $this->load->model('admin/Profile_Model', 'ProfileModel');
     }
 
     public function index()
     {
-
-        $title['title'] = ['header'=>'Laporan', 'dash'=>'Laporan'];
-        // $data = $this->TransaksiModel->select();
+        $profile = $this->ProfileModel->select();
+        $periode = $this->PeriodeModel->selectarsip();
+        $periodeaktif = $this->PeriodeModel->selectperiodeaktif();
+        $title['title'] = ['header'=>'Laporan', 'dash'=>'Laporan', 'profile' => $profile, 'periode' => $periodeaktif[0]];
         $data = ['transaksi'=>array(), 'pemesanan'=>array()];
         $this->load->view('admin/template/header', $title);
-        $this->load->view('admin/laporan', $data);
+        $this->load->view('admin/laporan');
         $this->load->view('admin/template/footer');
     }
     public function CetakPDF()

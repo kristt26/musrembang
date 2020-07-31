@@ -22,13 +22,12 @@ function rencanaKerjaController($scope, RencanaKerjaService) {
   RencanaKerjaService.get().then(x => {
     $scope.datas = x;
     $scope.Final = $scope.datas.filter(x => x.status == 'Final');
-    $scope.Usulan = $scope.datas.filter(x => x.status == 'Usulan');
+    $scope.Disetujui = $scope.datas.filter(x => x.status == 'Disetujui');
     $scope.Tolak = $scope.datas.filter(x => x.status == 'Batal');
-    $scope.Laporan = $scope.datas.filter(x => x.status == 'Disetujui');
     $.LoadingOverlay("hide");
   })
   $scope.validasi = (item) => {
-    item.setstatus = 'Final'
+    item.setstatus = 'Disetujui'
     swal({
       title: "Anda Yakin?",
       text: "Akan Melakukan Pembatalan?",
@@ -111,7 +110,7 @@ function detailRencanaKerjaController($scope, DetailRencanaKerjaService, $window
     $.LoadingOverlay("hide");
   })
   $scope.validasi = () => {
-    $scope.model.setstatus = 'Final'
+    $scope.model.setstatus = 'Disetujui'
     swal({
       title: "Anda Yakin?",
       text: "Akan Melakukan Pembatalan?",
@@ -222,12 +221,12 @@ function homeController($scope, HomeService, $window) {
 }
 
 function pegawaiController($scope, PegawaiService, $window) {
+  $.LoadingOverlay("hide");
   $scope.datas = [];
   $scope.model = {};
   $scope.edit = true;
   PegawaiService.get().then((x) => {
     $scope.datas = x;
-    $.LoadingOverlay("hide");
   })
   $scope.simpan = () => {
     PegawaiService.post($scope.model).then((x) => {
@@ -251,12 +250,12 @@ function pegawaiController($scope, PegawaiService, $window) {
 }
 
 function rwController($scope, RwService, $window) {
+  $.LoadingOverlay("hide");
   $scope.datas = [];
   $scope.model = {};
   $scope.edit = true;
   RwService.get().then((x) => {
     $scope.datas = x;
-    $.LoadingOverlay("hide");
   })
   $scope.simpan = () => {
     RwService.post($scope.model).then((x) => {
@@ -281,7 +280,7 @@ function rwController($scope, RwService, $window) {
 }
 
 function periodeController($scope, periodeService, $window) {
-  
+  $.LoadingOverlay("hide");
   $scope.datas = [];
   $scope.model = {};
   periodeService.get().then((x) => {
@@ -290,10 +289,9 @@ function periodeController($scope, periodeService, $window) {
     angular.forEach($scope.datas, x => {
       x.mulai = new Date(x.mulai);
       x.berakhir = new Date(x.berakhir);
-      // console.log(x.mulai.toLocaleDateString(undefined, options));
-      // console.log(x.mulai.toTimeString());
+      console.log(x.mulai.toLocaleDateString(undefined, options));
+      console.log(x.mulai.toTimeString());
     })
-    $.LoadingOverlay("hide");
   })
   $scope.simpan = () => {
     periodeService.post($scope.model).then((x) => {
@@ -315,6 +313,7 @@ function periodeController($scope, periodeService, $window) {
 }
 
 function rtController($scope, RtService, $window) {
+  $.LoadingOverlay("hide");
   $scope.datas = [];
   $scope.model = {};
   $scope.edit = false;
@@ -325,7 +324,6 @@ function rtController($scope, RtService, $window) {
   $scope.tomboljalan = '';
   RtService.get().then((x) => {
     $scope.datas = x;
-    $.LoadingOverlay("hide");
   })
   $scope.simpan = () => {
     $scope.model.idrw = angular.copy($scope.datas.rw.idrw);
@@ -370,6 +368,7 @@ function rtController($scope, RtService, $window) {
 }
 
 function anggaranBiayaController($scope, $http, AnggaranBiayaService, helperServices, $window) {
+  $.LoadingOverlay("hide");
   $scope.datas = [];
   $scope.model = {};
   $scope.daftarKegiatan = false;
@@ -384,7 +383,6 @@ function anggaranBiayaController($scope, $http, AnggaranBiayaService, helperServ
       if ($scope.datas.detailrencanabiaya.find(x => x.idRencanaBiaya == value.idRencanaBiaya) == undefined)
         $scope.rencanabiaya.push(value);
     })
-    $.LoadingOverlay("hide");
   })
 
   $scope.simpan = () => {
@@ -450,12 +448,11 @@ function anggaranBiayaController($scope, $http, AnggaranBiayaService, helperServ
 }
 
 function rencanaBiayaController($scope, RencanaBiayaService) {
-  
+  $.LoadingOverlay("hide");
   $scope.datas = [];
   $scope.model = {};
   RencanaBiayaService.get().then((x) => {
     $scope.datas = x;
-    $.LoadingOverlay("hide");
   })
   $scope.simpan = () => {
     RencanaBiayaService.post($scope.model).then((x) => {
@@ -477,13 +474,13 @@ function rencanaBiayaController($scope, RencanaBiayaService) {
 }
 
 function profileController($scope, $http, ProfileService, helperServices) {
+  $.LoadingOverlay("hide");
   $scope.model = {};
   $scope.img;
   ProfileService.get().then(data => {
     if (data.length !== 0)
       $scope.model = data;
     $scope.img = '<img class="card-img-top" src="' + helperServices.url + "/musrembang/assets/img/" + data.logo + '">';
-    $.LoadingOverlay("hide");
   })
   $scope.simpan = () => {
     ProfileService.post($scope.model).then((x) => {
@@ -499,13 +496,13 @@ function profileController($scope, $http, ProfileService, helperServices) {
 }
 
 function bidangController($scope, $http, BidangService) {
+  $.LoadingOverlay("hide");
   $scope.datas = [];
   $scope.model = {};
   $scope.daftarKegiatan = false;
   $scope.listKegiatan = {};
   BidangService.get().then(x => {
     $scope.datas = x;
-    $.LoadingOverlay("hide");
   })
   $scope.selected = (item) => {
     if (item) {
@@ -613,11 +610,11 @@ function bidangController($scope, $http, BidangService) {
 }
 
 function skpdController($scope, SkpdService) {
+  $.LoadingOverlay("hide");
   $scope.datas = [];
   $scope.model = {};
   SkpdService.get().then((x) => {
     $scope.datas = x;
-    $.LoadingOverlay("hide");
   })
   $scope.simpan = () => {
     SkpdService.post($scope.model).then((x) => {

@@ -20,36 +20,9 @@ class RencanaKerja extends CI_Controller
         $periode = $this->PeriodeModel->selectarsip();
         $periodeaktif = $this->PeriodeModel->selectperiodeaktif();
         $title['title'] = ['header' => 'Rencana Kerja', 'dash' => 'Rencana Kerja', 'tahun' => $periode[0], 'profile' => $profile, 'periode' => $periodeaktif[0]];
-        $this->load->view('admin/template/header', $title);
-        $this->load->view('admin/rencanakerja');
-        $this->load->view('admin/template/footer');
-    }
-
-    public function simpan()
-    {
-        $data = $_POST;
-        $a = $this->upload();
-        if (count($a) > 0) {
-            $data['file'] = $a['file'];
-        }
-
-        if (!isset($data['idRencanaKerja'])) {
-            $result = $this->RencanaKerjaModel->insert($data);
-            if ($result !== false) {
-                echo json_encode($result);
-            } else {
-                http_response_code(400);
-                echo json_encode(array('message' => 'Gagal Simpan'));
-            }
-        } else {
-            $result = $this->RencanaKerjaModel->update($data);
-            if ($result !== false) {
-                echo json_encode($result);
-            } else {
-                http_response_code(400);
-                echo json_encode(array('message' => 'Gagal Ubah'));
-            }
-        }
+        $this->load->view('pimpinan/template/header', $title);
+        $this->load->view('pimpinan/rencanakerja');
+        $this->load->view('pimpinan/template/footer');
     }
 
     public function getdata()
@@ -100,11 +73,13 @@ class RencanaKerja extends CI_Controller
         $this->load->model('user/Renja_model', 'RenjaModel');
         
         $profile = $this->ProfileModel->select();
-        $title['title'] = ['header' => 'Rencana Kerja', 'dash' => 'Rencana Kerja', 'tahun'=>$this->PeriodeModel->selectarsip()[0], 'profile'=>$profile];
-        $periode['periode'] = $this->RenjaModel->selectperiode();
-        $this->load->view('admin/template/header', $title);
-        $this->load->view('admin/detailrencanakerja', $periode);
-        $this->load->view('admin/template/footer');
+        $periode = $this->PeriodeModel->selectarsip();
+        $periodeaktif = $this->PeriodeModel->selectperiodeaktif();
+        $title['title'] = ['header' => 'Rencana Kerja', 'dash' => 'Rencana Kerja', 'tahun' => $periode[0], 'profile' => $profile, 'periode' => $periodeaktif[0]];
+        $periodee['periode'] = $this->RenjaModel->selectperiode();
+        $this->load->view('pimpinan/template/header', $title);
+        $this->load->view('pimpinan/detailrencanakerja', $periodee);
+        $this->load->view('pimpinan/template/footer');
     }
 
     public function getdatadetail($idRencanaKerja = null)
