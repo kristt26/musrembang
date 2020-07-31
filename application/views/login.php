@@ -24,12 +24,13 @@
   <div class="data-flush" data-flash="<?= $this->session->flashdata('pesan');?>"></div>
   <div class="login-box">
     <div class="login-logo">
-      <h3>SISTEM INFORMASI LAUNDRY</h3>
+      <img src="<?= base_url().'assets/img/'.$title['profile']->logo;?>" alt="" width="100px">
+      <h3>MUSREMBANG KELURAHAN</h3>
     </div>
     <!-- /.login-logo -->
     <div class="card">
       <div class="card-body login-card-body">
-        <p class="login-box-msg">Sign in to start your session</p>
+        <p class="login-box-msg">Gunakan username dan password yang telah terdaftar</p>
 
         <form action="<?= base_url();?>authorization/login" method="post">
           <div class="input-group mb-3">

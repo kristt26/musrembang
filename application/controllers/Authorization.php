@@ -9,11 +9,13 @@ class Authorization extends CI_Controller
     {
         parent::__construct();
         $this->load->model('User_model', 'UserModel');
+        $this->load->model('admin/Profile_Model', 'ProfileModel');
     }
 
     public function index()
     {
-        $title['title'] = ['header' => 'User Authorization', 'dash' => 'User_authorization'];
+        $profile = $this->ProfileModel->select();
+        $title['title'] = ['header' => 'User Authorization', 'dash' => 'User_authorization', 'profile'=>$profile];
         $this->load->view('login', $title);
     }
 
