@@ -8,7 +8,7 @@ class laporan extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('admin/Transaksi_model', 'TransaksiModel');
+        $this->load->model('admin/Laporan_model', 'LaporanModel');
         $this->load->model('admin/Periode_model', 'PeriodeModel');
         $this->load->model('admin/Profile_Model', 'ProfileModel');
     }
@@ -28,13 +28,17 @@ class laporan extends CI_Controller
     {
         $this->load->library('mypdf');
         $view = "admin/cetaklaporan";
-        $data = $this->TransaksiModel->select();
+        $data = $this->LaporanModel->select();
         $this->mypdf->generate($view,$data);
     }
-    public function getprint()
+    public function getdata()
     {
-        $data = $this->input->post();
-        $result = $this->TransaksiModel->AmbilLaporan($data);
+        $result = $this->PeriodeModel->selectarsip();
+        echo json_encode($result);
+    }
+    public function getprint($idPeriodeRenker = null)
+    {
+        $result = $this->LaporanModel->AmbilLaporan($idPeriodeRenker);
         echo json_encode($result);
     }
 }

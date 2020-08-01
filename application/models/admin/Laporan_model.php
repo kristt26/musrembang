@@ -1,10 +1,63 @@
 <?php
 
-class Transaksi_model extends CI_Model {
-    public function AmbilLaporan($tanggal)
+class Laporan_model extends CI_Model {
+    public function AmbilLaporan($idPeriode)
     {
-        $tglawal = $tanggal['tglawal'];
-        $tglakhir = $tanggal['tglakhir'];
+        $result = $this->db->get('bidang');
+        $bidang = $result->result();
+        foreach ($bidang as $value) {
+            $result = $this->db->get_where('kegiatan', array('idbidang'=>$value->idbidang));
+            $value->kegiatans = $result->result();
+            foreach ($value->kegiatans as $kegiatan) {
+                $result = $this->db->query("SELECT
+                    `rencanakerja`.`idRencanaKerja`,
+                    `rencanakerja`.`permasalahan`,
+                    `rencanakerja`.`status`,
+                    `rencanakerja`.`volume`,
+                    `rencanakerja`.`satuan`,
+                    `rencanakerja`.`prioritas`,
+                    `rencanakerja`.`file`,
+                    `rencanakerja`.`idKegiatan`,
+                    `rw`.`idrw`,
+                    `rw`.`norw`,
+                    `jalan`.`idjalan`,
+                    `jalan`.`jalan`,
+                    `jalan`.`lat`,
+                    `jalan`.`long`,
+                    `rt`.`idrt`,
+                    `rt`.`nort`,
+                    `transaksirenbi`.`idtransaksirenbi`,
+                    `transaksirenbi`.`nominal`,
+                    `bidangskpd`.`idbidangskpd`,
+                    `bidangskpd`.`NamaBidangSkpd`,
+                    `detailrencanabiaya`.`iddetailrencanabiaya`,
+                    `detailrencanabiaya`.`nominal` AS `nominal1`,
+                    `rencanabiaya`.`idRencanaBiaya`,
+                    `rencanabiaya`.`NamaRencanaBiaya`,
+                    `perioderenker`.`idPeriodeRenker`,
+                    `perioderenker`.`Tahun`,
+                    `perioderenker`.`mulai`,
+                    `perioderenker`.`berakhir`
+                FROM
+                    `rencanakerja`
+                    LEFT JOIN `jalan` ON `jalan`.`idjalan` = `rencanakerja`.`idjalan`
+                    LEFT JOIN `rt` ON `rt`.`idrt` = `jalan`.`idrt`
+                    LEFT JOIN `rw` ON `rw`.`idrw` = `rencanakerja`.`idrw`
+                    LEFT JOIN `transaksirenbi` ON `rencanakerja`.`idRencanaKerja` =
+                    `transaksirenbi`.`idRencanaKerja`
+                    LEFT JOIN `bidangskpd` ON `bidangskpd`.`idbidangskpd` =
+                    `transaksirenbi`.`idbidangskpd`
+                    LEFT JOIN `detailrencanabiaya` ON `transaksirenbi`.`iddetailrencanabiaya` =
+                    `detailrencanabiaya`.`iddetailrencanabiaya`
+                    LEFT JOIN `rencanabiaya` ON `rencanabiaya`.`idRencanaBiaya` =
+                    `detailrencanabiaya`.`idRencanaBiaya`
+                    LEFT JOIN `perioderenker` ON `rencanakerja`.`idPeriodeRenker` =
+                    `perioderenker`.`idPeriodeRenker`
+                WHERE `perioderenker`.`idPeriodeRenker` = '$idPeriode' AND `rencanakerja`.`idKegiatan` = '$kegiatan->idKegiatan'");
+                $kegiatan->rencanakerja = $result->result();
+            }
+            return $bidang;
+        }
         $query = $this->db->query("SELECT
             `pemesanan`.`kd_pemesanan`,
             `pemesanan`.`tgl_pemesanan`,

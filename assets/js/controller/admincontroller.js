@@ -10,7 +10,8 @@ angular.module('ctrl', ['ngSanitize'])
   .controller('rencanaBiayaController', rencanaBiayaController)
   .controller('profileController', profileController)
   .controller('bidangController', bidangController)
-  .controller('skpdController', skpdController);
+  .controller('skpdController', skpdController)
+  .controller('laporanController', laporanController);
 
 
 function rencanaKerjaController($scope, RencanaKerjaService) {
@@ -636,4 +637,25 @@ function skpdController($scope, SkpdService) {
       swal("Information!", "Berhasil dihapus", "success");
     })
   }
+}
+
+function laporanController($scope, LaporanService, helperServices) {
+  $scope.idIndex;
+  $scope.datas = [];
+  $scope.periodes = [];
+  $scope.model = {};
+  $.LoadingOverlay("hide");
+  $scope.idKegiatans
+  LaporanService.get().then((x) => {
+    $scope.periodes = x;
+    
+  });
+  $scope.getData = (idPeridoeRenker)=>{
+    LaporanService.getLaporan(idPeridoeRenker).then((x)=>{
+      $scope.datas = x;
+    })
+  }
+  $scope.romanize = (number) => {
+		return helperServices.romanize(number);
+	};
 }

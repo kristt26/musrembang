@@ -194,8 +194,14 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h3>MUSRENBANG TAHUN <?= $title['periode']->Tahun;?></h3>
-              <p>Berlangsung dari tanggal <?= date('d M Y', strtotime($title['periode']->mulai));?> sampai <?= date('d M Y',strtotime($title['periode']->berakhir));?></p>
+              
+              <?php if(isset($title['periode']->mulai)){?>
+                <h3>MUSRENBANG TAHUN <?= $title['periode']->Tahun;?></h3>
+                <p>Berlangsung dari tanggal <?= date('d M Y', strtotime($title['periode']->mulai));?> sampai <?= date('d M Y',strtotime($title['periode']->berakhir));?></p>
+              <?php }else{?>
+                <h3>MUSRENBANG KELURAHAN</h3>
+                <p>Saat ini tidak ada kegiatan musrenbang yang sedang berlangsung</p>
+              <?php }?>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">

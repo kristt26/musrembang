@@ -10,7 +10,7 @@ class Periode_model extends CI_Model {
     public function selectarsip()
     {
         $tanggal = date("Y-m-d");
-        $result = $this->db->query("SELECT * FROM perioderenker WHERE mulai <='$tanggal'");
+        $result = $this->db->query("SELECT * FROM perioderenker WHERE berakhir <='$tanggal'");
         return $result->result();
     }
 
@@ -18,7 +18,7 @@ class Periode_model extends CI_Model {
     {
         $tanggal = date("Y-m-d");
         $result = $this->db->query("SELECT * FROM perioderenker WHERE `perioderenker`.`mulai` <= '$tanggal' AND `perioderenker`.`berakhir` >= '$tanggal'");
-        return $result->result();
+        return $result->result()[0];
     }
 
     function insert($data)
