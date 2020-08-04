@@ -17,8 +17,9 @@
             <tr>
               <th class="align-middle text-center" style="width: 10px" rowspan ="4">No</th>
               <th class="align-middle" rowspan ="4" colspan="2">Bidang/Kegiatan</th>
+              <th class="align-middle" rowspan ="4">RW</th>
               <th class="align-middle" rowspan ="4">Lokasi</th>
-              <th class="align-middle" rowspan ="4">Volume</th>
+              <th class="align-middle" rowspan ="4">Volume/Satuan</th>
               <th class="align-middle text-center" colspan="5">RENCANA BIAYA YANG DIUSULKAN</th>
               <th rowspan="4" class="align-middle text-center">Bidang SKPD</th>
             </tr>
@@ -32,29 +33,32 @@
               <th class="align-middle text-center" colspan="2">APBD Kota (Optimalisasi)</th>
             </tr>
             <tr>
-              <th class="align-middle text-center">Sharing Dana Prog. (Kota Tanpa Kumuh)KOTAKU</th>
+              <th class="align-middle text-center">Sharing Dana Prog. (Kota Tanpa Kumuh) KOTAKU</th>
               <th class="align-middle text-center">Biaya Penunjang Pemerintahan Kamp/Kel</th>
             </tr>
           </thead>
-          <tbody ng-repeat="bidang in datas">
+          <tbody ng-repeat="kegiatan in datas">
             <tr >
-              <td>{{romanize($index+1)}}</td>
-              <td colspan="10">{{bidang.NamaBidang}}</td>
+              <td>{{$index+1}}</td>
+              <td colspan="11">{{kegiatan.NamaKegiatan}}</td>
             </tr>
-            <tr ng-repeat="kegiatan in bidang.kegiatans">
+            <tr ng-repeat="ajuan in kegiatan.rencanakerja">
               <td></td>
-              <td>{{idIndex = $index+1}}</td>
-              <td>{{kegiatan.NamaKegiatan}}</td>
-              <td colspan="8">
-              </td>
-            </tr>
-            <tr>
-              <td>{{idIndex}}</td>
+              <td colspan="2"></td>
+              <td>{{ajuan.norw}}</td>
+              <td>{{ajuan.jalan}}, RT. {{ajuan.nort}}</td>
+              <td>{{ajuan.volume}} {{ajuan.satuan}}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>{{ajuan.nominal}}</td>
+              <td></td>
+              <td>{{ajuan.NamaBidangSkpd}}</td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
   </div>
-  
+
 </div>

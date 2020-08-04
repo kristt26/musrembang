@@ -18,7 +18,12 @@ class RencanaBiaya extends CI_Controller
         $profile = $this->ProfileModel->select();
         $periode = $this->PeriodeModel->selectarsip();
         $periodeaktif = $this->PeriodeModel->selectperiodeaktif();
-        $title['title'] = ['header' => 'Rencana Biaya', 'dash' => 'Rencana Biaya', 'profile' => $profile, 'periode' => $periodeaktif[0]];
+        if (isset($periodeaktif)) {
+            $title['title'] = ['header' => 'Rencana Biaya', 'dash' => 'Rencana Biaya', 'tahun' => empty($periode) ? array() : $periode[0], 'profile' => $profile, 'periode' => $periodeaktif];
+        } else {
+            $title['title'] = ['header' => 'Rencana Biaya', 'dash' => 'Rencana Biaya', 'tahun' => empty($periode) ? array() : $periode[0], 'profile' => $profile, 'periode' => array()];
+        }
+        // $title['title'] = ['header' => 'Rencana Biaya', 'dash' => 'Rencana Biaya', 'profile' => $profile, 'periode' => $periodeaktif[0]];
         $this->load->view('admin/template/header', $title);
         $this->load->view('admin/rencanabiaya');
         $this->load->view('admin/template/footer');

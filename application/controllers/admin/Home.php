@@ -16,10 +16,11 @@ class Home extends CI_Controller
         $profile = $this->ProfileModel->select();
         $periode = $this->PeriodeModel->selectarsip();
         $periodeaktif = $this->PeriodeModel->selectperiodeaktif();
-        if(isset($periodeaktif))
-            $title['title'] = ['header' => 'Home', 'dash' => 'Home', 'tahun' => $periode[0], 'profile' => $profile, 'periode' => $periodeaktif];
-        else
-            $title['title'] = ['header' => 'Home', 'dash' => 'Home', 'tahun' => $periode[0], 'profile' => $profile, 'periode' => array()];
+        if (isset($periodeaktif)) {
+            $title['title'] = ['header' => 'Home', 'dash' => 'Home', 'tahun' => empty($periode) ? array() : $periode[0], 'profile' => $profile, 'periode' => $periodeaktif];
+        } else {
+            $title['title'] = ['header' => 'Home', 'dash' => 'Home', 'tahun' => empty($periode) ? array() : $periode[0], 'profile' => $profile, 'periode' => array()];
+        }
 
         $this->load->view('admin/template/header', $title);
         $this->load->view('admin/home');

@@ -11,7 +11,7 @@ class RencanaKerja extends CI_Controller
         $this->load->model('admin/RencanaKerja_model', 'RencanaKerjaModel');
         $this->load->model('admin/Periode_model', 'PeriodeModel');
         $this->load->model('admin/Profile_Model', 'ProfileModel');
-        
+
     }
 
     public function index()
@@ -19,7 +19,12 @@ class RencanaKerja extends CI_Controller
         $profile = $this->ProfileModel->select();
         $periode = $this->PeriodeModel->selectarsip();
         $periodeaktif = $this->PeriodeModel->selectperiodeaktif();
-        $title['title'] = ['header' => 'Rencana Kerja', 'dash' => 'Rencana Kerja', 'tahun' => $periode[0], 'profile' => $profile, 'periode' => $periodeaktif[0]];
+        if (isset($periodeaktif)) {
+            $title['title'] = ['header' => 'Rencana Kerja', 'dash' => 'Rencana Kerja', 'tahun' => empty($periode) ? array() : $periode[0], 'profile' => $profile, 'periode' => $periodeaktif];
+        } else {
+            $title['title'] = ['header' => 'Rencana Kerja', 'dash' => 'Rencana Kerja', 'tahun' => empty($periode) ? array() : $periode[0], 'profile' => $profile, 'periode' => array()];
+        }
+        // $title['title'] = ['header' => 'Rencana Kerja', 'dash' => 'Rencana Kerja', 'tahun' => $periode[0], 'profile' => $profile, 'periode' => $periodeaktif[0]];
         $this->load->view('admin/template/header', $title);
         $this->load->view('admin/rencanakerja');
         $this->load->view('admin/template/footer');
@@ -67,12 +72,12 @@ class RencanaKerja extends CI_Controller
         $this->load->view('admin/template/footer');
     }
 
-    public function getdatacreated($idRencanaKerja=null)
+    public function getdatacreated($idRencanaKerja = null)
     {
-        if($idRencanaKerja=='created'){
+        if ($idRencanaKerja == 'created') {
             $result = $this->RencanaKerjaModel->selectdata();
             echo json_encode($result);
-        }else{
+        } else {
             $result = $this->RencanaKerjaModel->dataEdit($idRencanaKerja);
             echo json_encode($result);
         }
@@ -82,7 +87,7 @@ class RencanaKerja extends CI_Controller
     {
         $data = json_decode($this->security->xss_clean($this->input->raw_input_stream), true);
         $result = $this->RencanaKerjaModel->validasi($data);
-        echo json_encode(array('status'=>$result));
+        echo json_encode(array('status' => $result));
     }
 
     public function hapus($idRencanaKerja)
@@ -98,9 +103,9 @@ class RencanaKerja extends CI_Controller
     public function detail()
     {
         $this->load->model('user/Renja_model', 'RenjaModel');
-        
+
         $profile = $this->ProfileModel->select();
-        $title['title'] = ['header' => 'Rencana Kerja', 'dash' => 'Rencana Kerja', 'tahun'=>$this->PeriodeModel->selectarsip()[0], 'profile'=>$profile];
+        $title['title'] = ['header' => 'Rencana Kerja', 'dash' => 'Rencana Kerja', 'tahun' => $this->PeriodeModel->selectarsip()[0], 'profile' => $profile];
         $periode['periode'] = $this->RenjaModel->selectperiode();
         $this->load->view('admin/template/header', $title);
         $this->load->view('admin/detailrencanakerja', $periode);
@@ -109,7 +114,7 @@ class RencanaKerja extends CI_Controller
 
     public function getdatadetail($idRencanaKerja = null)
     {
-        
+
         $result = $this->RencanaKerjaModel->dataEdit($idRencanaKerja);
         echo json_encode($result);
     }

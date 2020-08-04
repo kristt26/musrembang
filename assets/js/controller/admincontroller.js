@@ -644,15 +644,16 @@ function laporanController($scope, LaporanService, helperServices) {
   $scope.datas = [];
   $scope.periodes = [];
   $scope.model = {};
-  $.LoadingOverlay("hide");
   $scope.idKegiatans
   LaporanService.get().then((x) => {
     $scope.periodes = x;
-    
+    $.LoadingOverlay("hide");
   });
   $scope.getData = (idPeridoeRenker)=>{
+    $.LoadingOverlay("show");
     LaporanService.getLaporan(idPeridoeRenker).then((x)=>{
       $scope.datas = x;
+      $.LoadingOverlay("hide");
     })
   }
   $scope.romanize = (number) => {

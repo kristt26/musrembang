@@ -18,8 +18,12 @@ class laporan extends CI_Controller
         $profile = $this->ProfileModel->select();
         $periode = $this->PeriodeModel->selectarsip();
         $periodeaktif = $this->PeriodeModel->selectperiodeaktif();
-        $title['title'] = ['header'=>'Laporan', 'dash'=>'Laporan', 'profile' => $profile, 'periode' => $periodeaktif[0]];
-        $data = ['transaksi'=>array(), 'pemesanan'=>array()];
+        if (isset($periodeaktif)) {
+            $title['title'] = ['header' => 'Laporan', 'dash' => 'Laporan', 'tahun' => empty($periode) ? array() : $periode[0], 'profile' => $profile, 'periode' => $periodeaktif];
+        } else {
+            $title['title'] = ['header' => 'Laporan', 'dash' => 'Laporan', 'tahun' => empty($periode) ? array() : $periode[0], 'profile' => $profile, 'periode' => array()];
+        }
+        // $data = ['transaksi' => array(), 'pemesanan' => array()];
         $this->load->view('admin/template/header', $title);
         $this->load->view('admin/laporan');
         $this->load->view('admin/template/footer');
@@ -29,7 +33,7 @@ class laporan extends CI_Controller
         $this->load->library('mypdf');
         $view = "admin/cetaklaporan";
         $data = $this->LaporanModel->select();
-        $this->mypdf->generate($view,$data);
+        $this->mypdf->generate($view, $data);
     }
     public function getdata()
     {

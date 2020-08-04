@@ -1,7 +1,8 @@
 <?php
 
-class Periode_model extends CI_Model {
-    function select()
+class Periode_model extends CI_Model
+{
+    public function select()
     {
         $result = $this->db->get('perioderenker');
         return $result->result();
@@ -9,8 +10,9 @@ class Periode_model extends CI_Model {
 
     public function selectarsip()
     {
-        $tanggal = date("Y-m-d");
-        $result = $this->db->query("SELECT * FROM perioderenker WHERE berakhir <='$tanggal'");
+        // $tanggal = date("Y-m-d");
+        // $result = $this->db->query("SELECT * FROM perioderenker WHERE berakhir <='$tanggal'");
+        $result = $this->db->query("SELECT * FROM perioderenker");
         return $result->result();
     }
 
@@ -21,41 +23,47 @@ class Periode_model extends CI_Model {
         return $result->result()[0];
     }
 
-    function insert($data)
+    public function insert($data)
     {
-        $item= [
-            'Tahun'=>$data['Tahun'],
-            'mulai'=>$data['mulai'],
-            'berakhir'=>$data['berakhir']
+        $item = [
+            'Tahun' => $data['Tahun'],
+            'mulai' => $data['mulai'],
+            'berakhir' => $data['berakhir'],
         ];
         // $this->db->update('perioderenker', array('Status'=>'Tidak Aktif'));
         $result = $this->db->insert('perioderenker', $item);
         $item['idPeriodeRenker'] = $this->db->insert_id();
-        if($result)
+        if ($result) {
             return $item;
-        else
+        } else {
             return false;
+        }
+
     }
 
-    function update($data)
+    public function update($data)
     {
-        $item= [
-            'Tahun'=>$data['Tahun'],
-            'mulai'=>$data['mulai'],
-            'berakhir'=>$data['berakhir']
+        $item = [
+            'Tahun' => $data['Tahun'],
+            'mulai' => $data['mulai'],
+            'berakhir' => $data['berakhir'],
         ];
         $this->db->where('idPeriodeRenker', $data['idPeriodeRenker']);
-        if($this->db->update('perioderenker', $item))
+        if ($this->db->update('perioderenker', $item)) {
             return $data;
-        else
+        } else {
             return false;
+        }
+
     }
-    function delete($idPeriodeRenker)
+    public function delete($idPeriodeRenker)
     {
         $this->db->where('idPeriodeRenker', $idPeriodeRenker);
-        if($this->db->delete('perioderenker'))
+        if ($this->db->delete('perioderenker')) {
             return true;
-        else
+        } else {
             return false;
-    }    
+        }
+
+    }
 }
