@@ -217,6 +217,47 @@ function homeController($scope, HomeService, $window) {
   $scope.datas = [];
   $scope.model = {};
   $.LoadingOverlay("hide");
+  var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+		var color = Chart.helpers.color;
+		var barChartData = {
+			labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+			datasets: [{
+				label: 'Dataset 1',
+				// backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+				// borderColor: window.chartColors.red,
+				borderWidth: 1,
+				data: [
+					80,
+					80,
+					80,
+					80,
+					80,
+					80,
+					80
+				]
+			}]
+
+		};
+
+		window.onload = function() {
+			var ctx = document.getElementById('canvas').getContext('2d');
+			window.myBar = new Chart(ctx, {
+				type: 'bar',
+				data: barChartData,
+				options: {
+					responsive: true,
+					legend: {
+						position: 'top',
+					},
+					title: {
+						display: true,
+						text: 'RENCANA KERJA YANG DIAJUKAN'
+					}
+				}
+			});
+
+		};
+
   $scope.back = () => {
     $window.history.back();
   }
@@ -282,7 +323,7 @@ function rwController($scope, RwService, $window) {
 }
 
 function periodeController($scope, periodeService, $window) {
-  
+
   $scope.datas = [];
   $scope.model = {};
   periodeService.get().then((x) => {
@@ -451,7 +492,7 @@ function anggaranBiayaController($scope, $http, AnggaranBiayaService, helperServ
 }
 
 function rencanaBiayaController($scope, RencanaBiayaService) {
-  
+
   $scope.datas = [];
   $scope.model = {};
   RencanaBiayaService.get().then((x) => {
@@ -649,14 +690,14 @@ function laporanController($scope, LaporanService, helperServices) {
     $scope.periodes = x;
     $.LoadingOverlay("hide");
   });
-  $scope.getData = (idPeridoeRenker)=>{
+  $scope.getData = (idPeridoeRenker) => {
     $.LoadingOverlay("show");
-    LaporanService.getLaporan(idPeridoeRenker).then((x)=>{
+    LaporanService.getLaporan(idPeridoeRenker).then((x) => {
       $scope.datas = x;
       $.LoadingOverlay("hide");
     })
   }
   $scope.romanize = (number) => {
-		return helperServices.romanize(number);
-	};
+    return helperServices.romanize(number);
+  };
 }

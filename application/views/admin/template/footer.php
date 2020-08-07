@@ -7,7 +7,7 @@
       <div class="float-right d-none d-sm-block">
         <b>Version</b> 3.0.5
       </div>
-      <strong><a href="http://adminlte.io">MUSRENBANG KELURAHAN HAMADI</a></strong> 
+      <strong><a href="http://adminlte.io">MUSRENBANG KELURAHAN HAMADI</a></strong>
     </footer>
 
     <!-- Control Sidebar -->
@@ -19,37 +19,38 @@
   <!-- ./wrapper -->
 
   <!-- jQuery -->
-  
+
   <!-- Bootstrap 4 -->
-  <script type="text/javascript" src="<?php echo base_url();?>assets/js/app.js"></script>
-  <script type="text/javascript" src="<?php echo base_url();?>assets/js/controller/admincontroller.js"></script>
-  <script type="text/javascript" src="<?php echo base_url();?>assets/js/directives.js"></script>
-  <script type="text/javascript" src="<?php echo base_url();?>assets/plugins/angular-datatables/dist/angular-datatables.min.js"></script>
-  <script src="<?= base_url();?>assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/app.js"></script>
+  <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/controller/admincontroller.js"></script>
+  <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/directives.js"></script>
+  <script type="text/javascript" src="<?php echo base_url(); ?>assets/plugins/angular-datatables/dist/angular-datatables.min.js"></script>
+  <script src="<?=base_url();?>assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- bs-custom-file-input -->
-  <script src="<?= base_url();?>assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
-  <script src="<?= base_url();?>assets/node_modules/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="<?=base_url();?>assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+  <script src="<?=base_url();?>assets/node_modules/sweetalert/dist/sweetalert.min.js"></script>
   <!-- AdminLTE App -->
-  <script src="<?= base_url();?>assets/dist/js/adminlte.min.js"></script>
+  <script src="<?=base_url();?>assets/dist/js/adminlte.min.js"></script>
   <!-- AdminLTE for demo purposes -->
-  <script src="<?= base_url();?>assets/dist/js/demo.js"></script>
-  <script src="<?= base_url();?>assets/plugins/select2/js/select2.full.min.js"></script>
-  <script src="<?= base_url();?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
-  <script src="<?= base_url();?>assets/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
-  <script src="<?= base_url();?>assets/plugins/moment/moment.min.js"></script>
-  <script src="<?= base_url();?>assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+  <script src="<?=base_url();?>assets/dist/js/demo.js"></script>
+  <script src="<?=base_url();?>assets/plugins/select2/js/select2.full.min.js"></script>
+  <script src="<?=base_url();?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
+  <script src="<?=base_url();?>assets/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+  <script src="<?=base_url();?>assets/plugins/moment/moment.min.js"></script>
+  <script src="<?=base_url();?>assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
   <script src="https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js"></script>
-  <!-- <script src="<?= base_url();?>assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script> -->
+  <!-- <script src="<?=base_url();?>assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>
-  <script src="<?= base_url();?>assets/plugins/daterangepicker/daterangepicker.js"></script>
-  <script type="text/javascript" src="<?php echo base_url();?>assets/js/plugins/angular-locale_id-id.js"></script>
-  <script type="text/javascript" src="<?php echo base_url();?>assets/js/plugins/jquery.PrintArea.js"></script>
-  <script type="text/javascript" src="<?php echo base_url();?>assets/js/services/helper.services.js"></script>
-  <script type="text/javascript" src="<?php echo base_url();?>assets/js/services/data.service.js"></script>
-  <script type="text/javascript" src="<?php echo base_url();?>assets/js/plugins/input-mask/angular-input-masks-standalone.min.js"></script>
-  <script type="text/javascript" src="<?php echo base_url();?>assets/bower_components/jquery-loading-overlay/dist/loadingoverlay.min.js"></script>
+  <script src="<?=base_url();?>assets/plugins/daterangepicker/daterangepicker.js"></script>
+  <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/plugins/angular-locale_id-id.js"></script>
+  <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/plugins/jquery.PrintArea.js"></script>
+  <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/services/helper.services.js"></script>
+  <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/services/data.service.js"></script>
+  <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/plugins/input-mask/angular-input-masks-standalone.min.js"></script>
+  <script type="text/javascript" src="<?php echo base_url(); ?>assets/bower_components/jquery-loading-overlay/dist/loadingoverlay.min.js"></script>
+
   <script type="text/javascript">
-    
+
 
     $(document).ready(function () {
       bsCustomFileInput.init();
