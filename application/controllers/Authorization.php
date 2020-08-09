@@ -9,7 +9,7 @@ class Authorization extends CI_Controller
     {
         parent::__construct();
         $this->load->model('User_model', 'UserModel');
-        $this->load->model('admin/Profile_Model', 'ProfileModel');
+        $this->load->model('admin/Profile_model', 'ProfileModel');
     }
 
     public function index()
