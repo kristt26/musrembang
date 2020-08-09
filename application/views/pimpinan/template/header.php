@@ -22,6 +22,9 @@
   <script src="<?= base_url();?>assets/plugins/jquery/jquery.min.js"></script>
   <script src="<?= base_url();?>assets/js/plugins/angular.min.js"></script>
   <script src="<?= base_url();?>assets/js/plugins/angular-sanitize.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/bower_components/chart.js/dist/Chart.min.css"></script>
+  <script type="text/javascript" src="<?php echo base_url(); ?>assets/bower_components/chart.js/dist/Chart.min.js"></script>
+  <script type="text/javascript" src="<?php echo base_url(); ?>assets/bower_components/chart.js/dist/utils.js"></script>
   
   <style>
     .print-header {

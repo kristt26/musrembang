@@ -8,7 +8,8 @@ class Home extends CI_Controller
     {
         parent::__construct();
         $this->load->model('admin/Periode_model', 'PeriodeModel');
-        $this->load->model('admin/Profile_Model', 'ProfileModel');
+        $this->load->model('admin/Profile_model', 'ProfileModel');
+        $this->load->model('admin/Home_model', 'HomeModel');
     }
 
     public function index()
@@ -25,6 +26,12 @@ class Home extends CI_Controller
         $this->load->view('admin/template/header', $title);
         $this->load->view('admin/home');
         $this->load->view('admin/template/footer');
+    }
+    public function getdata()
+    {
+        $result = $this->HomeModel->select();
+        echo json_encode($result);
+        
     }
 }
 

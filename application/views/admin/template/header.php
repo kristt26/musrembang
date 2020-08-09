@@ -26,6 +26,8 @@
   <script type="text/javascript" src="<?php echo base_url(); ?>assets/bower_components/chart.js/dist/Chart.min.js"></script>
   <script type="text/javascript" src="<?php echo base_url(); ?>assets/bower_components/chart.js/dist/utils.js"></script>
 
+  
+
   <style>
     .print-header {
     display: none;
@@ -58,7 +60,8 @@
     canvas{
 		-moz-user-select: none;
 		-webkit-user-select: none;
-		-ms-user-select: none;
+		-ms-user-select:
+     none;
 	}
   </style>
 

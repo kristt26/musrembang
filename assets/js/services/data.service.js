@@ -1023,31 +1023,25 @@ function HomeService($http, $q, helperServices) {
 		Items: []
 	};
 
-	service.get = function (id) {
+	service.get = function () {
 		var def = $q.defer();
-		id = helperServices.absUrl.split('/');
-		id = id[id.length - 1];
-		if (service.instance) {
-			def.resolve(service.Items);
-		} else {
-			$http({
-				method: 'Get',
-				url: url + 'getdatadetail/' + id,
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			}).then(
-				(response) => {
-					service.instance = true;
-					service.Items = response.data;
-					def.resolve(service.Items);
-				},
-				(err) => {
-					swal("Information!", err.data, "error");
-					def.reject(err);
-				}
-			);
-		}
+		$http({
+			method: 'Get',
+			url: url + 'getdata',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}).then(
+			(response) => {
+				service.instance = true;
+				service.Items = response.data;
+				def.resolve(service.Items);
+			},
+			(err) => {
+				swal("Information!", err.data, "error");
+				def.reject(err);
+			}
+		);
 		return def.promise;
 	};
 
@@ -1323,7 +1317,7 @@ function LaporanService($http, $q, helperServices) {
 		var def = $q.defer();
 		$http({
 			method: 'Get',
-			url: url + 'getprint/'+id,
+			url: url + 'getprint/' + id,
 			headers: {
 				'Content-Type': 'application/json'
 			}

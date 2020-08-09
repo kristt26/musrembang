@@ -1,7 +1,8 @@
 angular
 	.module('userdata.service', ['helper.service'])
 	.factory('RenjaService', RenjaService)
-	.factory('SkpdService', SkpdService);
+	.factory('SkpdService', SkpdService)
+	.factory('HomeService', HomeService);
 
 function RenjaService($http, $q, helperServices) {
 	var url = helperServices.url + '/musrembang/user/renja/';
@@ -222,6 +223,133 @@ function SkpdService($http, $q, helperServices) {
 				def.reject(err);
 			}
 		);
+		return def.promise;
+	};
+	return service;
+}
+function HomeService($http, $q, helperServices) {
+	var url = helperServices.url + '/musrembang/admin/home/';
+	var service = {
+		Items: []
+	};
+
+	service.get = function () {
+		var def = $q.defer();
+		$http({
+			method: 'Get',
+			url: url + 'getdata',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}).then(
+			(response) => {
+				service.instance = true;
+				service.Items = response.data;
+				def.resolve(service.Items);
+			},
+			(err) => {
+				swal("Information!", err.data, "error");
+				def.reject(err);
+			}
+		);
+		return def.promise;
+	};
+
+	service.getKegiatan = function () {
+		var def = $q.defer();
+		id = helperServices.absUrl.split('/');
+		id = id[id.length - 1];
+		if (service.instance) {
+			def.resolve(service.Items);
+		} else {
+			$http({
+				method: 'Get',
+				url: url + 'getdatacreated/' + id,
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			}).then(
+				(response) => {
+					service.instance = true;
+					service.Items = response.data;
+					def.resolve(service.Items);
+				},
+				(err) => {
+					swal("Information!", err.data, "error");
+					def.reject(err);
+				}
+			);
+		}
+		return def.promise;
+	};
+
+	service.validasi = function (param) {
+		var def = $q.defer();
+		$http({
+			method: 'POST',
+			url: url + 'validasi',
+			data: param,
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}).then(
+			(response) => {
+				service.instance = true;
+				service.Items = response.data;
+				def.resolve(service.Items);
+			},
+			(err) => {
+				swal("Information!", err.data, "error");
+				def.reject(err);
+			}
+		);
+		return def.promise;
+	};
+
+	service.post = function (param) {
+		var def = $q.defer();
+		$http({
+			method: 'POST',
+			url: url + 'simpan',
+			headers: {
+				'Content-Type': undefined
+			},
+			data: param
+		}).then(
+			(response) => {
+				service.Items = response.data;
+				def.resolve(response.data);
+			},
+			(err) => {
+				swal("Information!", err.data, "success");
+				def.reject(err);
+			}
+		);
+
+		return def.promise;
+	};
+	service.upload = function (param) {
+		var def = $q.defer();
+		var fd = new FormData();
+		fd.append('file', param[0]);
+		$http({
+			method: 'POST',
+			url: url + 'upload',
+			headers: {
+				'Content-Type': undefined
+			},
+			data: fd
+		}).then(
+			(response) => {
+				service.Items.logo = response.data;
+				def.resolve(response.data);
+			},
+			(err) => {
+				swal("Information!", err.data, "success");
+				def.reject(err);
+			}
+		);
+
 		return def.promise;
 	};
 	return service;

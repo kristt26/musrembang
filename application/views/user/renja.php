@@ -15,7 +15,7 @@
                   <th style="width: 10px">No</th>
                   <th>Bidang</th>
                   <th>Kegiatan</th>
-                  <th>RW</th>
+                  <th>Lokasi</th>
                   <th>Permasalahan</th>
                   <th>Prioritas</th>
                   <th>Volume</th>
@@ -28,7 +28,7 @@
                   <td>{{$index+1}}</td>
                   <td>{{item.NamaBidang}}</td>
                   <td>{{item.NamaKegiatan}}</td>
-                  <td>RW. {{item.norw}}</td>
+                  <td>{{item.jalan}}, RT. {{item.nort}}</td>
                   <td>{{item.permasalahan}}</td>
                   <td>{{item.prioritas}}</td>
                   <td>{{item.volume}} {{item.satuan}}</td>

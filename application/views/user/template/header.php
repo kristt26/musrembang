@@ -18,6 +18,9 @@
   <link rel="stylesheet" href="<?=base_url();?>assets/css/style.css">
   <script src="<?= base_url();?>assets/js/plugins/angular.min.js"></script>
   <script src="<?= base_url();?>assets/js/plugins/angular-sanitize.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/bower_components/chart.js/dist/Chart.min.css"></script>
+  <script type="text/javascript" src="<?php echo base_url(); ?>assets/bower_components/chart.js/dist/Chart.min.js"></script>
+  <script type="text/javascript" src="<?php echo base_url(); ?>assets/bower_components/chart.js/dist/utils.js"></script>
   <style>
     .center {
       margin: 0;
@@ -88,14 +91,6 @@ if (!$this->session->userdata('jenis') && $this->session->userdata('akses') != '
                 </p>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="<?=base_url()?>user/transaksi" class="nav-link">
-                <i class="nav-icon fas fa-th"></i>
-                <p>
-                  Transaksi
-                </p>
-              </a>
-            </li>
             <li class="nav-item has-treeview <?= $title['header']=='Pegawai' || $title['header']=='RW' ? 'menu-open': '' ?>">
               <a href="#" class="nav-link <?= $title['header']=='Pegawai' || $title['header']=='RW' ? 'active': '' ?>">
                 <i class="nav-icon fas fa-edit"></i>
@@ -124,11 +119,17 @@ if (!$this->session->userdata('jenis') && $this->session->userdata('akses') != '
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1><?=$title['header'];?></h1>
+              <?php if (isset($title['periode']->mulai)) {?>
+                <h3>MUSRENBANG TAHUN <?=$title['periode']->Tahun;?></h3>
+                <p>Berlangsung dari tanggal <?=date('d M Y', strtotime($title['periode']->mulai));?> sampai <?=date('d M Y', strtotime($title['periode']->berakhir));?></p>
+              <?php } else {?>
+                <h3>MUSRENBANG KELURAHAN</h3>
+                <p>Saat ini tidak ada kegiatan musrenbang yang sedang berlangsung</p>
+              <?php }?>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="<?= base_url();?>user/home">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
                 <li class="breadcrumb-item active"><?=$title['dash'];?></li>
               </ol>
             </div>
@@ -137,4 +138,4 @@ if (!$this->session->userdata('jenis') && $this->session->userdata('akses') != '
       </section>
       <section class="content">
         <div class="container-fluid">
-          <!-- <div class="data-flush" data-flash="<?=$this->session->flashdata('pesan');?>"></div> -->
+          <div class="data-flush" data-flash="<?=$this->session->flashdata('pesan');?>"></div>

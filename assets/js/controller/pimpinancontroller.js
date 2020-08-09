@@ -214,9 +214,131 @@ function detailRencanaKerjaController($scope, DetailRencanaKerjaService, $window
 function homeController($scope, HomeService, $window) {
   $scope.datas = [];
   $scope.model = {};
-  $.LoadingOverlay("hide");
-  $scope.back = () => {
-    $window.history.back();
+  $scope.TotalUsulan = 0;
+  $scope.TotalDiterima = 0;
+  $scope.TotalDitolak = 0;
+  $scope.TotalAnggaranMasuk = 0;
+  $scope.TotalAnggaranDiterima = 0;
+  $scope.TotalAnggaranDiTolak = 0;
+  
+  HomeService.get().then((x) => {
+    $scope.datas = x;
+    var Label = [];
+    var Data =[];
+    $scope.datas.forEach(element => {
+      Label.push('No.RW ' + element.norw);
+      Data.push(element.kegiatan.length)
+      $scope.TotalUsulan += element.kegiatan.length;
+      var a = element.kegiatan.filter(x=>x.status=='Disetujui').length;
+      $scope.TotalDiterima += a;
+      var a = element.kegiatan.filter(x=>x.status=='Batal').length;
+      $scope.TotalDitolak += a;
+      if(element.kegiatan.length > 0){
+        element.kegiatan. forEach(itemkegiatan =>{
+          $scope.TotalAnggaranMasuk += parseFloat(itemkegiatan.nominal);
+          $scope.TotalAnggaranDiterima += itemkegiatan.status=='Disetujui' ? parseFloat(itemkegiatan.nominal):0;
+          $scope.TotalAnggaranDiTolak += itemkegiatan.status=='Batal' ? parseFloat(itemkegiatan.nominal):0;
+          element.totalanggaran +=  itemkegiatan.status=='Disetujui' ? parseFloat(itemkegiatan.nominal):0;
+        })
+      }
+    });
+    var ctx = document.getElementById('myChart').getContext('2d');
+    
+    // var Data = [12, 19, 3, 5, 2, 3];
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: Label,
+        datasets: [
+          {
+            label: 'Total Pengajuan',
+            data: Data,
+            backgroundColor: random_rgba(Data.length)
+            // [
+            // 	'rgba(255, 99, 132, 0.2)',
+            // 	'rgba(54, 162, 235, 0.2)',
+            // 	'rgba(255, 206, 86, 0.2)',
+            // 	'rgba(75, 192, 192, 0.2)',
+            // 	'rgba(153, 102, 255, 0.2)',
+            // 	'rgba(255, 159, 64, 0.2)'
+            // ],
+            // borderColor: [
+            // 	'rgba(255, 99, 132, 1)',
+            // 	'rgba(54, 162, 235, 1)',
+            // 	'rgba(255, 206, 86, 1)',
+            // 	'rgba(75, 192, 192, 1)',
+            // 	'rgba(153, 102, 255, 1)',
+            // 	'rgba(255, 159, 64, 1)'
+            // ],
+            // borderWidth: 1
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        legend: {
+          display: false
+        },
+        scales: {
+          xAxes: [{
+            display: true,
+            scaleLabel: {
+              display: true,
+              labelString: 'Nomor RW'
+            }
+          }],
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: true
+              },
+              display: true,
+              scaleLabel: {
+                display: true,
+                labelString: 'Jumlah Pengajuan'
+              }
+            }
+          ]
+        }
+      }
+    });
+    var config = {
+			type: 'pie',
+			data: {
+				datasets: [{
+					data: [
+            $scope.TotalDiterima,
+            $scope.TotalDitolak
+					],
+					backgroundColor: [
+						window.chartColors.green,
+						window.chartColors.red
+					],
+					label: 'Dataset 1'
+				}],
+				labels: [
+					'Usulan Diterima',
+					'Usulan Ditolak'
+				]
+			},
+			options: {
+				responsive: true
+			}
+		};
+    var diterima = document.getElementById('chart-diterima').getContext('2d');
+    window.myPie = new Chart(diterima, config);
+    $.LoadingOverlay("hide");
+  })
+
+  var random_rgba = (length) => {
+    var color = [];
+    for (let index = 0; index < length; index++) {
+      var o = Math.round, r = Math.random, s = 255;
+      color.push('rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + 0.7 + ')');
+    }
+    console.log(color);
+    return color;
   }
 }
 

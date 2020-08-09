@@ -7,7 +7,7 @@ class Rt_model extends CI_Model
         $data = array('rw' => '', 'rt' => '');
         $result = $this->db->get_where('rw', array('idrw' => $idrw));
         $data['rw'] = $result->result()[0];
-        $result = $this->db->get('rt');
+        $result = $this->db->get_where('rt', ['idrw'=>$idrw]);
         $rt = $result->result();
         foreach ($rt as $value) {
             $result = $this->db->get_where('jalan', array('idrt' => $value->idrt));
