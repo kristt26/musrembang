@@ -780,7 +780,7 @@ function laporanController($scope, LaporanService, helperServices) {
   $scope.getData = (idPeridoeRenker) => {
     $.LoadingOverlay("show");
     LaporanService.getLaporan(idPeridoeRenker).then((x) => {
-      $scope.datas = x;
+      $scope.datas = x.filter(x=>x.rencanakerja.length !=0);
       $.LoadingOverlay("hide");
     })
   }
