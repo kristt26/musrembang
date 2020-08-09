@@ -1,6 +1,6 @@
 <?php
 
-class Profile_model extends CI_Model {
+class Profile_Model extends CI_Model {
     function select()
     {
         $result = $this->db->get('kelurahan');
