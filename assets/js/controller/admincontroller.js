@@ -654,7 +654,7 @@ function bidangController($scope, $http, BidangService) {
     console.log($scope.model);
     $http({
       method: 'post',
-      url: '<?=base_url()?>admin/kegiatan/simpan',
+      url: helperServices.url + '/admin/kegiatan/simpan',
       data: $scope.model
     }).then(response => {
       $scope.listKegiatan.kegiatan.push(response.data)
