@@ -10,7 +10,7 @@ class laporan extends CI_Controller
         parent::__construct();
         $this->load->model('admin/Laporan_model', 'LaporanModel');
         $this->load->model('admin/Periode_model', 'PeriodeModel');
-        $this->load->model('admin/Profile_Model', 'ProfileModel');
+        $this->load->model('admin/Profile_model', 'ProfileModel');
     }
 
     public function index()
