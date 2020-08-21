@@ -627,7 +627,7 @@ function profileController($scope, $http, ProfileService, helperServices) {
   }
 }
 
-function bidangController($scope, $http, BidangService) {
+function bidangController($scope, $http, BidangService, helperServices) {
   $scope.datas = [];
   $scope.model = {};
   $scope.daftarKegiatan = false;
