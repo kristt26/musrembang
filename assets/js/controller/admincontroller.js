@@ -340,7 +340,7 @@ function homeController($scope, HomeService, $window) {
       var o = Math.round, r = Math.random, s = 255;
       color.push('rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + 0.7 + ')');
     }
-    console.log(color);
+    // console.log(color);
     return color;
   }
 

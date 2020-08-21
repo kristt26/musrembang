@@ -50,13 +50,10 @@ class Kegiatan extends CI_Controller {
         }
     }
 
-    public function haspus($idKegiatan)
+    public function hapus($idKegiatan)
     {
         $result = $this->KegiatanModel->delete($idKegiatan);
-        if($result)
-            var_dump(http_response_code(200));
-        else
-            var_dump(http_response_code(400));
+        echo json_encode($result);
     }
 }
 
