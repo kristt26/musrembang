@@ -2,7 +2,7 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class RencanaBiaya extends CI_Controller
+class Rencanabiaya extends CI_Controller
 {
 
     public function __construct()
