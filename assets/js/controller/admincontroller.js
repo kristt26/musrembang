@@ -611,7 +611,7 @@ function profileController($scope, $http, ProfileService, helperServices) {
   ProfileService.get().then(data => {
     if (data.length !== 0)
       $scope.model = data;
-    $scope.img = '<img class="card-img-top" src="' + helperServices.url + "/musrembang/assets/img/" + data.logo + '">';
+    $scope.img = '<img class="card-img-top" src="' + helperServices.url + "/assets/img/" + data.logo + '">';
     $.LoadingOverlay("hide");
   })
   $scope.simpan = () => {
@@ -621,7 +621,7 @@ function profileController($scope, $http, ProfileService, helperServices) {
   }
   $scope.uploadFile = function () {
     ProfileService.upload($scope.files).then(x => {
-      $scope.img = '<img class="card-img-top" src="' + helperServices.url + "/musrembang/assets/img/" + x.logo + '">';
+      $scope.img = '<img class="card-img-top" src="' + helperServices.url + "/assets/img/" + x.logo + '">';
       swal("Information!", "Logo Berhasil ditambahkan", "success");
     })
   }
