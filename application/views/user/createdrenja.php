@@ -120,7 +120,7 @@
           </div>
         </form>
         <!-- <div class="col-md-12"> -->
-          <button ng-show="(model.status && model.status == 'Draf') || !model.status" type="button" class="btn btn-block bg-gradient-primary" ng-click="showvalidasi()">Validasi</button>
+          <!-- <button ng-show="(model.status && model.status == 'Draf') || !model.status" type="button" class="btn btn-block bg-gradient-primary" ng-click="showvalidasi()">Validasi</button> -->
           <!-- <button ng-show="model.status && model.status != 'Draf'" type="button" class="btn btn-block bg-gradient-primary" disabled>Validasi</button> -->
         <!-- </div> -->
       </div>
