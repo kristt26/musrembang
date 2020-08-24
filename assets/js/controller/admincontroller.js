@@ -222,30 +222,30 @@ function homeController($scope, HomeService, $window) {
   $scope.TotalAnggaranMasuk = 0;
   $scope.TotalAnggaranDiterima = 0;
   $scope.TotalAnggaranDiTolak = 0;
-  
+
   HomeService.get().then((x) => {
     $scope.datas = x;
     var Label = [];
-    var Data =[];
+    var Data = [];
     $scope.datas.forEach(element => {
       Label.push('No.RW ' + element.norw);
       Data.push(element.kegiatan.length)
       $scope.TotalUsulan += element.kegiatan.length;
-      var a = element.kegiatan.filter(x=>x.status=='Disetujui').length;
+      var a = element.kegiatan.filter(x => x.status == 'Disetujui').length;
       $scope.TotalDiterima += a;
-      var a = element.kegiatan.filter(x=>x.status=='Batal').length;
+      var a = element.kegiatan.filter(x => x.status == 'Batal').length;
       $scope.TotalDitolak += a;
-      if(element.kegiatan.length > 0){
-        element.kegiatan. forEach(itemkegiatan =>{
+      if (element.kegiatan.length > 0) {
+        element.kegiatan.forEach(itemkegiatan => {
           $scope.TotalAnggaranMasuk += parseFloat(itemkegiatan.nominal);
-          $scope.TotalAnggaranDiterima += itemkegiatan.status=='Disetujui' ? parseFloat(itemkegiatan.nominal):0;
-          $scope.TotalAnggaranDiTolak += itemkegiatan.status=='Batal' ? parseFloat(itemkegiatan.nominal):0;
-          element.totalanggaran +=  itemkegiatan.status=='Disetujui' ? parseFloat(itemkegiatan.nominal):0;
+          $scope.TotalAnggaranDiterima += itemkegiatan.status == 'Disetujui' ? parseFloat(itemkegiatan.nominal) : 0;
+          $scope.TotalAnggaranDiTolak += itemkegiatan.status == 'Batal' ? parseFloat(itemkegiatan.nominal) : 0;
+          element.totalanggaran += itemkegiatan.status == 'Disetujui' ? parseFloat(itemkegiatan.nominal) : 0;
         })
       }
     });
     var ctx = document.getElementById('myChart').getContext('2d');
-    
+
     // var Data = [12, 19, 3, 5, 2, 3];
     var myChart = new Chart(ctx, {
       type: 'bar',
@@ -306,27 +306,27 @@ function homeController($scope, HomeService, $window) {
       }
     });
     var config = {
-			type: 'pie',
-			data: {
-				datasets: [{
-					data: [
+      type: 'pie',
+      data: {
+        datasets: [{
+          data: [
             $scope.TotalDiterima,
             $scope.TotalDitolak
-					],
-					backgroundColor: [
-						window.chartColors.green,
-						window.chartColors.red
-					],
-					label: 'Dataset 1'
-				}],
-				labels: [
-					'Usulan Diterima',
-					'Usulan Ditolak'
-				]
-			},
-			options: {
-				responsive: true
-			}
+          ],
+          backgroundColor: [
+            window.chartColors.green,
+            window.chartColors.red
+          ],
+          label: 'Dataset 1'
+        }],
+        labels: [
+          'Usulan Diterima',
+          'Usulan Ditolak'
+        ]
+      },
+      options: {
+        responsive: true
+      }
     };
     $scope.colortable = window.chartColors.red;
     var diterima = document.getElementById('chart-diterima').getContext('2d');
@@ -773,6 +773,10 @@ function laporanController($scope, LaporanService, helperServices) {
   $scope.periodes = [];
   $scope.model = {};
   $scope.idKegiatans
+  $scope.hasil = 0;
+  $scope.convert = (item)=>{
+    $scope.hasil += parseFloat(item);
+  }
   LaporanService.get().then((x) => {
     $scope.periodes = x;
     $.LoadingOverlay("hide");
@@ -780,11 +784,20 @@ function laporanController($scope, LaporanService, helperServices) {
   $scope.getData = (idPeridoeRenker) => {
     $.LoadingOverlay("show");
     LaporanService.getLaporan(idPeridoeRenker).then((x) => {
-      $scope.datas = x.filter(x=>x.rencanakerja.length !=0);
+      $scope.datas = x.filter(x => x.rencanakerja.length != 0);
       $.LoadingOverlay("hide");
     })
   }
   $scope.romanize = (number) => {
     return helperServices.romanize(number);
   };
+  // $scope.Cetak = () => {
+  //   $(document).ready(function (e) {
+  //     // aksi ketika tombol cetak ditekan
+  //     $("#cetak").bind("click", function (event) {
+  //       // cetak data pada area <div id="#data-mahasiswa"></div>
+  //       $('#print').printArea();
+  //     });
+  //   });
+  // }
 }
