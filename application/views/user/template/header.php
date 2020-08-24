@@ -68,7 +68,7 @@ if (!$this->session->userdata('jenis') && $this->session->userdata('akses') != '
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           <div class="info">
             <a href="#" class="d-block"><?=$this->session->userdata('pejabatrw');?></a>
-            <a href=""><i class="fa fa-circle text-success"></i> <?=$this->session->userdata('nama');?></a>
+            <a href=""><i class="fa fa-circle text-success"></i> RW</a>
           </div>
         </div>
 
