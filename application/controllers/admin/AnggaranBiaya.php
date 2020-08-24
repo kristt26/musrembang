@@ -13,7 +13,7 @@ class Anggaranbiaya extends CI_Controller {
         $this->load->model('admin/Profile_model', 'ProfileModel');
     }
 
-    public function index($idPeriodeRenker= null)
+    public function index($idPeriodeRenker = null)
     {
         $profile = $this->ProfileModel->select();
         $periode = $this->PeriodeModel->selectarsip();

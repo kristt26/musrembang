@@ -3,7 +3,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Anggaranbiaya extends CI_Controller {
+class Anggaranbiaya1 extends CI_Controller {
     
     public function __construct()
     {
