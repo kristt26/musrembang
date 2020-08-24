@@ -66,11 +66,9 @@ if (!$this->session->userdata('jenis') && $this->session->userdata('akses') != '
       </a>
       <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-          <div class="image">
-            <img src="<?=base_url()?>assets/dist/img/user7-128x128.jpg" class="img-circle elevation-2" alt="User Image">
-          </div>
           <div class="info">
             <a href="#" class="d-block"><?=$this->session->userdata('pejabatrw');?></a>
+            <a href=""><i class="fa fa-circle text-success"></i> <?=$this->session->userdata('nama');?></a>
           </div>
         </div>
 
