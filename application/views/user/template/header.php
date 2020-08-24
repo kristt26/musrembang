@@ -92,7 +92,7 @@ if (!$this->session->userdata('jenis') && $this->session->userdata('akses') != '
                 </p>
               </a>
             </li>
-            <li class="nav-item has-treeview <?= $title['header']=='Pegawai' || $title['header']=='RW' ? 'menu-open': '' ?>">
+            <!-- <li class="nav-item has-treeview <?= $title['header']=='Pegawai' || $title['header']=='RW' ? 'menu-open': '' ?>">
               <a href="#" class="nav-link <?= $title['header']=='Pegawai' || $title['header']=='RW' ? 'active': '' ?>">
                 <i class="nav-icon fas fa-edit"></i>
                 <p>
@@ -110,7 +110,7 @@ if (!$this->session->userdata('jenis') && $this->session->userdata('akses') != '
                 </li>
                 <?php endforeach;?>
               </ul>
-            </li>
+            </li> -->
           </ul>
         </nav>
       </div>
