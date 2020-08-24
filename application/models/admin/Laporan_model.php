@@ -59,7 +59,7 @@ class Laporan_model extends CI_Model
                     `detailrencanabiaya`.`idRencanaBiaya`
                     LEFT JOIN `perioderenker` ON `rencanakerja`.`idPeriodeRenker` =
                     `perioderenker`.`idPeriodeRenker`
-                WHERE `perioderenker`.`idPeriodeRenker` = '$idPeriode' AND `rencanakerja`.`idKegiatan` = '$kegiatan->idKegiatan' AND `rencanakerja`.`status`='Final'");
+                WHERE `perioderenker`.`idPeriodeRenker` = '$idPeriode' AND `rencanakerja`.`idKegiatan` = '$kegiatan->idKegiatan' AND `rencanakerja`.`status`='Disetujui'");
             $kegiatan->rencanakerja = $result->result();
         }
         return $kegiatans;
