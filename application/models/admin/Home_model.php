@@ -1,10 +1,16 @@
 <?php
 
-class Home_model extends CI_Model {
+class Home_model extends CI_Model
+{
 
-    public function select($id=null)
+    public function select($id = null)
     {
-        $string = $id ==null ? "": "perioderenker.idperiodeRenker='$id' AND";
+        if ($id == null) {
+            $string = "";
+        } else {
+            $string = "perioderenker.idperiodeRenker=$id AND";
+        }
+
         $data = $this->db->query("SELECT
             `rw`.*,
             (select count(idrt) from rt where rt.idrw=rw.idrw) as totalrt,
@@ -12,7 +18,7 @@ class Home_model extends CI_Model {
             (select count(idRencanaKerja) from rencanakerja where rencanakerja.idrw=rw.idrw AND rencanakerja.status ='Disetujui') as totaldisetujui,
             (select count(idRencanaKerja) from rencanakerja where rencanakerja.idrw=rw.idrw AND rencanakerja.status ='Batal') as totalbatal,
             (select sum(nominal) from transaksirenbi where `rencanakerja`.`idRencanaKerja` = `transaksirenbi`.`idRencanaKerja` And rencanakerja.idrw=rw.idrw AND rencanakerja.status ='Disetujui') as totalanggaran
-            
+
         FROM
             `rw`
             LEFT JOIN `rt` ON `rt`.`idrw` = `rw`.`idrw`
@@ -23,7 +29,7 @@ class Home_model extends CI_Model {
             `rw`.`idrw`")->result();
         $tanggal = date("Y-m-d");
         foreach ($data as $key => $value) {
-            $result = $this->db-> query("SELECT
+            $result = $this->db->query("SELECT
                 `rencanakerja`.*,
                 `perioderenker`.`Tahun`,
                 `perioderenker`.`mulai`,
