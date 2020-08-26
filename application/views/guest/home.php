@@ -10,7 +10,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<link rel="icon" href="<?=base_url();?>assets/img/logo.png">
-	<title><?= $title['header']?></title>
+	<title><?=$title['header']?></title>
 
 	<!-- Font Awesome Icons -->
 	<link rel="stylesheet" href="<?=base_url()?>assets/plugins/fontawesome-free/css/all.min.css">
@@ -182,13 +182,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 							aria-expanded="false"><i class="fa fa-fw fa-clone"></i> ARSIP<span class="caret"></span></a>
 						<div class="magic_line"></div>
 						<ul class="dropdown-menu">
-							<?php foreach($title['tahun'] as $value):?>
-							<li><a href="<?= base_url().'home/index/'.$value->idPeriodeRenker?>"><?= $value->Tahun?></a></li>
+							<?php foreach ($title['tahun'] as $value): ?>
+							<li><a href="<?=base_url() . 'home/index/' . $value->idPeriodeRenker?>"><?=$value->Tahun?></a></li>
 							<?php endforeach;?>
 						</ul>
 					</li>
 					<li>
-						<a href="<?= base_url('authorization')?>"><i class="fa fa-fw fa-user"></i> LOGIN</a>
+						<a href="<?=base_url('authorization')?>"><i class="fa fa-fw fa-user"></i> LOGIN</a>
 						<div class="magic_line"></div>
 					</li>
 				</ul>
@@ -203,7 +203,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 				<div class="welcome-desc">
 					<img src="<?=base_url('assets/img/logo.png')?>" alt="" width="100" style="margin-bottom: 10px;">
 					<p class="welcome-top">MUSRENBANG KELURAHAN HAMADI</p>
-					<h1 class="anim--tahun"><span>Tahun</span> <span><?= $title['periode']->Tahun?></span></h1>
+					<h1 class="anim--tahun"><span>Tahun</span> <span><?=$title['periode']->Tahun?></span></h1>
 				</div>
 				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-md-12">
@@ -381,7 +381,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
 		crossorigin="anonymous"></script>
 	<script src="<?=base_url()?>assets/js/guestapp.js"></script>
-	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/controller/guestController.js"></script>
+	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/controller/guestcontroller.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/directives.js"></script>
 	<script type="text/javascript"
 		src="<?php echo base_url(); ?>assets/plugins/angular-datatables/dist/angular-datatables.min.js"></script>
