@@ -5,7 +5,8 @@ class Home_model extends CI_Model
 
     public function select($id = null)
     {
-        $string = $id == null ? "" : "perioderenker.idperiodeRenker='$id' AND";
+        $string = $id == null ? "" : "perioderenker.idPeriodeRenker='$id' AND";
+        $string1 = $id == null ? "" : "WHERE rencanakerja.idPeriodeRenker = '$id'";
         $data = $this->db->query("SELECT
             `rw`.*,
             (select count(idrt) from rt where rt.idrw=rw.idrw) as totalrt,
@@ -20,6 +21,7 @@ class Home_model extends CI_Model
             LEFT JOIN `rencanakerja` ON `rw`.`idrw` = `rencanakerja`.`idrw`
             LEFT JOIN `transaksirenbi` ON `rencanakerja`.`idRencanaKerja` =
             `transaksirenbi`.`idRencanaKerja`
+        $string1
         GROUP BY
             `rw`.`idrw`")->result();
         $tanggal = date("Y-m-d");
