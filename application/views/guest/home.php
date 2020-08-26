@@ -174,7 +174,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
 					<li>
-						<a href="https://e-musrenbang.samarindakota.go.id"><i class="fa fa-fw fa-home"></i> BERANDA</a>
+						<a href="<?=base_url()?>"><i class="fa fa-fw fa-home"></i> BERANDA</a>
 						<div class="magic_line"></div>
 					</li>
 					<li class="dropdown">
