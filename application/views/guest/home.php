@@ -324,7 +324,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 									</div>
 								</div>
 							</form>
-							<table class="table table-sm table-bordered">
+							<table id="example1" class="table table-sm table-bordered">
 								<thead>
 									<tr>
 										<th class="align-middle text-center" style="width: 10px">No</th>
