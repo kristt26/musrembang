@@ -5,12 +5,7 @@ class Home_model extends CI_Model
 
     public function select($id = null)
     {
-        if ($id == null) {
-            $string = "";
-        } else {
-            $string = "perioderenker.idperiodeRenker=$id AND";
-        }
-
+        $string = $id == null ? "" : "perioderenker.idperiodeRenker='$id' AND";
         $data = $this->db->query("SELECT
             `rw`.*,
             (select count(idrt) from rt where rt.idrw=rw.idrw) as totalrt,
