@@ -37,7 +37,7 @@ class Bidang extends CI_Controller
     public function simpan()
     {
         $data = json_decode($this->security->xss_clean($this->input->raw_input_stream), true);
-        if (!isset($data['kd_pegawai'])) {
+        if (!isset($data['idbidang'])) {
             $result = $this->BidangModel->insert($data);
             if ($result !== false) {
                 echo json_encode($result);
