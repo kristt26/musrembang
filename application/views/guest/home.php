@@ -367,15 +367,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 		<div class="footer animated bawah slideInUp ">
 			<div class="pull-right text-right hidden-xs">
-				Komplek Balai Kota, Jl. Dahlia No.81, Bugis, Samarinda Kota, Kota Samarinda, Kalimantan Timur 75121<br>
-				Telp. <strong>(0541) 203785</strong> • Fax.<strong>(0541) 732072</strong> •
-				Email : <strong><a href="mailto:sipedas@samarindakota.go.id">sipedas@samarindakota.go.id</a></strong>
+				Hamadi, Jayapura Sel., Kota Jayapura, Papua<br>
+				Telp. <strong>(0967) ....</strong> • Fax.<strong>(0967) ...</strong> •
+				Email : <strong><a href="">.....</a></strong>
 			</div>
 			<div>
-				Hak Cipta 2020 <i class="fa fa-copyright"></i> Badan Perencanaan dan Pembangunan Daerah <span
-					class="hidden-xs">Kota Samarinda</span><br>
-				E-Musrenbang v3.0 &bullet; Proudly Supported by <b><a href="https://www.enterwind.com"
-						target="_blank">Enter(wind)</a></b>.
+				&copy; 2020 - Kantor Kelurahan Hamadi <span
+					class="hidden-xs">Kota Jayapura</span><br>
 			</div>
 		</div>
 
