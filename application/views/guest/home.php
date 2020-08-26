@@ -334,8 +334,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 										<th class="align-middle text-center">Lokasi</th>
 										<th class="align-middle text-center">Volume/Satuan</th>
 										<th class="align-middle text-center">Bidang SKPD</th>
-										<th class="align-middle text-center text-wrap">Usulan Anggaran<br>(Rp.)</th>
 										<th class="align-middle text-center">Status Usulan</th>
+										<th class="align-middle text-center text-wrap">Usulan Anggaran<br>(Rp.)</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -345,9 +345,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 										<td>{{ajuan.jalan}}, RT. {{ajuan.nort}}</td>
 										<td>{{ajuan.volume}} {{ajuan.satuan}}</td>
 										<td>{{ajuan.NamaBidangSkpd}}</td>
+										<td>{{ajuan.status}}</td>
 										<td class="text-right">{{ajuan.nominal | currency:''}} <span
 												class="d-none">{{convert(ajuan.nominal)}}</span></td>
-										<td>{{ajuan.status}}</td>
 									</tr>
 								</tbody>
 								<tfoot>
