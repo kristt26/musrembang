@@ -31,15 +31,17 @@ class Home_model extends CI_Model
                 `perioderenker`.`berakhir`,
                 `transaksirenbi`.`nominal`,
                 `kegiatan`.`NamaKegiatan`,
-                `jalan`.`jalan`
+                `jalan`.`jalan`,
+                `rt`.`nort`
             FROM
                 `rencanakerja`
                 LEFT JOIN `perioderenker` ON `rencanakerja`.`idPeriodeRenker` =
-                `perioderenker`.`idPeriodeRenker`
+            `perioderenker`.`idPeriodeRenker`
                 LEFT JOIN `transaksirenbi` ON `transaksirenbi`.`idRencanaKerja` =
-                `rencanakerja`.`idRencanaKerja`
+            `rencanakerja`.`idRencanaKerja`
                 LEFT JOIN `kegiatan` ON `rencanakerja`.`idKegiatan` = `kegiatan`.`idKegiatan`
                 LEFT JOIN `jalan` ON `rencanakerja`.`idjalan` = `jalan`.`idjalan`
+                LEFT JOIN `rt` ON `jalan`.`idrt` = `rt`.`idrt`
             WHERE $string `perioderenker`.`mulai` < '$tanggal' AND `perioderenker`.`berakhir` > '$tanggal' AND `rencanakerja`.`idrw` = '$value->idrw'")->result();
             $value->kegiatan = $result;
             $value->totalanggaran = 0;
