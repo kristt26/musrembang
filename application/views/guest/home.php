@@ -18,7 +18,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	<link rel="stylesheet" href="<?=base_url()?>assets/css/styleguest.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
 		integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-	<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.0/css/responsive.dataTables.min.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
 	<link rel="stylesheet" href="<?=base_url();?>assets/plugins/angular-datatables/dist/css/angular-datatables.min.css">
 	<link rel="stylesheet" href="<?=base_url()?>assets/css/guest.css">
 
@@ -326,7 +326,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 									</div>
 								</div>
 							</form>
-							<table datatable="ng" class="table table-sm table-bordered">
+							<table id="example2" datatable="ng" class="table table-sm table-bordered">
 								<thead>
 									<tr>
 										<th class="align-middle text-center" style="width: 10px">No</th>
