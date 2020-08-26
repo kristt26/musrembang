@@ -318,7 +318,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 								<div class="form-group">
 									<label for="skpd" class="col-md-3 control-label">No RW</label>
 									<div class="col-md-6">
-										<select class="form-control select2" id="skpd" name="skpd"
+										<select class="form-control select2"
 											ng-options="item as ('RW '+ ' '+item.norw) for item in datas" ng-model="rw"
 											ng-change="setModel(rw)">
 											<option>-- Pilih RW --</option>
