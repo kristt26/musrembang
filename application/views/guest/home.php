@@ -214,7 +214,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 						<hr />
 						<div class="row">
 							<div class="col-lg-4 col-6">
-								<!-- small box -->
 								<div class="small-box bg-info">
 									<div class="inner">
 										<h3>{{TotalUsulan | number}}</h3>
@@ -229,11 +228,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 								</div>
 							</div>
 							<div class="col-lg-4 col-6">
-								<!-- small box -->
 								<div class="small-box bg-success">
 									<div class="inner">
 										<h3>{{TotalDiterima | number}}</h3>
-
 										<p>Usulan Diterima</p>
 										<div class="chip z-depth-4 shadow-demo">Rp. {{TotalAnggaranDiterima | number}}
 										</div>
@@ -244,7 +241,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 								</div>
 							</div>
 							<div class="col-lg-4 col-6">
-								<!-- small box -->
 								<div class="small-box bg-danger">
 									<div class="inner">
 										<h3>{{TotalDitolak | number}}</h3>
@@ -261,15 +257,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 						</div>
 						<div class="clearfix"></div>
 						<hr />
-
 						<div class="row">
 							<div class="col-md-12">
-
 								<div id="urusan" style="min-width: 310px; margin: 0 auto"></div>
-
 								<hr />
-
-								<br />
 								<br />
 
 								<div class="table-responsive">
@@ -314,11 +305,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 						<div class="clearfix"></div>
 						<hr />
 						<div class="row">
-							<form class="form-horizontal">
+							<form>
 								<div class="form-group">
 									<label for="skpd" class="col-md-3 control-label">No RW</label>
 									<div class="col-md-6">
-										<select class="form-control select2"
+										<select class="form-control"
 											ng-options="item as ('RW '+ ' '+item.norw) for item in datas" ng-model="rw"
 											ng-change="setModel(rw)">
 											<option>-- Pilih RW --</option>
