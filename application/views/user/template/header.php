@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="icon" href="<?=base_url();?>assets/img/logo.png">
   <title><?=$title['header']?></title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="<?=base_url();?>assets/plugins/fontawesome-free/css/all.min.css">
@@ -65,11 +66,9 @@ if (!$this->session->userdata('jenis') && $this->session->userdata('akses') != '
       </a>
       <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-          <div class="image">
-            <img src="<?=base_url()?>assets/dist/img/user7-128x128.jpg" class="img-circle elevation-2" alt="User Image">
-          </div>
           <div class="info">
             <a href="#" class="d-block"><?=$this->session->userdata('pejabatrw');?></a>
+            <a href=""><i class="fa fa-circle text-success"></i> RW</a>
           </div>
         </div>
 
@@ -91,7 +90,7 @@ if (!$this->session->userdata('jenis') && $this->session->userdata('akses') != '
                 </p>
               </a>
             </li>
-            <li class="nav-item has-treeview <?= $title['header']=='Pegawai' || $title['header']=='RW' ? 'menu-open': '' ?>">
+            <!-- <li class="nav-item has-treeview <?= $title['header']=='Pegawai' || $title['header']=='RW' ? 'menu-open': '' ?>">
               <a href="#" class="nav-link <?= $title['header']=='Pegawai' || $title['header']=='RW' ? 'active': '' ?>">
                 <i class="nav-icon fas fa-edit"></i>
                 <p>
@@ -109,7 +108,7 @@ if (!$this->session->userdata('jenis') && $this->session->userdata('akses') != '
                 </li>
                 <?php endforeach;?>
               </ul>
-            </li>
+            </li> -->
           </ul>
         </nav>
       </div>

@@ -16,7 +16,7 @@ angular
 	.factory('LaporanService', LaporanService);
 
 function ProfileService($http, $q, helperServices) {
-	var url = helperServices.url + '/musrembang/admin/profile/';
+	var url = helperServices.url + '/admin/profile/';
 	var service = {
 		Items: []
 	};
@@ -96,7 +96,7 @@ function ProfileService($http, $q, helperServices) {
 }
 
 function SkpdService($http, $q, helperServices) {
-	var url = helperServices.url + '/musrembang/admin/skpd/';
+	var url = helperServices.url + '/admin/skpd/';
 	var service = { Items: [] };
 
 	service.get = function () {
@@ -183,7 +183,7 @@ function SkpdService($http, $q, helperServices) {
 }
 
 function RencanaBiayaService($http, $q, helperServices) {
-	var url = helperServices.url + '/musrembang/admin/rencanabiaya/';
+	var url = helperServices.url + '/admin/rencanabiaya/';
 	var service = { Items: [] };
 
 	service.get = function () {
@@ -269,7 +269,7 @@ function RencanaBiayaService($http, $q, helperServices) {
 }
 
 function PegawaiService($http, $q, helperServices) {
-	var url = helperServices.url + '/musrembang/admin/pegawai/';
+	var url = helperServices.url + '/admin/pegawai/';
 	var service = { Items: [] };
 
 	service.get = function () {
@@ -359,7 +359,7 @@ function PegawaiService($http, $q, helperServices) {
 }
 
 function RwService($http, $q, helperServices) {
-	var url = helperServices.url + '/musrembang/admin/rw/';
+	var url = helperServices.url + '/admin/rw/';
 	var service = { Items: [] };
 
 	service.get = function () {
@@ -447,7 +447,7 @@ function RwService($http, $q, helperServices) {
 }
 
 function RtService($http, $q, helperServices) {
-	var url = helperServices.url + '/musrembang/admin/rt/';
+	var url = helperServices.url + '/admin/rt/';
 	var service = { Items: [] };
 
 	service.get = function () {
@@ -568,7 +568,7 @@ function RtService($http, $q, helperServices) {
 }
 
 function periodeService($http, $q, helperServices) {
-	var url = helperServices.url + '/musrembang/admin/periode/';
+	var url = helperServices.url + '/admin/periode/';
 	var service = { Items: [] };
 
 	service.get = function () {
@@ -664,7 +664,7 @@ function periodeService($http, $q, helperServices) {
 }
 
 function AnggaranBiayaService($http, $q, helperServices) {
-	var url = helperServices.url + '/musrembang/admin/anggaranbiaya/';
+	var url = helperServices.url + '/admin/anggaranbiaya/';
 	var service = { Items: [] };
 
 	service.get = function () {
@@ -750,7 +750,7 @@ function AnggaranBiayaService($http, $q, helperServices) {
 }
 
 function RencanaKerjaService($http, $q, helperServices) {
-	var url = helperServices.url + '/musrembang/admin/rencanakerja/';
+	var url = helperServices.url + '/admin/rencanakerja/';
 	var service = {
 		Items: []
 	};
@@ -884,7 +884,7 @@ function RencanaKerjaService($http, $q, helperServices) {
 }
 
 function DetailRencanaKerjaService($http, $q, helperServices) {
-	var url = helperServices.url + '/musrembang/admin/rencanakerja/';
+	var url = helperServices.url + '/admin/rencanakerja/';
 	var service = {
 		Items: []
 	};
@@ -1018,7 +1018,7 @@ function DetailRencanaKerjaService($http, $q, helperServices) {
 }
 
 function HomeService($http, $q, helperServices) {
-	var url = helperServices.url + '/musrembang/admin/home/';
+	var url = helperServices.url + '/admin/home/';
 	var service = {
 		Items: []
 	};
@@ -1146,7 +1146,7 @@ function HomeService($http, $q, helperServices) {
 }
 
 function BidangService($http, $q, helperServices) {
-	var url = helperServices.url + '/musrembang/admin/bidang/';
+	var url = helperServices.url + '/admin/bidang/';
 	var service = {
 		Items: []
 	};
@@ -1213,7 +1213,7 @@ function BidangService($http, $q, helperServices) {
 }
 
 function KegiatanService($http, $q, helperServices) {
-	var url = helperServices.url + '/musrembang/admin/kegiatan/';
+	var url = helperServices.url + '/admin/kegiatan/';
 	var service = {
 		Items: []
 	};
@@ -1280,7 +1280,7 @@ function KegiatanService($http, $q, helperServices) {
 }
 
 function LaporanService($http, $q, helperServices) {
-	var url = helperServices.url + '/musrembang/admin/laporan/';
+	var url = helperServices.url + '/admin/laporan/';
 	var service = {
 		Items: []
 	};

@@ -2,8 +2,9 @@
 
 class Home_model extends CI_Model {
 
-    public function select()
+    public function select($id=null)
     {
+        $string = $id ==null ? "": "perioderenker.idperiodeRenker='$id' AND";
         $data = $this->db->query("SELECT
             `rw`.*,
             (select count(idrt) from rt where rt.idrw=rw.idrw) as totalrt,
@@ -27,14 +28,18 @@ class Home_model extends CI_Model {
                 `perioderenker`.`Tahun`,
                 `perioderenker`.`mulai`,
                 `perioderenker`.`berakhir`,
-                `transaksirenbi`.`nominal`
+                `transaksirenbi`.`nominal`,
+                `kegiatan`.`NamaKegiatan`,
+                `jalan`.`jalan`
             FROM
                 `rencanakerja`
                 LEFT JOIN `perioderenker` ON `rencanakerja`.`idPeriodeRenker` =
                 `perioderenker`.`idPeriodeRenker`
                 LEFT JOIN `transaksirenbi` ON `transaksirenbi`.`idRencanaKerja` =
                 `rencanakerja`.`idRencanaKerja`
-            WHERE `perioderenker`.`mulai` < '$tanggal' AND `perioderenker`.`berakhir` > '$tanggal' AND `rencanakerja`.`idrw` = '$value->idrw'")->result();
+                LEFT JOIN `kegiatan` ON `rencanakerja`.`idKegiatan` = `kegiatan`.`idKegiatan`
+                LEFT JOIN `jalan` ON `rencanakerja`.`idjalan` = `jalan`.`idjalan`
+            WHERE $string `perioderenker`.`mulai` < '$tanggal' AND `perioderenker`.`berakhir` > '$tanggal' AND `rencanakerja`.`idrw` = '$value->idrw'")->result();
             $value->kegiatan = $result;
             $value->totalanggaran = 0;
         }

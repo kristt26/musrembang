@@ -11,11 +11,41 @@
             ng-change="getData(periode.idPeriodeRenker)">
             <option></option>
           </select>
-          <button class="btn btn-primary">Cetak</button>
+          <button id="cetak" class="btn btn-primary">Cetak</button>
         </div>
-        <div style="width:100wh; overflow-x: auto;">
+        <div id="print" style="width:100wh; overflow-x: auto;">
           <table class="table table-sm table-bordered">
-            <thead>
+          <thead>
+              <tr>
+                <th class="align-middle text-center" style="width: 10px">No</th>
+                <th class="align-middle text-center"  colspan="2">Bidang/Kegiatan</th>
+                <th class="align-middle text-center">RW</th>
+                <th class="align-middle text-center">Lokasi</th>
+                <th class="align-middle text-center">Volume/Satuan</th>
+                <th class="align-middle text-center">Bidang SKPD</th>
+                <th class="align-middle text-center text-wrap">Usulan Anggaran<br>(Rp.)</th>
+              </tr>
+            </thead>
+            <tbody ng-repeat="kegiatan in datas">
+              <tr>
+                <td rowspan="{{kegiatan.rencanakerja.length+1}}">{{$index+1}}</td>
+                <td colspan="2" rowspan="{{kegiatan.rencanakerja.length+1}}">{{kegiatan.NamaKegiatan}}</td>
+              </tr>
+              <tr ng-repeat="ajuan in kegiatan.rencanakerja">
+                <td>{{ajuan.norw}}</td>
+                <td>{{ajuan.jalan}}, RT. {{ajuan.nort}}</td>
+                <td>{{ajuan.volume}} {{ajuan.satuan}}</td>
+                <td>{{ajuan.NamaBidangSkpd}}</td>
+                <td class="text-right">{{ajuan.nominal | currency:''}} <span class="d-none">{{convert(ajuan.nominal)}}</span></td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="7" class="text-center">Total</td>
+                <td class="text-right"><b>{{hasil | currency: ''}}</b></td>
+              </tr>
+            </tfoot>
+            <!-- <thead>
               <tr>
                 <th class="align-middle text-center" style="width: 10px" rowspan="4">No</th>
                 <th class="align-middle" rowspan="4" colspan="2">Bidang/<br>Kegiatan</th>
@@ -41,21 +71,21 @@
             </thead>
             <tbody ng-repeat="kegiatan in datas">
               <tr>
-                <td rowspan="3">{{$index+1}}</td>
-                <td colspan="2" rowspan="3">{{kegiatan.NamaKegiatan}}</td>
+                <td rowspan="{{kegiatan.rencanakerja.length+1}}">{{$index+1}}</td>
+                <td colspan="2" rowspan="{{kegiatan.rencanakerja.length+1}}">{{kegiatan.NamaKegiatan}}</td>
               </tr>
               <tr ng-repeat="ajuan in kegiatan.rencanakerja">
                 <td>{{ajuan.norw}}</td>
                 <td>{{ajuan.jalan}}, RT. {{ajuan.nort}}</td>
                 <td>{{ajuan.volume}} {{ajuan.satuan}}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>{{ajuan.nominal}}</td>
+                <td class="text-right">{{ajuan.nominal | currency:''}}</td>
+                <td class="text-right">{{ajuan.nominal | currency:''}}</td>
+                <td class="text-right">{{ajuan.nominal | currency:''}}</td>
+                <td class="text-right">{{ajuan.nominal | currency:''}}</td>
                 <td></td>
                 <td>{{ajuan.NamaBidangSkpd}}</td>
               </tr>
-            </tbody>
+            </tbody> -->
           </table>
         </div>
 
@@ -64,3 +94,15 @@
   </div>
 
 </div>
+<script>
+  (function ($) {
+    // fungsi dijalankan setelah seluruh dokumen ditampilkan
+    $(document).ready(function (e) {
+
+      // aksi ketika tombol cetak ditekan
+      $("#cetak").bind("click", function (event) {
+        // cetak data pada area <div id="#data-mahasiswa"></div>
+        $('#print').printArea();
+      });
+    });
+  })(jQuery);</script>

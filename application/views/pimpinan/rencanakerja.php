@@ -46,7 +46,7 @@
                       <a ng-show="item.status == 'Usulan'" class="btn btn-primary btn-sm" ng-click="validasi(item)" title="Validasi" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-check"></i></a>
                       <a href="<?= base_url();?>pimpinan/rencanakerja/detail/{{item.idRencanaKerja}}" class="btn btn-success btn-sm" ng-click="ubah(item)" title="Ubah" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-info-circle"></i></a>
                       <bottom class="btn btn-warning btn-sm" ng-click="kembalikan(item)" title="Kembalikan pengajuan" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-arrow-left"></i></bottom>
-                      <a href="<?= base_url();?>assets/berkas/{{item.file}}" target="_blank" class="btn btn-info btn-sm" ng-click="ubah(item)" title="Ubah" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-book"></i></a>
+                      <a href="<?= base_url();?>assets/berkas/{{item.file}}" target="_blank" class="btn btn-info btn-sm" ng-click="ubah(item)" title="Berkas" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-book"></i></a>
                       <bottom class="btn btn-danger btn-sm" ng-click="tolak(item)" title="Kembalikan pengajuan" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-minus-circle"></i></bottom>
                     </div>
                   </td>

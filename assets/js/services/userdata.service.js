@@ -5,7 +5,7 @@ angular
 	.factory('HomeService', HomeService);
 
 function RenjaService($http, $q, helperServices) {
-	var url = helperServices.url + '/musrembang/user/renja/';
+	var url = helperServices.url + '/user/renja/';
 	var service = {
 		Items: []
 	};
@@ -142,7 +142,7 @@ function RenjaService($http, $q, helperServices) {
 }
 
 function SkpdService($http, $q, helperServices) {
-	var url = helperServices.url + '/musrembang/admin/skpd/';
+	var url = helperServices.url + '/admin/skpd/';
 	var service = { Items: [] };
 
 	service.get = function () {
@@ -228,7 +228,7 @@ function SkpdService($http, $q, helperServices) {
 	return service;
 }
 function HomeService($http, $q, helperServices) {
-	var url = helperServices.url + '/musrembang/admin/home/';
+	var url = helperServices.url + '/admin/home/';
 	var service = {
 		Items: []
 	};

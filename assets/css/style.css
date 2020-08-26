@@ -98,6 +98,7 @@ svg {
         filter: drop-shadow( 0 0 3px #0091b2);
     }
 }
+
 .inputDnD .form-control-file {
     position: relative;
     width: 100%;
@@ -108,8 +109,9 @@ svg {
     cursor: pointer;
     background-color: #a0a0a0;
     box-shadow: 0 0 5px solid currentColor;
-  }
-  .inputDnD .form-control-file:before {
+}
+
+.inputDnD .form-control-file:before {
     content: attr(data-title);
     position: absolute;
     top: 0.5em;
@@ -124,10 +126,9 @@ svg {
     border: 0.25em dashed currentColor;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     overflow: hidden;
-  }
-  .inputDnD .form-control-file:hover:before {
+}
+
+.inputDnD .form-control-file:hover:before {
     border-style: solid;
     box-shadow: inset 0px 0px 0px 0.25em currentColor;
-  }
-  
-
+}

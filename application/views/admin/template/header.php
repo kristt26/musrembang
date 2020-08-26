@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="icon" href="<?=base_url();?>assets/img/logo.png">
   <title><?=$title['header']?></title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="<?=base_url();?>assets/plugins/fontawesome-free/css/all.min.css">
@@ -100,7 +101,7 @@ if (!$this->session->userdata('akses') || $this->session->userdata('akses') != '
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           <div class="info">
             <a href="#" class="d-block"><?=$title['profile']->NamaKelurahan;?></a>
-            <a href=""><i class="fa fa-circle text-success"></i><?=$this->session->userdata('nama');?></a>
+            <a href=""><i class="fa fa-circle text-success"></i> <?=$this->session->userdata('nama');?></a>
           </div>
         </div>
 
