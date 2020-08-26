@@ -333,6 +333,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 										<th class="align-middle text-center">Volume/Satuan</th>
 										<th class="align-middle text-center">Bidang SKPD</th>
 										<th class="align-middle text-center text-wrap">Usulan Anggaran<br>(Rp.)</th>
+										<th class="align-middle text-center">Status Usulan</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -344,6 +345,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 										<td>{{ajuan.NamaBidangSkpd}}</td>
 										<td class="text-right">{{ajuan.nominal | currency:''}} <span
 												class="d-none">{{convert(ajuan.nominal)}}</span></td>
+										<td>{{ajuan.status}}</td>
 									</tr>
 								</tbody>
 								<tfoot>
