@@ -4,7 +4,7 @@ class Periode_model extends CI_Model
 {
     public function select()
     {
-        $result = $this->db->get('perioderenker');
+        $result = $this->db->query("SELECT * FROM perioderenker ORDER BY tahun DESC");
         return $result->result();
     }
 
@@ -22,7 +22,7 @@ class Periode_model extends CI_Model
         $result = $this->db->query("SELECT * FROM perioderenker WHERE `perioderenker`.`mulai` <= '$tanggal' AND `perioderenker`.`berakhir` >= '$tanggal'");
         return $result->result()[0];
     }
-    public function selectperiodebyid($id =null)
+    public function selectperiodebyid($id = null)
     {
         $result = $this->db->query("SELECT * FROM perioderenker WHERE `perioderenker`.`idPeriodeRenker` = '$id'");
         return $result->result()[0];
