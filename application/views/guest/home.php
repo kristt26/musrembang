@@ -337,8 +337,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 										<td>{{ajuan.volume}} {{ajuan.satuan}}</td>
 										<td>{{ajuan.NamaBidangSkpd}}</td>
 										<td>{{ajuan.status}}</td>
-										<td class="text-right">{{ajuan.nominal | currency:''}} <span
-												class="d-none">{{convert(ajuan.nominal)}}</span></td>
+										<td class="text-right">{{ajuan.nominal | currency:''}}</td>
 									</tr>
 								</tbody>
 								<tfoot>
