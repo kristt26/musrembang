@@ -326,7 +326,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 									</div>
 								</div>
 							</form>
-							<table id="example1" datatable="ng" class="table table-sm table-bordered">
+							<table datatable="ng" class="table table-sm table-bordered">
 								<thead>
 									<tr>
 										<th class="align-middle text-center" style="width: 10px">No</th>
@@ -352,7 +352,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 								</tbody>
 								<tfoot>
 									<tr>
-										<td colspan="5" class="text-center">Total</td>
+										<td colspan="6" class="text-center">Total</td>
 										<td class="text-right"><b>{{hasil | currency: ''}}</b></td>
 									</tr>
 								</tfoot>
