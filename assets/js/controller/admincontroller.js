@@ -662,6 +662,7 @@ function bidangController($scope, $http, BidangService, helperServices) {
     }).then(response => {
       
       $('#addkegiatan').modal("hide");
+      $.LoadingOverlay("hide");
       if ($scope.model.idKegiatan == undefined) {
         $scope.listKegiatan.kegiatan.push(response.data);
         swal("Information!", "Berhasil di ditambahkan", "success").then((value) => {
