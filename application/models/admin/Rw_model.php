@@ -59,6 +59,7 @@ class Rw_model extends CI_Model {
             'password'=>md5($data['password'])
         ];
         $this->db->where('iduser', $data['iduser']);
+        $this->db->update('user', $item);
         if($this->db->trans_status()==true){
             $this->db->trans_commit();
             return true;
