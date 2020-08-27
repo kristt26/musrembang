@@ -12,7 +12,7 @@ class Laporan_model extends CI_Model
                 `bidang`.`NamaBidang`
             FROM
                 `kegiatan`
-                LEFT JOIN `bidang` ON `kegiatan`.`idbidang` = `bidang`.`idbidang`");
+                LEFT JOIN `bidang` ON `kegiatan`.`idbidang` = `bidang`.`idbidang` ORDER BY `bidang`.`NamaBidang` ASC");
         $kegiatans = $result->result();
         foreach ($kegiatans as $kegiatan) {
             $result = $this->db->query("SELECT
