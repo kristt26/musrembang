@@ -29,7 +29,7 @@
             <tbody ng-repeat="kegiatan in datas">
               <tr>
                 <td rowspan="{{kegiatan.rencanakerja.length+1}}">{{$index+1}}</td>
-                <td colspan="2" rowspan="{{kegiatan.rencanakerja.length+1}}">{{kegiatan.NamaKegiatan}}</td>
+                <td colspan="2" rowspan="{{kegiatan.rencanakerja.length+1}}">{{kegiatan.NamaBidang}} - {{kegiatan.NamaKegiatan}}</td>
               </tr>
               <tr ng-repeat="ajuan in kegiatan.rencanakerja">
                 <td>{{ajuan.norw}}</td>
