@@ -18,11 +18,11 @@
             <label for="email" class="col-form-label col-form-label-sm">Email</label>
             <input type="email" class="form-control form-control-sm" ng-model="model.email" id="email" placeholder="Email" required>
           </div>
-          <div class="form-group" ng-if="edit">
+          <div class="form-group">
             <label for="username" class="col-form-label col-form-label-sm">Username</label>
             <input type="text" class="form-control form-control-sm" ng-model="model.username" id="username" placeholder="Username" required>
           </div>
-          <div class="form-group" ng-if="edit">
+          <div class="form-group">
             <label for="pass" class="col-form-label col-form-label-sm">Password</label>
             <input type="text" class="form-control form-control-sm" ng-model="model.password" id="pass" placeholder="Password" required>
           </div>
