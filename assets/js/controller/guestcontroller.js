@@ -114,6 +114,9 @@ function guestController($scope, HomeService) {
     })
     $scope.setModel = (item)=>{
         $scope.hasil = 0;
+        item.kegiatan.forEach(element=>{
+            $scope.hasil+= parseFloat(element.nominal);
+        })
         $scope.model = item;
         console.log(item);
     }

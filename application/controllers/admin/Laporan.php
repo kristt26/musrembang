@@ -37,7 +37,7 @@ class laporan extends CI_Controller
     }
     public function getdata()
     {
-        $result = $this->PeriodeModel->selectarsip();
+        $result = $this->PeriodeModel->select();
         echo json_encode($result);
     }
     public function getprint($idPeriodeRenker = null)

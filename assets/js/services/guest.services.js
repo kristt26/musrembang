@@ -11,7 +11,7 @@ function HomeService($http, $q, helperServices) {
 	service.get = function () {
         var def = $q.defer();
         id = helperServices.absUrl.split('/');
-        id = id.length == 7 ? id[id.length - 1]: '';
+        id = id.length == 6 ? id[id.length - 1]: '';
 		$http({
 			method: 'Get',
 			url: url + 'getdata/' + id,

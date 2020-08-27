@@ -10,7 +10,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<link rel="icon" href="<?=base_url();?>assets/img/logo.png">
-	<title><?= $title['header']?></title>
+	<title><?=$title['header']?></title>
 
 	<!-- Font Awesome Icons -->
 	<link rel="stylesheet" href="<?=base_url()?>assets/plugins/fontawesome-free/css/all.min.css">
@@ -18,6 +18,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	<link rel="stylesheet" href="<?=base_url()?>assets/css/styleguest.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
 		integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+	<link rel="stylesheet" href="<?=base_url();?>assets/plugins/angular-datatables/dist/css/angular-datatables.min.css">
 	<link rel="stylesheet" href="<?=base_url()?>assets/css/guest.css">
 
 	<!-- Google Font: Source Sans Pro -->
@@ -174,7 +176,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
 					<li>
-						<a href="https://e-musrenbang.samarindakota.go.id"><i class="fa fa-fw fa-home"></i> BERANDA</a>
+						<a href="<?=base_url()?>"><i class="fa fa-fw fa-home"></i> BERANDA</a>
 						<div class="magic_line"></div>
 					</li>
 					<li class="dropdown">
@@ -182,13 +184,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 							aria-expanded="false"><i class="fa fa-fw fa-clone"></i> ARSIP<span class="caret"></span></a>
 						<div class="magic_line"></div>
 						<ul class="dropdown-menu">
-							<?php foreach($title['tahun'] as $value):?>
-							<li><a href="<?= base_url().'home/index/'.$value->idPeriodeRenker?>"><?= $value->Tahun?></a></li>
+							<?php foreach ($title['tahun'] as $value): ?>
+							<li><a href="<?=base_url() . 'home/index/' . $value->idPeriodeRenker?>"><?=$value->Tahun?></a></li>
 							<?php endforeach;?>
 						</ul>
 					</li>
 					<li>
-						<a href="<?= base_url('authorization')?>"><i class="fa fa-fw fa-user"></i> LOGIN</a>
+						<a href="<?=base_url('authorization')?>"><i class="fa fa-fw fa-user"></i> LOGIN</a>
 						<div class="magic_line"></div>
 					</li>
 				</ul>
@@ -203,7 +205,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 				<div class="welcome-desc">
 					<img src="<?=base_url('assets/img/logo.png')?>" alt="" width="100" style="margin-bottom: 10px;">
 					<p class="welcome-top">MUSRENBANG KELURAHAN HAMADI</p>
-					<h1 class="anim--tahun"><span>Tahun</span> <span><?= $title['periode']->Tahun?></span></h1>
+					<h1 class="anim--tahun"><span>Tahun</span> <span><?=$title['periode']->Tahun?></span></h1>
 				</div>
 				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-md-12">
@@ -212,7 +214,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 						<hr />
 						<div class="row">
 							<div class="col-lg-4 col-6">
-								<!-- small box -->
 								<div class="small-box bg-info">
 									<div class="inner">
 										<h3>{{TotalUsulan | number}}</h3>
@@ -227,11 +228,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 								</div>
 							</div>
 							<div class="col-lg-4 col-6">
-								<!-- small box -->
 								<div class="small-box bg-success">
 									<div class="inner">
 										<h3>{{TotalDiterima | number}}</h3>
-
 										<p>Usulan Diterima</p>
 										<div class="chip z-depth-4 shadow-demo">Rp. {{TotalAnggaranDiterima | number}}
 										</div>
@@ -242,7 +241,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 								</div>
 							</div>
 							<div class="col-lg-4 col-6">
-								<!-- small box -->
 								<div class="small-box bg-danger">
 									<div class="inner">
 										<h3>{{TotalDitolak | number}}</h3>
@@ -259,15 +257,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 						</div>
 						<div class="clearfix"></div>
 						<hr />
-
 						<div class="row">
 							<div class="col-md-12">
-
 								<div id="urusan" style="min-width: 310px; margin: 0 auto"></div>
-
 								<hr />
-
-								<br />
 								<br />
 
 								<div class="table-responsive">
@@ -312,11 +305,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 						<div class="clearfix"></div>
 						<hr />
 						<div class="row">
-							<form class="form-horizontal">
+							<form>
 								<div class="form-group">
 									<label for="skpd" class="col-md-3 control-label">No RW</label>
 									<div class="col-md-6">
-										<select class="form-control select2" id="skpd" name="skpd"
+										<select class="form-control"
 											ng-options="item as ('RW '+ ' '+item.norw) for item in datas" ng-model="rw"
 											ng-change="setModel(rw)">
 											<option>-- Pilih RW --</option>
@@ -324,7 +317,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 									</div>
 								</div>
 							</form>
-							<table class="table table-sm table-bordered">
+							<table id="example2" datatable="ng" class="table table-sm table-bordered">
 								<thead>
 									<tr>
 										<th class="align-middle text-center" style="width: 10px">No</th>
@@ -332,6 +325,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 										<th class="align-middle text-center">Lokasi</th>
 										<th class="align-middle text-center">Volume/Satuan</th>
 										<th class="align-middle text-center">Bidang SKPD</th>
+										<th class="align-middle text-center">Status Usulan</th>
 										<th class="align-middle text-center text-wrap">Usulan Anggaran<br>(Rp.)</th>
 									</tr>
 								</thead>
@@ -342,13 +336,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 										<td>{{ajuan.jalan}}, RT. {{ajuan.nort}}</td>
 										<td>{{ajuan.volume}} {{ajuan.satuan}}</td>
 										<td>{{ajuan.NamaBidangSkpd}}</td>
-										<td class="text-right">{{ajuan.nominal | currency:''}} <span
-												class="d-none">{{convert(ajuan.nominal)}}</span></td>
+										<td>{{ajuan.status}}</td>
+										<td class="text-right">{{ajuan.nominal | currency:''}}</td>
 									</tr>
 								</tbody>
 								<tfoot>
 									<tr>
-										<td colspan="5" class="text-center">Total</td>
+										<td colspan="6" class="text-center">Total</td>
 										<td class="text-right"><b>{{hasil | currency: ''}}</b></td>
 									</tr>
 								</tfoot>
@@ -363,15 +357,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 		<div class="footer animated bawah slideInUp ">
 			<div class="pull-right text-right hidden-xs">
-				Komplek Balai Kota, Jl. Dahlia No.81, Bugis, Samarinda Kota, Kota Samarinda, Kalimantan Timur 75121<br>
-				Telp. <strong>(0541) 203785</strong> • Fax.<strong>(0541) 732072</strong> •
-				Email : <strong><a href="mailto:sipedas@samarindakota.go.id">sipedas@samarindakota.go.id</a></strong>
+				Hamadi, Jayapura Sel., Kota Jayapura, Papua<br>
+				Telp. <strong>(0967) ....</strong> • Fax.<strong>(0967) ...</strong> •
+				Email : <strong><a href="">.....</a></strong>
 			</div>
 			<div>
-				Hak Cipta 2020 <i class="fa fa-copyright"></i> Badan Perencanaan dan Pembangunan Daerah <span
-					class="hidden-xs">Kota Samarinda</span><br>
-				E-Musrenbang v3.0 &bullet; Proudly Supported by <b><a href="https://www.enterwind.com"
-						target="_blank">Enter(wind)</a></b>.
+				&copy; 2020 - Kantor Kelurahan Hamadi <span
+					class="hidden-xs">Kota Jayapura</span><br>
 			</div>
 		</div>
 
@@ -381,7 +373,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
 		crossorigin="anonymous"></script>
 	<script src="<?=base_url()?>assets/js/guestapp.js"></script>
-	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/controller/guestController.js"></script>
+	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/controller/guestcontroller.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/directives.js"></script>
 	<script type="text/javascript"
 		src="<?php echo base_url(); ?>assets/plugins/angular-datatables/dist/angular-datatables.min.js"></script>
