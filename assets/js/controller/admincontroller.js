@@ -660,15 +660,14 @@ function bidangController($scope, $http, BidangService, helperServices) {
       url: helperServices.url + '/admin/kegiatan/simpan',
       data: $scope.model
     }).then(response => {
-      $scope.listKegiatan.kegiatan.push(response.data)
+      
       $('#addkegiatan').modal("hide");
       if ($scope.model.idKegiatan == undefined) {
-        $.LoadingOverlay("hide");
+        $scope.listKegiatan.kegiatan.push(response.data);
         swal("Information!", "Berhasil di ditambahkan", "success").then((value) => {
 
         });
       } else {
-        $.LoadingOverlay("hide");
         swal("Information!", "Berhasil diubah", "success").then((value) => {
 
         });
