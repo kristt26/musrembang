@@ -588,8 +588,10 @@ function rencanaBiayaController($scope, RencanaBiayaService) {
   })
   $scope.simpan = () => {
     RencanaBiayaService.post($scope.model).then((x) => {
+      $.LoadingOverlay("show");
       $scope.model = {};
       swal("Information!", "Berhasil disimpan", "success");
+      $.LoadingOverlay("hide");
     })
   }
   $scope.ubah = (item) => {
@@ -651,6 +653,7 @@ function bidangController($scope, $http, BidangService, helperServices) {
     })
   }
   $scope.simpanKegiatan = () => {
+    $.LoadingOverlay("show");
     console.log($scope.model);
     $http({
       method: 'post',
@@ -660,15 +663,18 @@ function bidangController($scope, $http, BidangService, helperServices) {
       $scope.listKegiatan.kegiatan.push(response.data)
       $('#addkegiatan').modal("hide");
       if ($scope.model.idKegiatan == undefined) {
+        $.LoadingOverlay("hide");
         swal("Information!", "Berhasil di ditambahkan", "success").then((value) => {
 
         });
       } else {
+        $.LoadingOverlay("hide");
         swal("Information!", "Berhasil diubah", "success").then((value) => {
 
         });
       }
     }, error => {
+      $.LoadingOverlay("hide");
       swal("Information!", "proses gagal", "error").then((value) => {
 
       });
@@ -679,6 +685,10 @@ function bidangController($scope, $http, BidangService, helperServices) {
     $scope.daftarKegiatan = true;
     $scope.model.idbidang = item.idbidang;
     console.log($scope.listKegiatan);
+  }
+  $scope.ubahKegiatan = (item)=>{
+    $scope.model = item;
+    $('#addkegiatan').modal("show");
   }
   $scope.ubah = (item) => {
     $scope.model = item;
