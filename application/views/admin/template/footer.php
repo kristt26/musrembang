@@ -57,8 +57,9 @@
       bsCustomFileInput.init();
     });
     $.LoadingOverlay("show", {
-        image       : "",
-        fontawesome : "fas fa-cog fa-spin"
+      background      : "rgba(0, 0, 0, 0.9)",
+			image       : "./assets/img/preloader.gif",
+			imageAnimation: 'none'
     });
 
     $(function () {

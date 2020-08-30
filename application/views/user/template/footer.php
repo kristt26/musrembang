@@ -53,6 +53,12 @@
       });
     });
     
+    $.LoadingOverlay("show", {
+      background      : "rgba(0, 0, 0, 0.9)",
+			image       : "./assets/img/preloader.gif",
+			imageAnimation: 'none'
+    });
+    
     $(document).ready(function () {
       bsCustomFileInput.init();
     });

@@ -41,8 +41,9 @@ function rencanaKerjaController($scope, RencanaKerjaService) {
       .then((value) => {
         if (value) {
           $.LoadingOverlay("show", {
-            image: "",
-            fontawesome: "fas fa-cog fa-spin"
+            background: "rgba(0, 0, 0, 0.9)",
+            image: "./assets/img/preloader.gif",
+            imageAnimation: 'none'
           });
           RencanaKerjaService.validasi(item).then(x => {
             $.LoadingOverlay("hide");
@@ -64,8 +65,9 @@ function rencanaKerjaController($scope, RencanaKerjaService) {
       .then((value) => {
         if (value) {
           $.LoadingOverlay("show", {
-            image: "",
-            fontawesome: "fas fa-cog fa-spin"
+            background: "rgba(0, 0, 0, 0.9)",
+            image: "./assets/img/preloader.gif",
+            imageAnimation: 'none'
           });
           RencanaKerjaService.validasi(item).then(x => {
             $.LoadingOverlay("hide");
@@ -88,8 +90,9 @@ function rencanaKerjaController($scope, RencanaKerjaService) {
       .then((value) => {
         if (value) {
           $.LoadingOverlay("show", {
-            image: "",
-            fontawesome: "fas fa-cog fa-spin"
+            background: "rgba(0, 0, 0, 0.9)",
+            image: "./assets/img/preloader.gif",
+            imageAnimation: 'none'
           });
           RencanaKerjaService.validasi(item).then(x => {
             $.LoadingOverlay("hide");
@@ -123,8 +126,9 @@ function detailRencanaKerjaController($scope, DetailRencanaKerjaService, $window
       .then((value) => {
         if (value) {
           $.LoadingOverlay("show", {
-            image: "",
-            fontawesome: "fas fa-cog fa-spin"
+            background: "rgba(0, 0, 0, 0.9)",
+            image: "./assets/img/preloader.gif",
+            imageAnimation: 'none'
           });
           DetailRencanaKerjaService.validasi($scope.model).then(x => {
             $.LoadingOverlay("hide");
@@ -156,8 +160,9 @@ function detailRencanaKerjaController($scope, DetailRencanaKerjaService, $window
       .then((value) => {
         if (value) {
           $.LoadingOverlay("show", {
-            image: "",
-            fontawesome: "fas fa-cog fa-spin"
+            background: "rgba(0, 0, 0, 0.9)",
+            image: "./assets/img/preloader.gif",
+            imageAnimation: 'none'
           });
           DetailRencanaKerjaService.validasi($scope.model).then(x => {
             $.LoadingOverlay("hide");
@@ -188,8 +193,9 @@ function detailRencanaKerjaController($scope, DetailRencanaKerjaService, $window
       .then((value) => {
         if (value) {
           $.LoadingOverlay("show", {
-            image: "",
-            fontawesome: "fas fa-cog fa-spin"
+            background: "rgba(0, 0, 0, 0.9)",
+            image: "./assets/img/preloader.gif",
+            imageAnimation: 'none'
           });
           DetailRencanaKerjaService.validasi($scope.model).then(x => {
             $.LoadingOverlay("hide");
@@ -359,8 +365,14 @@ function pegawaiController($scope, PegawaiService, $window) {
     $.LoadingOverlay("hide");
   })
   $scope.simpan = () => {
+    $.LoadingOverlay("show", {
+      background: "rgba(0, 0, 0, 0.9)",
+      image: "./assets/img/preloader.gif",
+      imageAnimation: 'none'
+    });
     PegawaiService.post($scope.model).then((x) => {
       $scope.model = {};
+      $.LoadingOverlay("hide");
       swal("Information!", "Berhasil disimpan", "success");
     })
   }
@@ -373,7 +385,13 @@ function pegawaiController($scope, PegawaiService, $window) {
     $scope.edit = true;
   }
   $scope.delete = (item) => {
+    $.LoadingOverlay("show", {
+      background: "rgba(0, 0, 0, 0.9)",
+      image: "./assets/img/preloader.gif",
+      imageAnimation: 'none'
+    });
     PegawaiService.delete(item.idpegawai).then((x) => {
+      $.LoadingOverlay("hide");
       swal("Information!", "Berhasil dihapus", "success");
     })
   }
@@ -388,9 +406,15 @@ function rwController($scope, RwService, $window) {
     $.LoadingOverlay("hide");
   })
   $scope.simpan = () => {
+    $.LoadingOverlay("show", {
+      background: "rgba(0, 0, 0, 0.9)",
+      image: "./assets/img/preloader.gif",
+      imageAnimation: 'none'
+    });
     RwService.post($scope.model).then((x) => {
       $scope.model = {};
       // $scope.edit = true;
+      $.LoadingOverlay("hide");
       swal("Information!", "Proses Berhasil", "success");
     })
   }
@@ -403,7 +427,13 @@ function rwController($scope, RwService, $window) {
     $scope.edit = true;
   }
   $scope.delete = (item) => {
+    $.LoadingOverlay("show", {
+      background: "rgba(0, 0, 0, 0.9)",
+      image: "./assets/img/preloader.gif",
+      imageAnimation: 'none'
+    });
     RwService.delete(item.idrw).then((x) => {
+      $.LoadingOverlay("hide");
       swal("Information!", "Berhasil dihapus", "success");
     })
   }
@@ -425,8 +455,14 @@ function periodeController($scope, periodeService, $window) {
     $.LoadingOverlay("hide");
   })
   $scope.simpan = () => {
+    $.LoadingOverlay("show", {
+      background: "rgba(0, 0, 0, 0.9)",
+      image: "./assets/img/preloader.gif",
+      imageAnimation: 'none'
+    });
     periodeService.post($scope.model).then((x) => {
       $scope.model = {};
+      $.LoadingOverlay("hide");
       swal("Information!", "Berhasil disimpan", "success");
     })
   }
@@ -437,7 +473,13 @@ function periodeController($scope, periodeService, $window) {
     $scope.model = {};
   }
   $scope.delete = (item) => {
+    $.LoadingOverlay("show", {
+      background: "rgba(0, 0, 0, 0.9)",
+      image: "./assets/img/preloader.gif",
+      imageAnimation: 'none'
+    });
     periodeService.delete(item.idPeriodeRenker).then((x) => {
+      $.LoadingOverlay("hide");
       swal("Information!", "Berhasil dihapus", "success");
     })
   }
@@ -457,16 +499,28 @@ function rtController($scope, RtService, $window) {
     $.LoadingOverlay("hide");
   })
   $scope.simpan = () => {
+    $.LoadingOverlay("show", {
+      background: "rgba(0, 0, 0, 0.9)",
+      image: "./assets/img/preloader.gif",
+      imageAnimation: 'none'
+    });
     $scope.model.idrw = angular.copy($scope.datas.rw.idrw);
     RtService.post($scope.model).then((x) => {
       $scope.model = {};
       $scope.edit = true;
+      $.LoadingOverlay("hide");
       swal("Information!", "Proses Berhasil", "success");
     })
   }
   $scope.simpanJalan = () => {
+    $.LoadingOverlay("show", {
+      background: "rgba(0, 0, 0, 0.9)",
+      image: "./assets/img/preloader.gif",
+      imageAnimation: 'none'
+    });
     $scope.model.idrt = $scope.rt.idrt;
     RtService.postjalan($scope.model).then(x => {
+      $.LoadingOverlay("hide");
       swal("Information!", "Proses Berhasil", "success");
       $scope.model = {};
     });
@@ -517,6 +571,11 @@ function anggaranBiayaController($scope, $http, AnggaranBiayaService, helperServ
   })
 
   $scope.simpan = () => {
+    $.LoadingOverlay("show", {
+      background: "rgba(0, 0, 0, 0.9)",
+      image: "./assets/img/preloader.gif",
+      imageAnimation: 'none'
+    });
     $scope.model.idRencanaBiaya = $scope.itemRencanaBiaya.idRencanaBiaya;
     $scope.model.NamaRencanaBiaya = $scope.itemRencanaBiaya.NamaRencanaBiaya;
     $scope.model.idPeriodeRenker = $scope.datas.periode.idPeriodeRenker;
@@ -530,6 +589,7 @@ function anggaranBiayaController($scope, $http, AnggaranBiayaService, helperServ
         if ($scope.datas.detailrencanabiaya.find(x => x.idRencanaBiaya == value.idRencanaBiaya) == undefined)
           $scope.rencanabiaya.push(angular.copy(value));
       })
+      $.LoadingOverlay("hide");
       swal("Information!", "Berhasil di ditambahkan", "success");
     })
 
@@ -554,6 +614,11 @@ function anggaranBiayaController($scope, $http, AnggaranBiayaService, helperServ
   }
 
   $scope.hapus = () => {
+    $.LoadingOverlay("show", {
+      background: "rgba(0, 0, 0, 0.9)",
+      image: "./assets/img/preloader.gif",
+      imageAnimation: 'none'
+    });
     $http({
       method: 'post',
       url: '<?=base_url()?>admin/bidang/simpan',
@@ -562,15 +627,18 @@ function anggaranBiayaController($scope, $http, AnggaranBiayaService, helperServ
       $scope.datas.push(response.data);
       console.log($scope.model.idbidang);
       if ($scope.model.idbidang == undefined) {
+        $.LoadingOverlay("hide");
         swal("Information!", "Berhasil di ditambahkan", "success").then((value) => {
 
         });
       } else {
+        $.LoadingOverlay("hide");
         swal("Information!", "Berhasil diubah", "success").then((value) => {
 
         });
       }
     }, error => {
+      $.LoadingOverlay("hide");
       swal("Information!", "proses gagal", "error").then((value) => {
 
       });
@@ -587,8 +655,8 @@ function rencanaBiayaController($scope, RencanaBiayaService) {
     $.LoadingOverlay("hide");
   })
   $scope.simpan = () => {
+    $.LoadingOverlay("show");
     RencanaBiayaService.post($scope.model).then((x) => {
-      $.LoadingOverlay("show");
       $scope.model = {};
       swal("Information!", "Berhasil disimpan", "success");
       $.LoadingOverlay("hide");
@@ -601,7 +669,9 @@ function rencanaBiayaController($scope, RencanaBiayaService) {
     $scope.model = {};
   }
   $scope.delete = (item) => {
+    $.LoadingOverlay("show");
     RencanaBiayaService.delete(item.idRencanaBiaya).then((x) => {
+      $.LoadingOverlay("hide");
       swal("Information!", "Berhasil dihapus", "success");
     })
   }
@@ -660,7 +730,7 @@ function bidangController($scope, $http, BidangService, helperServices) {
       url: helperServices.url + '/admin/kegiatan/simpan',
       data: $scope.model
     }).then(response => {
-      
+
       $('#addkegiatan').modal("hide");
       $.LoadingOverlay("hide");
       if ($scope.model.idKegiatan == undefined) {
@@ -686,7 +756,7 @@ function bidangController($scope, $http, BidangService, helperServices) {
     $scope.model.idbidang = item.idbidang;
     console.log($scope.listKegiatan);
   }
-  $scope.ubahKegiatan = (item)=>{
+  $scope.ubahKegiatan = (item) => {
     $scope.model = item;
     $('#addkegiatan').modal("show");
   }
@@ -784,7 +854,7 @@ function laporanController($scope, LaporanService, helperServices) {
   $scope.model = {};
   $scope.idKegiatans
   $scope.hasil = 0;
-  $scope.convert = (item)=>{
+  $scope.convert = (item) => {
     $scope.hasil += parseFloat(item);
   }
   LaporanService.get().then((x) => {
