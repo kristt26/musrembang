@@ -15,9 +15,6 @@ function guestController($scope, HomeService) {
     $scope.sumtotal = (item)=>{
         $scope.total += parseFloat(item);
     }
-    $scope.convert = (item)=>{
-        $scope.hasil += parseFloat(item);
-    }
     HomeService.get().then(x => {
         $scope.datas = x;
         var Labelb = [];
