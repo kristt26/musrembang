@@ -67,7 +67,7 @@
   <div class="col-md-12" ng-if="daftarKegiatan">
     <div class="card card-danger">
       <div class="card-header justify-content-between">
-        <h3 class="card-title">Data Bidang</h3>
+        <h3 class="card-title">Data Kegiatan</h3>
         <a href="" class="btn btn-primary float-right" data-toggle="modal" data-target="#addkegiatan"><i class="fas fa-plus"></i></a>
       </div>
       <div class="card-body">

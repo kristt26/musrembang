@@ -5,6 +5,7 @@ class Rw_model extends CI_Model {
     {
         $result = $this->db->query("SELECT
             `rw`.*,
+            `user`.`iduser`,
             `user`.`username`,
             `user`.`status`
         FROM
@@ -45,16 +46,29 @@ class Rw_model extends CI_Model {
 
     function update($data)
     {
+        $this->db->trans_begin();
         $item= [
             'norw'=>$data['norw'],
             'pejabatrw'=>$data['pejabatrw'],
             'email'=>$data['email']
         ];
         $this->db->where('idrw', $data['idrw']);
-        if($this->db->update('rw', $item))
+        $this->db->update('rw', $item);
+        $item= [
+            'username'=>$data['username'],
+            'password'=>md5($data['password'])
+        ];
+        $this->db->where('iduser', $data['iduser']);
+        $this->db->update('user', $item);
+        if($this->db->trans_status()==true){
+            $this->db->trans_commit();
             return true;
-        else
+        }
+        else{
+            $this->db->trans_rollback();
             return false;
+        }
+            
     }
     function delete($idrw)
     {
