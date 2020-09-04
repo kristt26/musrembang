@@ -48,7 +48,7 @@
   <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/services/data.service.js"></script>
   <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/plugins/input-mask/angular-input-masks-standalone.min.js"></script>
   <script type="text/javascript" src="<?php echo base_url(); ?>assets/bower_components/jquery-loading-overlay/dist/loadingoverlay.min.js"></script>
-  
+
 
   <script type="text/javascript">
 
@@ -58,7 +58,7 @@
     });
     $.LoadingOverlay("show", {
       background      : "rgba(0, 0, 0, 0.9)",
-			image       : "./assets/img/preloader.gif",
+			image       : "<?php echo base_url('assets/img/preloader.gif'); ?>",
 			imageAnimation: 'none'
     });
 
