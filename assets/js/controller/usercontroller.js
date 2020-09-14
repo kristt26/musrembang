@@ -77,6 +77,7 @@ function createdRenjaController($scope, RenjaService, $window, helperServices) {
             $scope.bidangskpd = $scope.datas.bidangskpd.find(x => x.idbidangskpd == $scope.datas.data.idbidangskpd);
             $scope.jalan = $scope.lingkungan.jalan.find(x => x.idjalan == $scope.datas.data.idjalan);
         }
+        $.LoadingOverlay("hide");
     })
     $scope.simpan = () => {
         $.LoadingOverlay("show", {
