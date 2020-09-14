@@ -8,6 +8,7 @@ function rencanaKerjaController($scope, RenjaService) {
     $scope.model = {};
     RenjaService.get().then((x) => {
         $scope.datas = x;
+        $.LoadingOverlay("hide");
     })
     $scope.simpan = () => {
         $.LoadingOverlay("show", {
