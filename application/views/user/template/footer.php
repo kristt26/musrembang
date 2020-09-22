@@ -55,7 +55,7 @@
     
     $.LoadingOverlay("show", {
       background      : "rgba(0, 0, 0, 0.9)",
-			image       : "./assets/img/preloader.gif",
+			image       : "<?php echo base_url('assets/img/preloader.gif'); ?>",
 			imageAnimation: 'none'
     });
     

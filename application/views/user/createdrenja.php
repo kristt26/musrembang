@@ -35,7 +35,7 @@
                   <option></option>
                   </select>
                 </div>
-                <div class="d-flex" style="width:82px;">
+                <div class="d-flex" style="width:82px;" ng-show="lingkungan">
                   <bottom class="btn btn-success btn-sm float-right" ng-click="addJalan(lingkungan)">
                     <i class="fas fa-plus-circle"></i>Tambah
                   </bottom>
