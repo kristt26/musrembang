@@ -163,7 +163,7 @@ function createdRenjaController($scope, RenjaService, $window, helperServices) {
 		$('#addjalan').modal('show');
 	};
 	$scope.simpanJalan = () => {
-		RenjaService.postjalan().then((x) => {
+		RenjaService.postjalan($scope.datajalan).then((x) => {
 			$scope.jalan = x;
 		});
 	};
