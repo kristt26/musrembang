@@ -1,5 +1,5 @@
 angular
-	.module('userdata.service', ['helper.service'])
+	.module('userdata.service', [ 'helper.service' ])
 	.factory('RenjaService', RenjaService)
 	.factory('SkpdService', SkpdService)
 	.factory('HomeService', HomeService);
@@ -10,7 +10,7 @@ function RenjaService($http, $q, helperServices) {
 		Items: []
 	};
 
-	service.get = function () {
+	service.get = function() {
 		var def = $q.defer();
 		if (service.instance) {
 			def.resolve(service.Items);
@@ -28,7 +28,7 @@ function RenjaService($http, $q, helperServices) {
 					def.resolve(service.Items);
 				},
 				(err) => {
-					swal("Information!", err.data, "error");
+					swal('Information!', err.data, 'error');
 					def.reject(err);
 				}
 			);
@@ -36,7 +36,7 @@ function RenjaService($http, $q, helperServices) {
 		return def.promise;
 	};
 
-	service.getKegiatan = function () {
+	service.getKegiatan = function() {
 		var def = $q.defer();
 		id = helperServices.absUrl.split('/');
 		id = id[id.length - 1];
@@ -56,7 +56,7 @@ function RenjaService($http, $q, helperServices) {
 					def.resolve(service.Items);
 				},
 				(err) => {
-					swal("Information!", err.data, "error");
+					swal('Information!', err.data, 'error');
 					def.reject(err);
 				}
 			);
@@ -64,7 +64,7 @@ function RenjaService($http, $q, helperServices) {
 		return def.promise;
 	};
 
-	service.validasi = function (param) {
+	service.validasi = function(param) {
 		var def = $q.defer();
 		$http({
 			method: 'POST',
@@ -75,24 +75,23 @@ function RenjaService($http, $q, helperServices) {
 			}
 		}).then(
 			(response) => {
-				if(!service.Items.data){
-					var data = service.Items.find(x => x.idRencanaKerja == param.idRencanaKerja);
+				if (!service.Items.data) {
+					var data = service.Items.find((x) => x.idRencanaKerja == param.idRencanaKerja);
 					if (data) {
-						data.status = 'Usulan'
+						data.status = 'Usulan';
 					}
-				}else
-					service.Items.data.status = 'Usulan'
+				} else service.Items.data.status = 'Usulan';
 				def.resolve(service.Items);
 			},
 			(err) => {
-				swal("Information!", err.data, "error");
+				swal('Information!', err.data, 'error');
 				def.reject(err);
 			}
 		);
 		return def.promise;
 	};
 
-	service.post = function (param) {
+	service.post = function(param) {
 		var def = $q.defer();
 		$http({
 			method: 'POST',
@@ -107,14 +106,14 @@ function RenjaService($http, $q, helperServices) {
 				def.resolve(response.data);
 			},
 			(err) => {
-				swal("Information!", err.data, "success");
+				swal('Information!', err.data, 'success');
 				def.reject(err);
 			}
 		);
 
 		return def.promise;
 	};
-	service.upload = function (param) {
+	service.upload = function(param) {
 		var def = $q.defer();
 		var fd = new FormData();
 		fd.append('file', param[0]);
@@ -131,11 +130,33 @@ function RenjaService($http, $q, helperServices) {
 				def.resolve(response.data);
 			},
 			(err) => {
-				swal("Information!", err.data, "success");
+				swal('Information!', err.data, 'success');
 				def.reject(err);
 			}
 		);
 
+		return def.promise;
+	};
+	service.postjalan = function(param) {
+		var def = $q.defer();
+		$http({
+			method: 'Post',
+			url: helperServices.url + '/admin/rt/' + 'simpanjalan',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			data: param
+		}).then(
+			(response) => {
+				var data = service.Items.lingkungan.find((x) => x.idrt == param.idrt);
+				data.jalan.push(response.data);
+				def.resolve(response.data);
+			},
+			(err) => {
+				swal('Information!', err.data, 'error');
+				def.reject(err);
+			}
+		);
 		return def.promise;
 	};
 	return service;
@@ -145,7 +166,7 @@ function SkpdService($http, $q, helperServices) {
 	var url = helperServices.url + '/admin/skpd/';
 	var service = { Items: [] };
 
-	service.get = function () {
+	service.get = function() {
 		var def = $q.defer();
 		if (service.instance) {
 			def.resolve(service.Items);
@@ -155,7 +176,7 @@ function SkpdService($http, $q, helperServices) {
 				url: url + 'getdata',
 				headers: {
 					'Content-Type': 'application/json'
-				},
+				}
 			}).then(
 				(response) => {
 					service.instance = true;
@@ -171,7 +192,7 @@ function SkpdService($http, $q, helperServices) {
 		return def.promise;
 	};
 
-	service.post = function (param) {
+	service.post = function(param) {
 		var def = $q.defer();
 		$http({
 			method: 'Post',
@@ -194,21 +215,21 @@ function SkpdService($http, $q, helperServices) {
 				def.resolve(response.data);
 			},
 			(err) => {
-				swal("Information!", err.data, "error");
+				swal('Information!', err.data, 'error');
 				def.reject(err);
 			}
 		);
 		return def.promise;
 	};
 
-	service.delete = function (id) {
+	service.delete = function(id) {
 		var def = $q.defer();
 		$http({
 			method: 'Delete',
 			url: url + 'hapus/' + id,
 			headers: {
 				'Content-Type': 'application/json'
-			},
+			}
 		}).then(
 			(response) => {
 				var data = service.Items.find((x) => x.idbidangskpd == id);
@@ -219,7 +240,7 @@ function SkpdService($http, $q, helperServices) {
 				}
 			},
 			(err) => {
-				swal("Information!", err.data, "error");
+				swal('Information!', err.data, 'error');
 				def.reject(err);
 			}
 		);
@@ -233,7 +254,7 @@ function HomeService($http, $q, helperServices) {
 		Items: []
 	};
 
-	service.get = function () {
+	service.get = function() {
 		var def = $q.defer();
 		$http({
 			method: 'Get',
@@ -248,14 +269,14 @@ function HomeService($http, $q, helperServices) {
 				def.resolve(service.Items);
 			},
 			(err) => {
-				swal("Information!", err.data, "error");
+				swal('Information!', err.data, 'error');
 				def.reject(err);
 			}
 		);
 		return def.promise;
 	};
 
-	service.getKegiatan = function () {
+	service.getKegiatan = function() {
 		var def = $q.defer();
 		id = helperServices.absUrl.split('/');
 		id = id[id.length - 1];
@@ -275,7 +296,7 @@ function HomeService($http, $q, helperServices) {
 					def.resolve(service.Items);
 				},
 				(err) => {
-					swal("Information!", err.data, "error");
+					swal('Information!', err.data, 'error');
 					def.reject(err);
 				}
 			);
@@ -283,7 +304,7 @@ function HomeService($http, $q, helperServices) {
 		return def.promise;
 	};
 
-	service.validasi = function (param) {
+	service.validasi = function(param) {
 		var def = $q.defer();
 		$http({
 			method: 'POST',
@@ -299,14 +320,14 @@ function HomeService($http, $q, helperServices) {
 				def.resolve(service.Items);
 			},
 			(err) => {
-				swal("Information!", err.data, "error");
+				swal('Information!', err.data, 'error');
 				def.reject(err);
 			}
 		);
 		return def.promise;
 	};
 
-	service.post = function (param) {
+	service.post = function(param) {
 		var def = $q.defer();
 		$http({
 			method: 'POST',
@@ -321,14 +342,14 @@ function HomeService($http, $q, helperServices) {
 				def.resolve(response.data);
 			},
 			(err) => {
-				swal("Information!", err.data, "success");
+				swal('Information!', err.data, 'success');
 				def.reject(err);
 			}
 		);
 
 		return def.promise;
 	};
-	service.upload = function (param) {
+	service.upload = function(param) {
 		var def = $q.defer();
 		var fd = new FormData();
 		fd.append('file', param[0]);
@@ -345,7 +366,7 @@ function HomeService($http, $q, helperServices) {
 				def.resolve(response.data);
 			},
 			(err) => {
-				swal("Information!", err.data, "success");
+				swal('Information!', err.data, 'success');
 				def.reject(err);
 			}
 		);
@@ -354,4 +375,3 @@ function HomeService($http, $q, helperServices) {
 	};
 	return service;
 }
-

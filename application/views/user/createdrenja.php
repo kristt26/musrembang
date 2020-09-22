@@ -36,7 +36,7 @@
                   </select>
                 </div>
                 <div class="d-flex" style="width:82px;">
-                  <bottom class="btn btn-success btn-sm float-right" ng-click="back()">
+                  <bottom class="btn btn-success btn-sm float-right" ng-click="addJalan(lingkungan)">
                     <i class="fas fa-plus-circle"></i>Tambah
                   </bottom>
                 </div>
@@ -142,6 +142,21 @@
               <button type="button" class="btn btn-outline-light" ng-click="validasi()">Validasi</button>
           </div>
           
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="addjalan">
+    <div class="modal-dialog">
+      <div class="modal-content bg-default">
+        <div class="modal-header">
+          <h3>Tambah Jalan</h3>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="jalan" class="col-form-label col-form-label-sm">Jalan</label>
+            <input type="text" class="form-control form-control-sm" ng-model="datajalan.jalan" placeholder="Nama Jalan" required>
+          </div>
         </div>
       </div>
     </div>
