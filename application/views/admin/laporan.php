@@ -100,8 +100,8 @@
               <div class="col-md-7">&nbsp;</div>
               <div class="col-md-4 text-center">
                 <p>Jayapura, {{tanggal | date: 'd MMMM y'}}</p><br><br><br><br>
-                <h3><u><b>RAIMON FIDMAN KARETH, S.STP</b></u></h3><br>
-                <h3>NIP. 19841114 200312 1 001</h3>
+                <h4><u><b>RAIMON FIDMAN KARETH, S.STP</b></u></h4><br>
+                <h4>NIP. 19841114 200312 1 001</h4>
               </div>
             </div>
         </div>
