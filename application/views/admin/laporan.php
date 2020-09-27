@@ -20,7 +20,7 @@
               <div class="text-center"><h5>DAFTAR KEGIATAN PEMBANGUNAN PRIORITAS RENCANA KERJA PEMBANGUNAN <br>KAMPUNG / KELURAHAN ( RKP KELURAHAN / KAMPUNG ) <br>TAHUN {{periode.Tahun}}</h5></div>
               <div>&nbsp;</div>
             </div>
-            <hr><br><br>
+            <hr>
           </div>
 
           <table class="table table-sm table-bordered">
