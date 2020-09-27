@@ -59,7 +59,6 @@ function rencanaKerjaController($scope, RencanaKerjaService) {
     $("#message").modal('show');
   }
   $scope.kembalikan = (item) => {
-    item.setstatus = 'Draf'
     swal({
       title: "Anda Yakin?",
       text: "Akan Melakukan Pembatalan?",
@@ -84,7 +83,6 @@ function rencanaKerjaController($scope, RencanaKerjaService) {
       });
   }
   $scope.tolak = (item) => {
-    item.setstatus = 'Batal'
     swal({
       title: "Anda Yakin?",
       text: "Akan Melakukan Pembatalan?",
