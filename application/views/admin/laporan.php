@@ -14,12 +14,14 @@
           <button id="cetak" class="btn btn-primary">Cetak</button>
         </div>
         <div id="print" style="width:100wh; overflow-x: auto;">
-          <div class="col-md-12 row d-flex justify-content-between screen">
-            <div><img src="<?= base_url('assets/img/logo.png');?>" width="90px"></div>
-            <div class="text-center"><h5>DAFTAR KEGIATAN PEMBANGUNAN PRIORITAS RENCANA KERJA PEMBANGUNAN <br>KAMPUNG / KELURAHAN ( RKP KELURAHAN / KAMPUNG ) <br>TAHUN {{periode.Tahun}}</h5></div>
-            <div>&nbsp;</div>
+          <div class="screen">
+            <div class="col-md-12 row d-flex justify-content-between">
+              <div><img src="<?= base_url('assets/img/logo.png');?>" width="90px"></div>
+              <div class="text-center"><h5>DAFTAR KEGIATAN PEMBANGUNAN PRIORITAS RENCANA KERJA PEMBANGUNAN <br>KAMPUNG / KELURAHAN ( RKP KELURAHAN / KAMPUNG ) <br>TAHUN {{periode.Tahun}}</h5></div>
+              <div>&nbsp;</div>
+            </div>
+            <hr><br><br>
           </div>
-          <hr class="screen"><br><br>
 
           <table class="table table-sm table-bordered">
           <thead>
