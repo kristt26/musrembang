@@ -101,7 +101,8 @@
             <br><br><br><br>
             <div class="d-flex justify-content-end screeen">
               <div class="col-md-4 text-center">
-                <p>Jayapura, {{tanggal | date: 'd MMMM y'}}</p><br><br><br><br>
+                <p>Jayapura, {{tanggal | date: 'd MMMM y'}}</p>
+                <h4 style="margin-bottom: -1.5rem;"><u><b>KEPALA KELURAHAN HAMADI</b></u></h4><br><br><br><br>
                 <h4 style="margin-bottom: -1.5rem;"><u><b>RAIMON FIDMAN KARETH, S.STP</b></u></h4><br>
                 <h4>NIP. 19841114 200312 1 001</h4>
               </div>
