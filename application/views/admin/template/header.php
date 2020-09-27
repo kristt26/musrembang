@@ -41,7 +41,7 @@
                 #print {
                     font-family:verdana, arial, sans-serif;
                 }
-                .screen{
+                .screeen{
                     display:none;
                 }
             }
@@ -55,7 +55,7 @@
             display: block;
             text-align: left;
         }
-        .screen{
+        .screeen{
           display: block;
         }
         @page { size: landscape; }
