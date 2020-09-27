@@ -19,6 +19,7 @@
                   <th>Permasalahan</th>
                   <th>Prioritas</th>
                   <th>Volume</th>
+                  <th>Status</th>
                   <th>File</th>
                   <th style="width: 190px">Action</th>
                 </tr>
@@ -32,12 +33,13 @@
                   <td>{{item.permasalahan}}</td>
                   <td>{{item.prioritas}}</td>
                   <td>{{item.volume}} {{item.satuan}}</td>
+                  <td>{{item.status}}</td>
                   <td><a href="<?= base_url();?>assets/berkas/{{item.file}}" target="_blank">file</a></td>
                   <td>
                     <div class="noborder-radius text-center">
                       <a ng-show="item.status == 'Draf' || item.status == 'Dikembalikan'" class="btn btn-primary btn-sm" ng-click="showvalidasi(item)" title="Validasi" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-check"></i></a>
                       <a ng-show="item.status == 'Draf' || item.status == 'Dikembalikan'" href="<?= base_url();?>user/renja/created/{{item.idRencanaKerja}}" class="btn btn-warning btn-sm" ng-click="ubah(item)" title="Ubah" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-edit"></i></a>
-                      <bottom ng-show="item.status != 'Draf'" class="btn btn-warning disabled btn-sm" title="Ubah" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-edit"></i></bottom>
+                      <bottom ng-show="item.status != 'Draf' || item.status != 'Dikembalikan'" class="btn btn-warning disabled btn-sm" title="Ubah" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-edit"></i></bottom>
                       <bottom ng-show="item.status == 'Draf'" class="btn btn-danger btn-sm" ng-click="delete(item)" title="Hapus Pengajuan" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-trash-alt"></i></bottom>
                       <bottom ng-show="item.status != 'Draf'" class="btn btn-danger btn-sm disabled" title="Hapus Pengajuan" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-trash-alt"></i></bottom>
                       <bottom ng-show="item.status == 'Batal' || item.status == 'Dikembalikan'" ng-click="showMessage(item)" class="btn btn-info btn-sm" title="Pesan" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-envelope"></i></bottom>

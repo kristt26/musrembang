@@ -858,6 +858,7 @@ function laporanController($scope, LaporanService, helperServices) {
   $scope.model = {};
   $scope.idKegiatans
   $scope.hasil = 0;
+  $scope.tanggal = new Date();
   $scope.convert = (item) => {
     $scope.hasil += parseFloat(item);
   }

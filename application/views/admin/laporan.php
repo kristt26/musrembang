@@ -14,6 +14,13 @@
           <button id="cetak" class="btn btn-primary">Cetak</button>
         </div>
         <div id="print" style="width:100wh; overflow-x: auto;">
+          <div class="col-md-12 row d-flex justify-content-between">
+            <div><img src="<?= base_url('assets/img/logo.png');?>" width="100px"></div>
+            <div class="text-center"><h3>DAFTAR KEGIATAN PEMBANGUNAN PRIORITAS RENCANA KERJA PEMBANGUNAN <br>KAMPUNG / KELURAHAN ( RKP KELURAHAN / KAMPUNG ) <br>TAHUN {{periode.Tahun}}</h3></div>
+            <div>&nbsp;</div>
+          </div>
+          <hr><br><br>
+          
           <table class="table table-sm table-bordered">
           <thead>
               <tr>
@@ -45,6 +52,15 @@
                 <td class="text-right"><b>{{hasil | currency: ''}}</b></td>
               </tr>
             </tfoot>
+            <br><br><br><br>
+            <div class="col-md-12 row d-flex justify-content-between">
+              <div class="col-md-7">&nbsp;</div>
+              <div class="col-md-4 text-center">
+                <p>Jayapura, {{tanggal | date: 'd MMMM y'}}</p><br><br><br><br>
+                <h3><u><b>RAIMON FIDMAN KARETH, S.STP</b></u></h3><br>
+                <h3>NIP. 19841114 200312 1 001</h3>
+              </div>
+            </div>
             <!-- <thead>
               <tr>
                 <th class="align-middle text-center" style="width: 10px" rowspan="4">No</th>

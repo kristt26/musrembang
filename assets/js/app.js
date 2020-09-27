@@ -3,5 +3,6 @@ angular.module('app', [
     'ctrl', 
     'directives',
     'datatables',
-    'ui.utils.masks'
+    'ui.utils.masks',
+    'ngLocale'
 ]);
