@@ -37,6 +37,9 @@
     .print-body {
         display: none;
     }
+    .screen{
+      display: none;
+    }
 
     @media print {
         .print-header {
@@ -46,6 +49,9 @@
         .print-body {
             display: block;
             text-align: left;
+        }
+        .screen{
+          display: block;
         }
         @page { size: landscape; }
     }
