@@ -96,11 +96,10 @@
             </tbody> -->
           </table>
           <br><br><br><br>
-            <div class="col-md-12 row d-flex justify-content-between screen">
-              <div class="col-md-7">&nbsp;</div>
+            <div class="col-md-12 row d-flex justify-content-end screen">
               <div class="col-md-4 text-center">
                 <p>Jayapura, {{tanggal | date: 'd MMMM y'}}</p><br><br><br><br>
-                <h4><u><b>RAIMON FIDMAN KARETH, S.STP</b></u></h4><br>
+                <h4 style="margin-bottom: -1.5rem;"><u><b>RAIMON FIDMAN KARETH, S.STP</b></u></h4><br>
                 <h4>NIP. 19841114 200312 1 001</h4>
               </div>
             </div>

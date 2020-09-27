@@ -37,9 +37,14 @@
     .print-body {
         display: none;
     }
-    .screen{
-      display: none;
-    }
+    @media screen {
+                #print {
+                    font-family:verdana, arial, sans-serif;
+                }
+                .screen{
+                    display:none;
+                }
+            }
 
     @media print {
         .print-header {
