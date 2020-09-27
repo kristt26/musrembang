@@ -35,11 +35,12 @@
                   <td><a href="<?= base_url();?>assets/berkas/{{item.file}}" target="_blank">file</a></td>
                   <td>
                     <div class="noborder-radius text-center">
-                      <a ng-show="item.status == 'Draf'" class="btn btn-primary" ng-click="showvalidasi(item)" title="Validasi" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-check"></i></a>
-                      <a ng-show="item.status == 'Draf'" href="<?= base_url();?>user/renja/created/{{item.idRencanaKerja}}" class="btn btn-warning" ng-click="ubah(item)" title="Ubah" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-edit"></i></a>
-                      <bottom ng-show="item.status != 'Draf'" class="btn btn-warning disabled" title="Ubah" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-edit"></i></bottom>
-                      <bottom ng-show="item.status == 'Draf'" class="btn btn-danger" ng-click="delete(item)" title="Hapus Pengajuan" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-trash-alt"></i></bottom>
-                      <bottom ng-show="item.status != 'Draf'" class="btn btn-danger disabled" title="Hapus Pengajuan" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-trash-alt"></i></bottom>
+                      <a ng-show="item.status == 'Draf'" class="btn btn-primary btn-sm" ng-click="showvalidasi(item)" title="Validasi" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-check"></i></a>
+                      <a ng-show="item.status == 'Draf'" href="<?= base_url();?>user/renja/created/{{item.idRencanaKerja}}" class="btn btn-warning btn-sm" ng-click="ubah(item)" title="Ubah" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-edit"></i></a>
+                      <bottom ng-show="item.status != 'Draf'" class="btn btn-warning disabled btn-sm" title="Ubah" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-edit"></i></bottom>
+                      <bottom ng-show="item.status == 'Draf'" class="btn btn-danger btn-sm" ng-click="delete(item)" title="Hapus Pengajuan" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-trash-alt"></i></bottom>
+                      <bottom ng-show="item.status != 'Draf'" class="btn btn-danger btn-sm disabled" title="Hapus Pengajuan" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-trash-alt"></i></bottom>
+                      <bottom ng-show="item.status != 'Batal' || item.status != 'Dikembalikan'" ng-click="showMessage(item)" class="btn btn-info btn-sm" title="Pesan" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-envelope"></i></bottom>
                     </div>
                   </td>
                 </tr>
@@ -66,6 +67,26 @@
               <button type="button" class="btn btn-outline-light" ng-click="validasi()">Validasi</button>
           </div>
           
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="message" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{boxTitle}}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <textarea class="form-control" ng-model="model.keterangan" cols="4" disabled></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>

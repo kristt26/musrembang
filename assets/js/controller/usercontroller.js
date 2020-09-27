@@ -55,6 +55,10 @@ function rencanaKerjaController($scope, RenjaService) {
 		$scope.model = item;
 		$('#waning-validasi').modal('show');
 	};
+	$scope.showMessage = (item)=>{
+		$scope.model = item;
+		$("#message").modal('show');
+	}
 }
 
 function createdRenjaController($scope, RenjaService, $window, helperServices) {
