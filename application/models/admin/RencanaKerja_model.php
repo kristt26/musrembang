@@ -80,8 +80,15 @@ class RencanaKerja_model extends CI_Model {
     }
     public function validasi($data)
     {
-        $this->db->set('status',  $data['setstatus']);
-        $this->db->where('idRencanaKerja', $data['idRencanaKerja']);
+        if($data['setstatus']=="Batal" || $data['setstatus'] == "Dikembalikan"){
+            $this->db->set('status',  $data['setstatus']);
+            $this->db->set('keterangan',  $data['keterangan']);
+            $this->db->where('idRencanaKerja', $data['idRencanaKerja']);
+        }else{
+            $this->db->set('status',  $data['setstatus']);
+            $this->db->where('idRencanaKerja', $data['idRencanaKerja']);
+        }
+        
         $result = $this->db->update('rencanakerja');
         return $result;
 

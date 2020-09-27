@@ -172,13 +172,11 @@
         </div>
         <div class="modal-body">
           <div class="form-group">
-            <label for="">Pesan</label>
-            <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
-            <small id="helpId" class="text-muted">Help text</small>
+            <textarea class="form-control" ng-model="model.keterangan" cols="4"></textarea>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
           <button ng-if="model.setstatus=='Dikembalikan'" type="button" class="btn btn-warning btn-sm" ng-click="kembalikan(model)">Kembalikan</button>
           <button ng-if="model.setstatus=='Batal'" type="button" class="btn btn-danger btn-sm" ng-click="tolak(model)">Batalkan</button>
         </div>
