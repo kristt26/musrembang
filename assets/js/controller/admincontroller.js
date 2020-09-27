@@ -52,6 +52,11 @@ function rencanaKerjaController($scope, RencanaKerjaService) {
         }
       });
   }
+  $scope.showMessage = (item, set)=>{
+    item.setstatus = set;
+    $scope.model = item;
+    $("#message").modal('show');
+  }
   $scope.kembalikan = (item) => {
     item.setstatus = 'Draf'
     swal({
