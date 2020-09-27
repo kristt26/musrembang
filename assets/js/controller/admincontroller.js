@@ -55,6 +55,7 @@ function rencanaKerjaController($scope, RencanaKerjaService) {
   $scope.showMessage = (item, set)=>{
     item.setstatus = set;
     $scope.model = item;
+    $scope.boxTitle = set=="Batal" ? "Alasan Pembatalan": "Alasan Dikembalikan";
     $("#message").modal('show');
   }
   $scope.kembalikan = (item) => {

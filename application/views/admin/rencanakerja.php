@@ -49,9 +49,9 @@
                     <div class="noborder-radius text-center">
                       <a ng-show="item.status == 'Usulan'" class="btn btn-primary btn-sm" ng-click="validasi(item)" title="Validasi" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-check"></i></a>
                       <a href="<?=base_url();?>admin/rencanakerja/detail/{{item.idRencanaKerja}}" class="btn btn-success btn-sm" ng-click="ubah(item)" title="Ubah" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-info-circle"></i></a>
-                      <bottom class="btn btn-warning btn-sm" ng-click="kembalikan(item)" title="Kembalikan pengajuan" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-arrow-left"></i></bottom>
+                      <bottom class="btn btn-warning btn-sm" ng-click="showMessage(item, 'Dikembalikan')" title="Kembalikan pengajuan" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-arrow-left"></i></bottom>
                       <a href="<?=base_url();?>assets/berkas/{{item.file}}" target="_blank" class="btn btn-info btn-sm" ng-click="ubah(item)" title="Ubah" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-book"></i></a>
-                      <bottom class="btn btn-danger btn-sm" ng-click="tolak(item)" title="Kembalikan pengajuan" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-minus-circle"></i></bottom>
+                      <bottom class="btn btn-danger btn-sm" ng-click="showMessage(item, 'Batal')" title="Kembalikan pengajuan" data-toggle="tooltip" data-placement="left" tooltip><i class="fas fa-minus-circle"></i></bottom>
                     </div>
                   </td>
                 </tr>
@@ -165,7 +165,7 @@
     <div class="modal-dialog modal-sm" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">sm</h5>
+          <h5 class="modal-title">{{boxTitle}}</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -179,7 +179,8 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save</button>
+          <button ng-if="model.setstatus=='Dikembalikan'" type="button" class="btn btn-warning btn-sm" ng-click="kembalikan(model)">Kembalikan</button>
+          <button ng-if="model.setstatus=='Batal'" type="button" class="btn btn-danger btn-sm" ng-click="tolak(model)">Batalkan</button>
         </div>
       </div>
     </div>
