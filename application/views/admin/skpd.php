@@ -1,4 +1,4 @@
-<div class="row" ng-app="app" ng-controller="skpdController">
+<div class="row" ng-app="apps" ng-controller="skpdController">
   <div class="col-md-4">
     <div class="card card-danger">
       <div class="card-header">

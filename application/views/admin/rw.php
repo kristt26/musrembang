@@ -1,4 +1,4 @@
-<div class="row" ng-app="app" ng-controller="rwController">
+<div class="row" ng-app="apps" ng-controller="rwController">
   <div class="col-md-3">
     <div class="card card-danger">
       <div class="card-header">
@@ -65,7 +65,7 @@
                   <!-- <bottom class="btn btn-primary btn-sm" ng-click="ubah(item)" style="margin: 0px 1px 0px 1px"><i class="fas fa-info-circle"></i></bottom> -->
                   <bottom class="btn btn-warning btn-sm" ng-click="ubah(item)" style="margin: 0px 1px 0px 1px"><i class="fas fa-edit"></i></bottom>
                   <bottom class="btn btn-danger btn-sm float-right" ng-click="delete(item)" style="margin: 0px 1px 0px 1px"><i class="fas fa-trash-alt"></i></bottom>
-                  <a href="<?= base_url();?>admin/rt/index/{{item.idrw}}" class="btn btn-success btn-sm" style="margin: 0px 1px 0px 1px" data-toggle="tooltip" data-placement="top" title="Tambah Anggaran"><i class="fas fa-plus-circle"></i></a>
+                  <a href="<?=base_url();?>admin/rt/index/{{item.idrw}}" class="btn btn-success btn-sm" style="margin: 0px 1px 0px 1px" data-toggle="tooltip" data-placement="top" title="Tambah Anggaran"><i class="fas fa-plus-circle"></i></a>
                 </div>
               </td>
             </tr>

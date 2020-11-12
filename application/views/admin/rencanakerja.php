@@ -1,4 +1,4 @@
-<div class="row" ng-app="app" ng-controller="rencanaKerjaController">
+<div class="row" ng-app="apps" ng-controller="rencanaKerjaController">
   <div class="col-md-12">
     <div class="card card-danger card-tabs">
       <div class="card-header p-0 pt-1">

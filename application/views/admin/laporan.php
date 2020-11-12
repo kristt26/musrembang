@@ -1,4 +1,4 @@
-<div class="row" ng-app="app" ng-controller="laporanController">
+<div class="row" ng-app="apps" ng-controller="laporanController">
   <div class="col-md-12">
     <div class="card card-danger">
       <div class="card-header">

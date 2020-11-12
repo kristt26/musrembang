@@ -1,4 +1,4 @@
-<div class="row" ng-app="app" ng-controller="bidangController">
+<div class="row" ng-app="apps" ng-controller="bidangController">
   <div class="col-md-5">
     <div class="card card-danger">
       <div class="card-header">

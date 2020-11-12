@@ -1,4 +1,4 @@
-<div class="row" ng-app="app" ng-controller="homeController">
+<div class="row" ng-app="apps" ng-controller="homeController">
   <div class="col-lg-4 col-6">
     <!-- small box -->
     <div class="small-box bg-info">

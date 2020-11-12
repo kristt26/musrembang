@@ -1,5 +1,5 @@
 
-<div class="row" ng-app="app" ng-controller="detailRencanaKerjaController">
+<div class="row" ng-app="apps" ng-controller="detailRencanaKerjaController">
   <div class="col-md-12">
     <div class="card card-default">
       <div class="card-header clearfix">

@@ -1,4 +1,4 @@
-<div class="row" ng-app="app" ng-controller="anggaranBiayaController">
+<div class="row" ng-app="apps" ng-controller="anggaranBiayaController">
 <div class="col-md-12">
   <bottom class="btn btn-secondary btn-sm float-right" style="margin-bottom:12px;" ng-click="back()">
     <i class="fas fa-arrow-left"></i>Kembali

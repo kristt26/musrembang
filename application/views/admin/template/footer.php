@@ -21,7 +21,7 @@
   <!-- jQuery -->
 
   <!-- Bootstrap 4 -->
-  <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/app.js"></script>
+  <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/apps.js"></script>
   <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/controller/admincontroller.js"></script>
   <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/directives.js"></script>
   <script type="text/javascript" src="<?php echo base_url(); ?>assets/plugins/angular-datatables/dist/angular-datatables.min.js"></script>

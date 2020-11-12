@@ -1,4 +1,4 @@
-<div class="row" ng-app="app" ng-controller="pegawaiController">
+<div class="row" ng-app="apps" ng-controller="pegawaiController">
   <div class="col-md-3">
     <div class="card card-danger">
       <div class="card-header">

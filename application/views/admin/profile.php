@@ -1,4 +1,4 @@
-<div class="row" ng-app="app" ng-controller="profileController">
+<div class="row" ng-app="apps" ng-controller="profileController">
   <div class="col-md-2">
     <div class="card text-center">
       <center>
