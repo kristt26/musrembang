@@ -14,8 +14,9 @@ class Authorization extends CI_Controller
 
     public function index()
     {
+        $this->UserModel->check();
         $profile = $this->ProfileModel->select();
-        $title['title'] = ['header' => 'User Authorization', 'dash' => 'User_authorization', 'profile'=>$profile];
+        $title['title'] = ['header' => 'User Authorization', 'dash' => 'User_authorization', 'profile' => $profile];
         $this->load->view('login', $title);
     }
 
@@ -23,20 +24,22 @@ class Authorization extends CI_Controller
     {
         $data = $this->input->post();
         $result = $this->UserModel->select($data);
-        if (count($result)==0) {
+        if (count($result) == 0) {
             $this->session->set_flashdata('pesan', 'Gagal Login, error');
             redirect('authorization');
         } else {
             $this->session->set_userdata($result);
-            if($result['akses']=="admin")
+            if ($result['akses'] == "admin") {
                 redirect('admin/home');
-            else if($result['akses']=="user")
+            } else if ($result['akses'] == "user") {
                 redirect('user/home');
-            else
+            } else {
                 redirect('pimpinan/home');
+            }
+
         }
     }
-    function logout()
+    public function logout()
     {
         $this->session->sess_destroy();
         redirect('authorization');

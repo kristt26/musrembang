@@ -4,7 +4,7 @@ function helperServices($location) {
 	var service = { IsBusy: false, priotitas : [ '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12' ], absUrl: $location.$$absUrl };
 	service.url = $location.$$protocol + '://' + $location.$$host;
 	if ($location.$$port) {
-		service.url = service.url + ':' + $location.$$port;
+		service.url = service.url + ':' + $location.$$port + '/musrembang';
 	}
 
 	// '    http://localhost:5000';

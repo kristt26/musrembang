@@ -4,65 +4,64 @@ class Laporan_model extends CI_Model
 {
     public function AmbilLaporan($idPeriode)
     {
-        // $result = $this->db->get('bidang');
-        // $bidang = $result->result();
-        $result = $this->db->query("SELECT
-                `kegiatan`.*,
-                `bidang`.`KodeBidang`,
-                `bidang`.`NamaBidang`
-            FROM
-                `kegiatan`
-                LEFT JOIN `bidang` ON `kegiatan`.`idbidang` = `bidang`.`idbidang` ORDER BY `bidang`.`NamaBidang` ASC");
-        $kegiatans = $result->result();
-        foreach ($kegiatans as $kegiatan) {
-            $result = $this->db->query("SELECT
-                    `rencanakerja`.`idRencanaKerja`,
-                    `rencanakerja`.`permasalahan`,
-                    `rencanakerja`.`status`,
-                    `rencanakerja`.`volume`,
-                    `rencanakerja`.`satuan`,
-                    `rencanakerja`.`prioritas`,
-                    `rencanakerja`.`file`,
-                    `rencanakerja`.`idKegiatan`,
-                    `rw`.`idrw`,
-                    `rw`.`norw`,
-                    `jalan`.`idjalan`,
-                    `jalan`.`jalan`,
-                    `jalan`.`lat`,
-                    `jalan`.`long`,
-                    `rt`.`idrt`,
-                    `rt`.`nort`,
-                    `transaksirenbi`.`idtransaksirenbi`,
-                    `transaksirenbi`.`nominal`,
-                    `bidangskpd`.`idbidangskpd`,
-                    `bidangskpd`.`NamaBidangSkpd`,
-                    `detailrencanabiaya`.`iddetailrencanabiaya`,
-                    -- `detailrencanabiaya`.`nominal` AS `nominal1`,
-                    `rencanabiaya`.`idRencanaBiaya`,
-                    `rencanabiaya`.`NamaRencanaBiaya`,
-                    `perioderenker`.`idPeriodeRenker`,
-                    `perioderenker`.`Tahun`,
-                    `perioderenker`.`mulai`,
-                    `perioderenker`.`berakhir`
+        $bidang = $this->db->get('bidang')->result();
+        foreach ($bidang as $key => $value) {
+            $value->rows = 0;
+            $value->kegiatan = $this->db->query("SELECT
+                    `kegiatan`.*
                 FROM
-                    `rencanakerja`
-                    LEFT JOIN `jalan` ON `jalan`.`idjalan` = `rencanakerja`.`idjalan`
-                    LEFT JOIN `rt` ON `rt`.`idrt` = `jalan`.`idrt`
-                    LEFT JOIN `rw` ON `rw`.`idrw` = `rencanakerja`.`idrw`
-                    LEFT JOIN `transaksirenbi` ON `rencanakerja`.`idRencanaKerja` =
-                    `transaksirenbi`.`idRencanaKerja`
-                    LEFT JOIN `bidangskpd` ON `bidangskpd`.`idbidangskpd` =
-                    `transaksirenbi`.`idbidangskpd`
-                    LEFT JOIN `detailrencanabiaya` ON `transaksirenbi`.`iddetailrencanabiaya` =
-                    `detailrencanabiaya`.`iddetailrencanabiaya`
-                    LEFT JOIN `rencanabiaya` ON `rencanabiaya`.`idRencanaBiaya` =
-                    `detailrencanabiaya`.`idRencanaBiaya`
-                    LEFT JOIN `perioderenker` ON `rencanakerja`.`idPeriodeRenker` =
-                    `perioderenker`.`idPeriodeRenker`
-                WHERE `perioderenker`.`idPeriodeRenker` = '$idPeriode' AND `rencanakerja`.`idKegiatan` = '$kegiatan->idKegiatan' AND `rencanakerja`.`status`='Disetujui'");
-            $kegiatan->rencanakerja = $result->result();
+                    `kegiatan`
+                WHERE kegiatan.idbidang='$value->idbidang'")->result();
+            foreach ($value->kegiatan as $renja) {
+                $renja->renja = $this->db->query("SELECT
+                        `rencanakerja`.`idRencanaKerja`,
+                        `rencanakerja`.`permasalahan`,
+                        `rencanakerja`.`status`,
+                        `rencanakerja`.`volume`,
+                        `rencanakerja`.`satuan`,
+                        `rencanakerja`.`prioritas`,
+                        `rencanakerja`.`file`,
+                        `rencanakerja`.`idKegiatan`,
+                        `rw`.`idrw`,
+                        `rw`.`norw`,
+                        `jalan`.`idjalan`,
+                        `jalan`.`jalan`,
+                        `jalan`.`lat`,
+                        `jalan`.`long`,
+                        `rt`.`idrt`,
+                        `rt`.`nort`,
+                        `transaksirenbi`.`idtransaksirenbi`,
+                        `transaksirenbi`.`nominal`,
+                        `bidangskpd`.`idbidangskpd`,
+                        `bidangskpd`.`NamaBidangSkpd`,
+                        `detailrencanabiaya`.`iddetailrencanabiaya`,
+                        -- `detailrencanabiaya`.`nominal` AS `nominal1`,
+                        `rencanabiaya`.`idRencanaBiaya`,
+                        `rencanabiaya`.`NamaRencanaBiaya`,
+                        `perioderenker`.`idPeriodeRenker`,
+                        `perioderenker`.`Tahun`,
+                        `perioderenker`.`mulai`,
+                        `perioderenker`.`berakhir`
+                    FROM
+                        `rencanakerja`
+                        LEFT JOIN `jalan` ON `jalan`.`idjalan` = `rencanakerja`.`idjalan`
+                        LEFT JOIN `rt` ON `rt`.`idrt` = `jalan`.`idrt`
+                        LEFT JOIN `rw` ON `rw`.`idrw` = `rencanakerja`.`idrw`
+                        LEFT JOIN `transaksirenbi` ON `rencanakerja`.`idRencanaKerja` =
+                        `transaksirenbi`.`idRencanaKerja`
+                        LEFT JOIN `bidangskpd` ON `bidangskpd`.`idbidangskpd` =
+                        `transaksirenbi`.`idbidangskpd`
+                        LEFT JOIN `detailrencanabiaya` ON `transaksirenbi`.`iddetailrencanabiaya` =
+                        `detailrencanabiaya`.`iddetailrencanabiaya`
+                        LEFT JOIN `rencanabiaya` ON `rencanabiaya`.`idRencanaBiaya` =
+                        `detailrencanabiaya`.`idRencanaBiaya`
+                        LEFT JOIN `perioderenker` ON `rencanakerja`.`idPeriodeRenker` =
+                        `perioderenker`.`idPeriodeRenker`
+                    WHERE `perioderenker`.`idPeriodeRenker` = '$idPeriode' AND `rencanakerja`.`idKegiatan` = '$renja->idKegiatan' AND `rencanakerja`.`status`='Disetujui'")->result();
+                $value->rows += count($renja->renja);
+            }
         }
-        return $kegiatans;
+        return $bidang;
         // $query = $this->db->query("SELECT
         //     `pemesanan`.`kd_pemesanan`,
         //     `pemesanan`.`tgl_pemesanan`,

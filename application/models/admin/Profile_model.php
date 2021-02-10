@@ -10,6 +10,8 @@ class Profile_Model extends CI_Model {
             return $result->result();
     }    
 
+    
+
     public function updategambar($logo)
     {
         $result = $this->db->update('kelurahan', array('logo'=>$logo));

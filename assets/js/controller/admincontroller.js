@@ -854,19 +854,27 @@ function laporanController($scope, LaporanService, helperServices) {
   $scope.model = {};
   $scope.idKegiatans
   $scope.hasil = 0;
+  $scope.periode = {};
   $scope.convert = (item) => {
     $scope.hasil += parseFloat(item);
   }
   LaporanService.get().then((x) => {
     $scope.periodes = x;
     $.LoadingOverlay("hide");
+    var id = location.href.substring(location.href.lastIndexOf('/') + 1)
+    if(parseInt(id)){
+      $scope.periode = $scope.periodes.find(x=>x.idPeriodeRenker==id);
+    }
+    console.log($scope.periode);
   });
+  // console.log(location.href.substring(location.href.lastIndexOf('/') + 1));
   $scope.getData = (idPeridoeRenker) => {
-    $.LoadingOverlay("show");
-    LaporanService.getLaporan(idPeridoeRenker).then((x) => {
-      $scope.datas = x.filter(x => x.rencanakerja.length != 0);
-      $.LoadingOverlay("hide");
-    })
+    location.href = helperServices.url + "/admin/laporan/index/" + idPeridoeRenker;
+    // $.LoadingOverlay("show");
+    // LaporanService.getLaporan(idPeridoeRenker).then((x) => {
+    //   $scope.datas = x.filter(x => x.rencanakerja.length != 0);
+    //   $.LoadingOverlay("hide");
+    // })
   }
   $scope.romanize = (number) => {
     return helperServices.romanize(number);
